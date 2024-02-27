@@ -1,0 +1,144 @@
+*{
+  font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+}
+
+:root {
+  --icon-width: 4px;
+  --icon-color: black;
+}
+
+html,body{
+  height: 100%;
+}
+
+body{
+  background-color: #fff;
+}
+
+/* ヘッダー */
+.header__inner{
+  height: 70px;
+  display: flex;
+  justify-content:left;
+}
+
+.icon-menu {
+  color: var(--icon-color);
+  position: relative;
+  margin: 10px 0;
+}
+
+.icon-menu
+{
+  width: 24px;
+  height: var(--icon-width);
+  background-color: skyblue;
+}
+
+.icon-menu:before,
+.icon-menu:after {
+  width: 24px;
+  height: var(--icon-width);
+  background-color: currentColor;
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.icon-menu:before {
+  top: -8px;
+}
+
+.icon-menu:after {
+  top: 8px;
+}
+
+.header__logo {
+  text-decoration: none;
+  font-size: 30px;
+  transform: translateX(30px);
+  margin: auto 0;
+}
+
+.header__inner form{
+  margin: auto 30px auto 0;
+}
+
+/* ヘッダーメニュー */
+.header__nav {
+  transform: translateX(-10px);
+  margin: 10px 0;
+}
+
+.header__nav ul{
+  display: flex;
+  flex-direction: row;
+}
+
+.header__nav li{
+  list-style: none;
+  margin-right: 50px;
+}
+
+.header__nav a{
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header__nav a {
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header__nav button {
+  color: #000;
+  background-color: transparent;
+  text-decoration: none;
+  font-weight: bold;
+  font-size:16px;
+  padding: 0;
+}
+
+/* メイン */
+main{
+  height: calc(100% - 100px);
+}
+
+/* エラーメッセージ */
+.form__error {
+  color: #ff0000;
+  margin: 0;
+}
+
+/* 入力フォーム */
+::placeholder {
+  color: #909090;
+}
+
+input,
+textarea,
+select {
+  padding-left: 20px;
+  background-color: #F4F4F4;
+  border: none;
+}
+
+button {
+  background-color: #214BE0;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* フッター */
+.footer__inner {
+  height: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer__logo {
+  margin: auto 0;
+}
