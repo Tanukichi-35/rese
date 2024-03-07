@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\RestController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +16,22 @@ use App\Http\Controllers\RestController;
 |
 */
 
-Route::middleware('auth')->group(function () {
-// Route::middleware('verified')->group(function () {
+Route::middleware('verified')->group(function () {
     Route::get('/', [AuthController::class, 'index']);
 });
+
+Route::get('/search', [
+    StoreController::class, 'search'
+]);
+
+Route::post('/favorite-on', [
+    FavoriteController::class, 'favoriteOn'
+]);
+
+Route::post('/favorite-off', [
+    FavoriteController::class, 'favoriteOff'
+]);
+
+Route::get('/detail/{store_id}', [
+    StoreController::class, 'showDetail'
+]);

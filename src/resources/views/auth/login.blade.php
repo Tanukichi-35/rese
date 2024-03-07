@@ -6,36 +6,20 @@
 
 @section('content')
 <div class="div__main">
-  <h2 class="h2__login">ログイン</h2>
+  <h2 class="h2__login">Login</h2>
   <form action="/login" method="POST" class="form__login">
     @csrf
     <div class="div__input">
-      <input type="text" name="email" class="input__mail" placeholder="メールアドレス" value="{{ old('email') }}" >
-      <div class="form__error">
-        <ul>
-          @error('email')
-          <li>
-            {{$message}}
-          </li>
-          @enderror
-        </ul>
+      <div class="div__input-email">
+        <img src="{{ asset('img/email.png')}}" alt="email" class="img__email">
+        <input type="text" name="email" class="input__mail" placeholder="Email" value="{{ old('email') }}" >
       </div>
-      <input type="password" name="password" class="input__password" placeholder="パスワード">
-      <div class="form__error">
-        <ul>
-          @error('password')
-          <li>
-            {{$message}}
-          </li>
-          @enderror
-        </ul>
+      <div class="div__input-password">
+        <img src="{{ asset('img/password.png')}}" alt="password" class="img__password">
+        <input type="password" name="password" class="input__password" placeholder="password">
       </div>
+      <button class="button__login">ログイン</button>
     </div>
-    <button class="button__login">ログイン</button>
   </form>
-  <div class="div__register">
-    <p class="p__register">アカウントをお持ちでない方はこちらから</p>
-    <a href="/register" class="a__register">会員登録</a>
-  </div>
 </div>
 @endsection
