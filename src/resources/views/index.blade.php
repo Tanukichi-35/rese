@@ -4,49 +4,69 @@
   <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
 @endsection
 
-@section('link')
-<ul>
-  <li><a href="/">ホーム</a></li>
-  <li><a href="/attendance">日付一覧</a></li>
-  <li><a href="/user">ユーザー一覧</a></li>
-  <li>
-    <form action="/logout" method="POST">
-      @csrf
-      <button>ログアウト</button>
-    </form>
-  </li>
-</ul>
-@endsection
-
 @section('content')
 <div class="div__main">
-  <h2 class="h2__atte">{{$user->getMessage()}}</h2>
-  <form method="POST" class="form__atte">
-    @csrf
-    <div class="div__menu">
-      <div class="div__menu-upper">
-        <button formaction="/work-start" class="button__work-start" id="button__work-start">勤務開始</button>
-        <button formaction="/work-end" class="button__work-end" id="button__work-end" disabled>勤務終了</button>
+  
+  {{-- 検索 --}}
+  <div class="div__search">
+    <form action="/search" method="GET" class="form__search" id="form__search" >
+      @csrf
+      <div class="div__area">
+        <select name="area_id" class="select__search-area"  id="select__search-area">
+          <option value="" style='display:none;' disabled selected>地域</option>
+          <option value="0" @if(isset( $request ) && $request['area_id'] == 0) selected @endif>全て</option>
+          @foreach (Area::All() as $area)
+          <option value="{{$area->id}}" @if(isset( $request ) && $request['area_id'] == $area->id) selected @endif>{{$area->name}}</option>
+          @endforeach
+        </select>
       </div>
-      <div class="div__menu-lower">
-        <button formaction="/break-start" class="button__break-start" id="button__break-start" disabled>休憩開始</button>
-        <button formaction="/break-end" class="button__break-end" id="button__break-end" disabled>休憩終了</button>
+      <div class="div__category">
+        <select name="category_id" class="select__search-category" id="select__search-category">
+          <option value="" style='display:none;' disabled selected>カテゴリー</option>
+          <option value="0" @if(isset( $request ) && $request['category_id'] == 0) selected @endif>全て</option>
+          @foreach (Category::All() as $category)
+          <option value="{{$category->id}}" @if(isset( $request ) && $request['category_id'] == $category->id) selected @endif>{{$category->name}}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="div__store">
+        <input type="text" name="store_name" class="input__search-store" id="select__search-store" placeholder="店名" @if (isset( $request )) value="{{$request['store_name']}}"@endif>
+      </div>
+    </form>
+  </div>
+
+  {{-- 飲食店一覧 --}}
+  <div class="div__store-list">
+    @foreach ($stores as $store)
+    <div class="div__card">
+      <div class="div__image" style="background-image: url({{$store->imageURL}});"></div>
+      <h3 class="h3__store-name">{{$store->name}}</h3>
+      <div class="div__tag">
+          <p class="p__area-tag">#{{$store->getArea()}}</p>
+          <p class="p__category-tag">#{{$store->getCategory()}}</p>
+      </div>
+      <div class="div__button">
+        <a href="/detail/{{$store->id}}" class="a__store-detail">詳しく見る</a>
+        <form method="POST">
+        @csrf
+          <input type="number" name="store_id" value="{{$store->id}}" hidden>
+          @if($store->checkFavorite())
+            <button class="button__favorite" formaction="/favorite-off">
+              <img src="{{asset('img/heart_on.png')}}" alt="" style="height: 100%;">
+            </button>
+          @else
+            <button class="button__favorite" formaction="/favorite-on">
+              <img src="{{asset('img/heart_off.png')}}" alt="" style="height: 100%;">
+            </button>
+          @endif
+        </form>
       </div>
     </div>
-    <div class="div__status">
-      <label>ユーザーID：
-        <input type="text" name="user_id" class="input__user" value={{$user->id}}>
-      </label>
-      <label>勤怠ID：
-        <input type="text" name="attendance_id" class="input__attendance" value={{$user->getAttendanceID()}}>
-      </label>
-      <label>休憩ID：
-        <input type="text" name="rest_id" class="input__rest" value={{$user->getRestID()}}>
-      </label>
-      <label>ステータス：
-        <input type="text" name="status" class="input__status" id="input__status" value={{$user->getStatus()}}>
-      </label>
-    </div>
-  </form>
+    @endforeach
+  </div>
 </div>
+@endsection
+
+@section('script')
+  <script src="{{ asset('js/index.js') }}"></script>
 @endsection

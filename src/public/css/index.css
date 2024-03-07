@@ -1,55 +1,117 @@
-.div__main {
-  margin: 0;
-  height: 100%;
-  padding-top: 10px;
-  background-color: #F2F2F2;
-  text-align: center;
-}
-
-.h2__atte {
-  margin: 30px 0;
-}
-
-.form__atte{
-  width: 80%;
-  height: calc(100% - 200px);
+.div__main{
+  width: 95%;
   margin: auto;
 }
 
-.div__menu{
-  width: 100%;
-  height: 100%;
+/* 検索フォーム */
+.div__search{
   display: flex;
-  flex-direction: column;
-  gap: 10%;
+  justify-content: right;
 }
 
-.div__menu-upper, .div__menu-lower{
-  width: 100%;
-  height: 48%;
+.form__search {
+  width: 600px;
+  height: 30px;
+  background-color: #fff;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.6);
+}
+
+.select__search-area {
+  width: 100px;
+  background-color: transparent;
+  cursor: pointer;
+  appearance: none;
+}
+
+.select__search-category {
+  width: 180px;
+  background-color: transparent;
+  cursor: pointer;
+  appearance: none;
+}
+
+.input__search-store {
+  width: 300px;
+  background-color: transparent;
+}
+
+.div__area,
+.div__category{
+  display: inline-flex;
+  position: relative;
+}
+
+.div__area::after,
+.div__category::after{
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 10px;
+  height: 7px;
+  transform: translateY(-50%);
+  background-color: #000;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  content: '';
+  pointer-events: none;
+}
+
+/* 飲食店一覧 */
+.div__store-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.div__menu button{
-  width: 48%;
-  height: 100%;
-  color: #000;
+.div__card {
+  margin: 20px;
+  height: 180px;
+  width: 220px;
   background-color: #fff;
-  border-radius: 3px;
-  font-size: 24px;
-  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.6);
 }
 
-.div__menu button:disabled{
-  color: #E5E5E5;
-  cursor: auto;
+.h3__store-name{
+  margin: 5px 5px 0 10px;
+  padding: 0;
 }
 
-.div__status{
+.div__image{
+  height: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5px 5px 0 0;
+}
+
+.div__tag, .div__button{
   display: flex;
-  flex-direction: column;
-  text-align: left;
-  visibility: collapse;
+  flex-direction: row;
+  position: relative
+}
+
+.div__tag p{
+  margin: 0 0 5px 10px;
+}
+
+.a__store-detail{
+  color: #fff;
+  background-color: #3560F6;
+  height: 25px;
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.button__favorite{
+  background-color: transparent;
+  height: 25px;
+  position: absolute;
+  right: 20px;
 }
