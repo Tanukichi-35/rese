@@ -18,7 +18,12 @@ class FavoriteController extends Controller
       ]);
 
       // 画面を更新
-      return redirect('/')->withInput();
+      if(strpos($_SERVER['HTTP_REFERER'],'mypage') === false){
+        return redirect('/')->withInput();
+      }
+      else{
+        return redirect('/mypage')->withInput();
+      }
     }
 
     // お気に入り削除
@@ -28,6 +33,11 @@ class FavoriteController extends Controller
       $favorite->delete(); 
 
       // 画面を更新
-      return redirect('/')->withInput();
+      if(strpos($_SERVER['HTTP_REFERER'],'mypage') === false){
+        return redirect('/')->withInput();
+      }
+      else{
+        return redirect('/mypage')->withInput();
+      }
     }
 }

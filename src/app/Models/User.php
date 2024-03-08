@@ -42,4 +42,33 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Storeモデルとの紐づけ
+    public function store(){
+        return $this->hasOne('App\Models\Store');
+    }
+
+    // Bookingモデルとの紐づけ
+    public function bookings(){
+        return $this->hasMany('App\Models\Booking');
+    }
+
+    // Favoriteモデルとの紐づけ
+    public function favorites(){
+        return $this->hasMany('App\Models\Favorite');
+    }
+
+    // Reviewモデルとの紐づけ
+    public function reviews(){
+        return $this->hasMany('App\Models\Review');
+    }
+
+    // お気に入りの店の取得
+    public function favoriteStores(){
+        $favorites = $this->favorites;
+        for ($i=0; $i < $favorites->count(); $i++) { 
+            $stores[$i] = $favorites[$i]->store;
+        }
+        return $stores;
+    }
 }

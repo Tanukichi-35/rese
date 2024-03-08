@@ -14,4 +14,14 @@ class Review extends Model
         'rate',
         'comment',
     ];
+
+    // Userモデルとの紐づけ
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
+
+    // Storeモデルとの紐づけ
+    public function store(){
+        return $this->belongsTo('App\Models\Store');
+    }
 }

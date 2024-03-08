@@ -13,7 +13,7 @@ class Category extends Model
     ];
 
     // Storeモデルとの紐づけ
-    public function store(){
+    public function stores(){
         return $this->hasMany('App\Models\Store');
     }
 }
