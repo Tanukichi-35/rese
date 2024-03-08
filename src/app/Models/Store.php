@@ -25,6 +25,21 @@ class Store extends Model
         return $this->hasOne('App\Models\User');
     }
 
+    // Bookingモデルとの紐づけ
+    public function bookings(){
+        return $this->hasMany('App\Models\Booking');
+    }
+
+    // Favoriteモデルとの紐づけ
+    public function favorites(){
+        return $this->hasMany('App\Models\Favorite');
+    }
+
+    // Reviewモデルとの紐づけ
+    public function reviews(){
+        return $this->hasMany('App\Models\Review');
+    }
+
     // Areaモデルとの紐づけ
     public function area(){
         return $this->belongsTo('App\Models\Area');
@@ -33,16 +48,6 @@ class Store extends Model
     // Categoryモデルとの紐づけ
     public function category(){
         return $this->belongsTo('App\Models\Category');
-    }
-
-    // Area名の取得
-    public function getArea(){
-        return Store::find($this->area_id)->area->name;
-    }
-
-    // Category名の取得
-    public function getCategory(){
-        return Store::find($this->category_id)->category->name;
     }
 
     // お気に入りステータスの確認
@@ -61,6 +66,16 @@ class Store extends Model
         }
 
         return $hours;
+    }
+
+    // インデックスから予約時間の取得
+    public static function getHour(int $index){
+        $time = new DateTime("17:00");
+        for ($i = 1; $i < $index; $i++) { 
+            $time->modify("+30 minutes");
+        }
+
+        return $time;
     }
 
     // 人数の取得

@@ -1,0 +1,28 @@
+.div__main{
+  margin: auto;
+  margin-top: 20px;
+  width: 400px;
+  height: 220px;
+  background-color: #fff;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.6);
+}
+
+.div__inner{
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+}
+
+.a__back{
+  color: #fff;
+  background-color: #3560F6;
+  height: 25px;
+  margin-top: 20px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}

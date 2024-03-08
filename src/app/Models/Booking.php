@@ -12,16 +12,17 @@ class Booking extends Model
         'user_id',
         'store_id',
         'date',
+        'time',
         'number',
     ];
 
-    public function getTimes{
-        $time = datetime();
-        $times = ["17:00"]
-        array_push($times,"17:30");
-        return [
-            "foo" => "bar",
-            "bar" => "foo",
-        ];
+    // Userモデルとの紐づけ
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
+
+    // Storeモデルとの紐づけ
+    public function store(){
+        return $this->belongsTo('App\Models\Store');
     }
 }

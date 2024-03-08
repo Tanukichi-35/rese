@@ -17,7 +17,8 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('store_id')->constrained('stores');
-            $table->datetime('date');
+            $table->date('date');
+            $table->time('time');
             $table->tinyInteger('number');
             $table->timestamps();
         });

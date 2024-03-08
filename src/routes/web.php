@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,10 @@ use App\Http\Controllers\FavoriteController;
 
 Route::middleware('verified')->group(function () {
     Route::get('/', [AuthController::class, 'index']);
+});
+
+Route::middleware('verified')->group(function () {
+    Route::get('/mypage', [AuthController::class, 'mypage']);
 });
 
 Route::get('/search', [
@@ -35,3 +40,7 @@ Route::post('/favorite-off', [
 Route::get('/detail/{store_id}', [
     StoreController::class, 'showDetail'
 ]);
+
+Route::middleware('verified')->group(function () {
+    Route::post('/booking', [BookingController::class, 'booking']);
+});
