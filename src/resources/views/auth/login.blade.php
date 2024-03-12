@@ -14,9 +14,27 @@
         <img src="{{ asset('img/email.png')}}" alt="email" class="img__email">
         <input type="text" name="email" class="input__mail" placeholder="Email" value="{{ old('email') }}" >
       </div>
+      <div class="div__error">
+        <ul>
+          @error('email')
+          <li class="li__error">
+            {{$message}}
+          </li>
+          @enderror
+        </ul>
+      </div>
       <div class="div__input-password">
         <img src="{{ asset('img/password.png')}}" alt="password" class="img__password">
         <input type="password" name="password" class="input__password" placeholder="password">
+      </div>
+      <div class="div__error">
+        <ul>
+          @error('password')
+          <li class="li__error">
+            {{$message}}
+          </li>
+          @enderror
+        </ul>
       </div>
       <button class="button__login">ログイン</button>
     </div>
