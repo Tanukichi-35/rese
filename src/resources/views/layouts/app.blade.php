@@ -17,7 +17,13 @@
 <body>
   <header class="header">
     <div class="header__inner">
-      <button class="button__menu">
+      @php
+        $user_level = 0;
+        if(Auth::user()){
+          $user_level = Auth::user()->level;
+        }
+      @endphp
+      <button class="button__menu" onclick="switchMenu({{$user_level}})">
         <span class="header__menu-bar"></span>
         <span class="header__menu-bar"></span>
         <span class="header__menu-bar"></span>
@@ -40,23 +46,23 @@
       </div>
       <nav class="nav__menu">
         <div class="div__menu">
-          <form class="noraml-menu member-menu" action="/" method="GET" id="button__home">
+          <form class="menu-home" id="menu-home" action="/" method="GET" id="button__home" hidden>
             @csrf
             <button>ホーム</button>
           </form>
-          <form class="noraml-menu" action="/register" method="GET" id="button__register">
+          <form class="menu-register" id="menu-register" action="/register" method="GET" id="button__register" hidden>
             @csrf
             <button>会員登録</button>
           </form>
-          <form class="noraml-menu" action="/login" method="GET" id="button__login">
+          <form class="menu-login" id="menu-login" action="/login" method="GET" id="button__login" hidden>
             @csrf
             <button>ログイン</button>
           </form>
-          <form class="member-menu" action="/logout" method="POST" id="button__logout">
+          <form class="menu-logout" id="menu-logout" action="/logout" method="POST" id="button__logout" hidden>
             @csrf
             <button>ログアウト</button>
           </form>
-          <form class="member-menu" action="/mypage" method="GET" id="button__mypage">
+          <form class="menu-mypage" id="menu-mypage" action="/mypage" method="GET" id="button__mypage" hidden>
             @csrf
             <button>マイページ</button>
           </form>
