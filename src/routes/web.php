@@ -17,9 +17,9 @@ use App\Http\Controllers\BookingController;
 |
 */
 
-Route::middleware('verified')->group(function () {
-    Route::get('/', [AuthController::class, 'index']);
-});
+Route::get('/', [
+    StoreController::class, 'index'
+]);
 
 Route::middleware('verified')->group(function () {
     Route::get('/mypage', [AuthController::class, 'mypage']);

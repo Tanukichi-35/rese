@@ -7,9 +7,17 @@ use App\Models\Store;
 
 class StoreController extends Controller
 {
-    // ユーザー別勤怠ページを表示
+    // 飲食店一覧ページを表示
+    public function index(){
+        // 全ての飲食店を取得
+        $stores = Store::All();
+
+        return view('index', compact('stores'));
+    }
+
+    // 飲食店詳細ページを表示
     public function showDetail($store_id){
-        // ユーザーIDが一致するユーザーを取得
+        // IDが一致する飲食店を取得
         $store = Store::find($store_id);
 
         return view('detail', compact('store'));

@@ -52,7 +52,12 @@ class Store extends Model
 
     // お気に入りステータスの確認
     public function checkFavorite(){
-        return Favorite::checkFavorite(Auth::user()->id, $this->id);
+        if(Auth::user()){
+            return Favorite::checkFavorite(Auth::user()->id, $this->id);
+        }
+        else{
+            return Favorite::checkFavorite(0, $this->id);
+        }
     }
 
     // 営業時間の取得

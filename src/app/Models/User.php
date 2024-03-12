@@ -66,6 +66,7 @@ class User extends Authenticatable implements MustVerifyEmail
     // お気に入りの店の取得
     public function favoriteStores(){
         $favorites = $this->favorites;
+        $stores = [];
         for ($i=0; $i < $favorites->count(); $i++) { 
             $stores[$i] = $favorites[$i]->store;
         }

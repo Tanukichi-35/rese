@@ -14,8 +14,11 @@ use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
+use Laravel\Fortify\Contracts\RegisterResponse;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
+use Laravel\Fortify\Http\Controllers\VerifyEmailController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\VerifyController;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -24,7 +27,35 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // ログイン時の遷移先の設定
+        $this->app->instance(LoginResponse::class, new class implements LoginResponse {
+            public function toResponse($request)
+            {
+                return redirect('/');
+            }
+        });
+
+        // ログアウト時の遷移先の設定
+        $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
+            public function toResponse($request)
+            {
+                return redirect('/login');
+            }
+        });
+
+        // ユーザー登録時の遷移先の設定
+        $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
+            public function toResponse($request)
+            {
+                return redirect('email/verify');
+            }
+        });
+
+        // // ユーザー登録時の使用コントローラの変更
+        // $this->app->singleton(
+        //     RegisteredUserController::class,
+        //     RegisterController::class
+        // );
     }
 
     /**
