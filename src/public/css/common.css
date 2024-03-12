@@ -182,3 +182,7 @@ button {
   font-size: 12px;
   margin-right: 30px;
 }
+
+.li__error{
+  list-style: none;
+}

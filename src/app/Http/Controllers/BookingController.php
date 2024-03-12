@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\BookingRequest;
 use App\Models\Store;
 use App\Models\Booking;
 use Auth;
@@ -10,7 +11,7 @@ use Auth;
 class BookingController extends Controller
 {
     // 予約の作成
-    public function booking(Request $request){
+    public function booking(BookingRequest $request){
         // 予約アイテムの作成
         Booking::create([
             'user_id' => Auth::user()->id,

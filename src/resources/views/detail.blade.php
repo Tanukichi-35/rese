@@ -32,18 +32,45 @@
       @csrf
       <div class="div__inner">
         <input class="input__store_id" id="input__store_id" name="store_id" type="number" value="{{$store->id}}" hidden>
-        <input class="input__date" id="input__date" name="date" type="date" min="2024-03-06">
+        <input class="input__date" id="input__date" name="date" type="date" min="{{date('Y-m-d')}}" max="{{date('Y-m-d', strtotime('3 month'))}}">
+        <div class="div__error">
+          <ul>
+            @error('date')
+            <li class="li__error">
+              {{$message}}
+            </li>
+            @enderror
+          </ul>
+        </div>
         <select class="select__time" id="select__time" name="time">
           @foreach ($store->getHours() as $key => $value)
             <option value="{{$key}}">{{$value}}</option>
           @endforeach
         </select>
+        <div class="div__error">
+          <ul>
+            @error('time')
+            <li class="li__error">
+              {{$message}}
+            </li>
+            @enderror
+          </ul>
+        </div>
         <select class="select__number" id="select__number" name="number">
           @foreach ($store->getNumbers() as $key => $value)
             <option value="{{$key}}">{{$value}}</option>
           @endforeach
         </select>
-      <table class="table__monitor">
+        <div class="div__error">
+          <ul>
+            @error('number')
+            <li class="li__error">
+              {{$message}}
+            </li>
+            @enderror
+          </ul>
+        </div>
+        <table class="table__monitor">
         <tr>
           <th>店名</th>
           <td>{{$store->name}}</td>
