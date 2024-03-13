@@ -18,8 +18,16 @@
               <img src="{{asset('img/watch.png')}}" alt="" class="img_watch">
               <span >予約{{$i+1}}</span>
             </div>
-            <div class="div__delete">
-              <button class="button__delete"></button>
+            <div class="div__button">
+              <a href="/booking/QR/{{$bookings[$i]->id}}"><img src="{{asset ('img/QR.png')}}" alt="" class="img__QR"></a>
+              <a href="/booking/restore/{{$bookings[$i]->id}}"><img src="{{asset ('img/edit.png')}}" alt="" class="img__edit"></a>
+              <div class="div__delete">
+                <form action="/booking/delete" method="POST" class="form__delete" onsubmit="return confirmDeleteBooking()">
+                @csrf
+                  <input type="number" name="id" value="{{$bookings[$i]->id}}" hidden>
+                  <button class="button__delete"></button>
+                </form>
+              </div>
             </div>
           </div>
           <table class="table__monitor">

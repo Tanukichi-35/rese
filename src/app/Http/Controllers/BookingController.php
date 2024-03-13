@@ -26,7 +26,23 @@ class BookingController extends Controller
     }
 
     // 予約の変更
-    public function restoreBooking(Request $request){
+    public function restore(Request $request){
+        $booking = Booking::find($request->id);
+        $booking->update([
+            'date' => $request->date,
+            'time' => Store::getHour($request->time),
+            'number' => $request->number,
+        ]);
+
+        // 画面を更新
         return view('restore');
+    }
+
+    // 予約の削除
+    public function delete(Request $request){
+        $booking = Booking::find($request->id);
+        $booking->delete();
+
+        return redirect('/mypage');
     }
 }

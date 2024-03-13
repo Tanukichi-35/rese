@@ -1,14 +1,5 @@
 // 画面ロード時
 window.onload = function () {
-  // 日付が空の場合、今日の日付を入力
-  if (!$("#input__date").val()) {
-    $date = new Date();
-    $year = $date.getFullYear();
-    $month = ( '00' + ($date.getMonth() + 1) ).slice( -2 );
-    $day = ( '00' + $date.getDate() ).slice( -2 );
-    $("#input__date").val($year+"-"+$month+"-"+$day);
-  }
-
   // テーブルに値を入力
   inputDate();
   inputTime();
@@ -46,10 +37,4 @@ function inputTime() {
 function inputNumber() {
   $number = $("#select__number option:selected").text();
   $("#table__number").text($number);
-}
-
-// 予約の削除を確認
-function confirmDeleteBooking() {
-    var select = confirm("予約をキャンセルしますか？");
-    return select;
 }
