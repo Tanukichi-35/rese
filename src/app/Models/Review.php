@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Store;
 
 class Review extends Model
 {
@@ -23,5 +24,20 @@ class Review extends Model
     // Storeモデルとの紐づけ
     public function store(){
         return $this->belongsTo('App\Models\Store');
+    }
+
+    // レビューアイテムの取得
+    public static function getReview(int $user_id, int $store_id){
+      return Review::where("user_id", '=', $user_id)->where("store_id", '=', $store_id)->first();
+    }
+
+    // レビューステータスの確認
+    public static function checkReview(int $user_id, int $store_id){
+      if($user_id == 0){
+        return session()->has(Store::find($store_id)->name);
+      }
+      else{
+        return Review::where("user_id", '=', $user_id)->where("store_id", '=', $store_id)->exists();
+      }
     }
 }

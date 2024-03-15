@@ -19,8 +19,10 @@ class StoreController extends Controller
     public function showDetail($store_id){
         // IDが一致する飲食店を取得
         $store = Store::find($store_id);
+        // 飲食店のレビューを取得
+        $reviews = $store->reviews;
 
-        return view('detail', compact('store'));
+        return view('detail', compact('store', 'reviews'));
     }
 
     // 飲食店の検索を実施

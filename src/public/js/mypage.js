@@ -50,6 +50,6 @@ function inputNumber() {
 
 // 予約の削除を確認
 function confirmDeleteBooking() {
-    var select = confirm("予約をキャンセルしますか？");
+    const select = confirm("予約をキャンセルしますか？");
     return select;
 }

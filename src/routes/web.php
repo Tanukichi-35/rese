@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StoreController;
-use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,4 +66,9 @@ Route::middleware('verified')->group(function () {
 // 予約を削除
 Route::middleware('verified')->group(function () {
     Route::post('/booking/delete', [BookingController::class, 'delete']);
+});
+
+// レビューを投稿
+Route::middleware('verified')->group(function () {
+    Route::post('/submit-review', [ReviewController::class, 'submit']);
 });

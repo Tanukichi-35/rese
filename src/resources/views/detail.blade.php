@@ -6,12 +6,12 @@
 
 @section('content')
 <div class="div__main">
-  
   {{-- 店詳細 --}}
   <div class="div__store">
     <div class="div__store-name">
         <button class="button__back" onclick="goBackPage()"><</button>
         <h3 class="h3__store-name">{{$store->name}}</h3>
+        <button href="/" class="button__review" id="button__review">レビュー</button>
     </div>
     <div class="div__store-image">
       <img class="img__store-image" src="{{$store->imageURL}}" alt="">
@@ -31,7 +31,7 @@
     <form action="/booking" method="POST" class="form__booking">
       @csrf
       <div class="div__inner">
-        <input class="input__store_id" id="input__store_id" name="store_id" type="number" value="{{$store->id}}" hidden>
+        <input class="input__store_id" name="store_id" type="number" value="{{$store->id}}" hidden>
         <input class="input__date" id="input__date" name="date" type="date" min="{{date('Y-m-d')}}" max="{{date('Y-m-d', strtotime('3 month'))}}">
         <div class="div__error">
           <ul>
@@ -89,11 +89,63 @@
         </tr>
       </table>
       </div>
-      <button class="button__submit">予約する</button>
+      <button class="button__booking">予約する</button>
     </form>
   </div>
 
 </div>
+
+{{-- レビューページ（モーダルウィンドウ） --}}
+<div class="div__review">
+  <div class="div__overlay"></div>
+  <div class="div__review-window">
+    <div class="div__review-header">
+      <h3 class="h3__register">レビュー</h3>
+      <div class="div__review-close">
+        <button class="button__review-close"></button>
+      </div>
+    </div>
+    <div class="div__show-review">
+      @foreach ($store->reviews as $review)
+        <div class="div__review-content">
+          <p class="p__user-name">{{$review->user->name}} <span class="span__review-date">{{($review->created_at->format('Y/m/d'))}}</span></p>
+          <div class="div__show-rate">
+            @for ($i = 1; $i <= 5; $i++)
+              @if ($i <= $review->rate)
+                <img src="{{asset('img/star_on.png')}}" alt="">
+              @endif
+            @endfor
+          </div>
+          <p class="p__comment">{{$review->comment}}</p>
+        </div>
+      @endforeach
+    </div>
+    <div class="div__submit-review">
+      <form action="/submit-review" method="POST" class="form__review">
+      @csrf
+        <h4 class="h4__review-submit">評価する</h4>
+        <input type="number" name="store_id" value="{{$store->id}}" hidden>
+        <input type="number" class="input__rate" name="rate" value="1" hidden>
+        <div class="div__rate">
+          <img class="img__star" src="{{asset('img/star_on.png')}}" alt="" onclick="clickStar(1)">
+          @for ($i = 2; $i <= 5; $i++)
+            <img class="img__star" src="{{asset('img/star_off.png')}}" alt="" onclick="clickStar({{$i}})">
+          @endfor
+        </div>
+        <textarea name="comment" class="textarea__comment" cols="30" rows="3" placeholder="例：〇〇が美味しかった。"></textarea>
+        <button class="button__review-submit">投稿</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+@if(session('message'))
+<script>
+  let msg = "<?php echo session('message');?>";
+  alert(msg);
+</script>
+@endisset
+
 @endsection
 
 @section('script')

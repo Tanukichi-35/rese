@@ -47,3 +47,27 @@ function inputNumber() {
   $number = $("#select__number option:selected").text();
   $("#table__number").text($number);
 }
+
+// レビューボタンでレビューページを開く
+$(".button__review").on('click', function () {
+  $(".div__review").fadeIn();
+});
+
+// xボタンでレビューページを閉じる
+$(".button__review-close").on('click', function () {
+  $('.div__review').fadeOut();
+});
+
+function clickStar($rate) {
+  let i = 0;
+  Array.from($(".img__star")).forEach(star => {
+    if (i < $rate) {
+      star.src = '../img/star_on.png';
+    }
+    else {
+      star.src = '../img/star_off.png';
+    }
+    i++;
+  });
+  $(".input__rate").val($rate)
+}
