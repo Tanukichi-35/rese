@@ -72,11 +72,11 @@
           @csrf
             <input type="number" name="store_id" value="{{$store->id}}" hidden>
             @if($store->checkFavorite())
-              <button class="button__favorite" formaction="/favorite-off">
+              <button class="button__favorite" formaction="/favoriteOff">
                 <img src="{{asset('img/heart_on.png')}}" alt="" style="height: 100%;">
               </button>
             @else
-              <button class="button__favorite" formaction="/favorite-on">
+              <button class="button__favorite" formaction="/favoriteOn">
                 <img src="{{asset('img/heart_off.png')}}" alt="" style="height: 100%;">
               </button>
             @endif

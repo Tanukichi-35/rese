@@ -1,6 +1,7 @@
 .div__main{
   margin: auto;
   margin-top: 20px;
+  padding-bottom: 20px;
   /* height: 200px; */
   width: 400px;
   background-color: #fff;

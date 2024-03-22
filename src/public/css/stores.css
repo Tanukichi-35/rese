@@ -1,0 +1,241 @@
+.div__main {
+  margin: 0;
+  height: 100%;
+  padding-top: 10px;
+  background-color: #F2F2F2;
+  text-align: center;
+}
+
+.h2__title {
+  margin: 0;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+/* storesテーブル */
+.table__stores {
+  width: 95%;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+.table__stores>tr {
+  height: 30px;
+}
+
+.tr__header>th {
+  text-align: left;
+  padding: 10px 30px;
+  border-top: 2px solid #E0DFDE;
+}
+
+.tr__contents>td {
+  text-align: left;
+  padding: 10px 30px;
+  border-top: 2px solid #E0DFDE;
+}
+
+.tr__contents:last-child {
+  border-bottom: 2px solid #E0DFDE;
+}
+
+.div__button,
+.td__button {
+  display: flex;
+  flex-direction: row;
+}
+
+.button__create,
+.button__edit,
+.button__delete {
+  padding: 5px;
+  margin: 5px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.div__button {
+  float: left;
+  margin-left: 30px;
+}
+
+.a__register, .a__edit{
+  background-color: #214BE0;
+  color: #fff;
+  padding: 5px;
+  margin: 5px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.button__delete {
+  background-color: rgb(185, 75, 75);
+}
+
+/* modal-edit-page */
+.div__modal-page-contents {
+  width: 65%;
+  height: 90%;
+  border: 1px solid #000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.6);
+}
+
+.div__modal-page-header h2 {
+  font-size: 16px;
+  color: #3560F6;
+  margin: 0;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  line-height: 28px;
+}
+
+/* モーダルクローズボタン */
+.div__modal-page-close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.button__modal-page-close {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  width: 28px;
+  display: block;
+  height: 28px;
+  border: 1px solid #8B7969;
+  border-radius: 50%;
+  position: relative;
+}
+
+.button__modal-page-close::before,
+.button__modal-page-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 10px;
+  background-color: #000;
+}
+
+.button__modal-page-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.button__modal-page-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.div__overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: grey;
+  opacity: .6;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* モーダルコンテンツの窓 */
+.div__table{
+  width: 90%;
+  height: calc(100% - 130px);
+  position: absolute;
+  margin-top: 60px;
+  padding: 0 20px;
+  overflow: auto;
+}
+
+/* モーダルのテーブル */
+.table__modal{
+  width: 100%;
+  
+  tr {
+    height: 40px;
+  }
+
+  th {
+    padding-left: 30px;
+    text-align: left;
+    font-size: 12px;
+  }
+
+  td {
+    padding-left: 20px;
+    text-align: left;
+  }
+
+  td:last-child {
+    text-align: right;
+  }
+
+  input, select, textarea, .div__file{
+    width: 100%;
+    font-size: 12px;
+    padding: 5px;
+    border: solid 1px #505050;
+    border-radius: 3px;
+  }
+
+  button {
+    font-size: 12px;
+    width: 100px;
+  }
+
+  .div__file {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    img {
+      height: 100px;
+    }
+
+    input {
+      display: none;
+    }
+
+    label {
+      height: 30px;
+      background: #E9E9ED;
+      color: #000;
+      font-size: 0.8rem;
+      padding: 8px 10px;
+      border: solid 1px #8F8F9D;
+      border-radius: 4px;
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      margin-right: 8px;
+
+      &:hover {
+        opacity: 0.7;
+        transition: 0.3s ease-out;
+      }
+    }
+  }
+}
+
+.div__submit{
+  position: absolute;
+  right: 50px;
+  bottom: 20px;
+
+  button{
+    font-size: 12px;
+    padding: 5px 20px;
+    border-radius: 3px;
+  }
+}

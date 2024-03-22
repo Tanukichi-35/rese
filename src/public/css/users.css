@@ -1,0 +1,180 @@
+.div__main {
+  margin: 0;
+  height: 100%;
+  padding-top: 10px;
+  background-color: #F2F2F2;
+  text-align: center;
+}
+
+.h2__title {
+  margin: 0;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+/* usersテーブル */
+.table__users {
+  width: 95%;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+.table__users>tr {
+  height: 30px;
+}
+
+.tr__header>th {
+  text-align: left;
+  padding: 10px 30px;
+  border-top: 2px solid #E0DFDE;
+}
+
+.tr__contents>td {
+  text-align: left;
+  padding: 10px 30px;
+  border-top: 2px solid #E0DFDE;
+}
+
+.tr__contents:last-child {
+  border-bottom: 2px solid #E0DFDE;
+}
+
+.div__button,
+.td__button {
+  display: flex;
+  flex-direction: row;
+}
+
+.button__create,
+.button__edit,
+.button__delete {
+  padding: 5px;
+  margin: 5px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.div__button {
+  float: left;
+  margin-left: 30px;
+}
+
+.button__create,
+.button__edit {
+  background-color: rgb(60, 60, 150);
+}
+
+.button__delete {
+  background-color: rgb(150, 60, 60);
+}
+
+/* modal-edit-page */
+.div__modal-page-contents {
+  width: 65%;
+  height: 90%;
+  border: 1px solid #000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.6);
+}
+
+.div__modal-page-header h2 {
+  font-size: 16px;
+  color: #3560F6;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+.div__modal-page-close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.button__modal-page-close {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  width: 28px;
+  display: block;
+  height: 28px;
+  border: 1px solid #8B7969;
+  border-radius: 50%;
+  position: relative;
+}
+
+.button__modal-page-close::before,
+.button__modal-page-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 10px;
+  background-color: #000;
+}
+
+.button__modal-page-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.button__modal-page-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.div__overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: grey;
+  opacity: .6;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.table__modal {
+  width: 80%;
+  height: 60%;
+  position: absolute;
+  margin-top: 80px;
+  margin-left: 20px;
+}
+
+.table__modal tr {
+  height: 40px;
+}
+
+.table__modal th {
+  padding-left: 30px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.table__modal td {
+  padding-left: 20px;
+  text-align: left;
+}
+
+.table__modal input {
+  font-size: 12px;
+  padding: 5px;
+  border: solid 1px #505050;
+  border-radius: 3px;
+}
+
+.table__modal td:last-child {
+  text-align: center;
+}
+
+.table__modal button {
+  font-size: 12px;
+  width: 100px;
+}

@@ -20,9 +20,9 @@ class Store extends Model
         'imageURL',
     ];
 
-    // Userモデルとの紐づけ
-    public function user(){
-        return $this->hasOne('App\Models\User');
+    // Managerモデルとの紐づけ
+    public function manager(){
+        return $this->hasOne('App\Models\Manager');
     }
 
     // Bookingモデルとの紐づけ

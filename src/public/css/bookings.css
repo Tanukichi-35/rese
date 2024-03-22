@@ -1,0 +1,41 @@
+.div__main {
+  margin: 0;
+  height: 100%;
+  padding-top: 10px;
+  background-color: #F2F2F2;
+  text-align: center;
+}
+
+.h2__title {
+  margin: 0;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+/* bookingsテーブル */
+.table__bookings {
+  width: 95%;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+.table__bookings>tr {
+  height: 30px;
+}
+
+.tr__header>th {
+  text-align: left;
+  padding: 10px 30px;
+  border-top: 2px solid #E0DFDE;
+}
+
+.tr__contents>td {
+  text-align: left;
+  padding: 10px 30px;
+  border-top: 2px solid #E0DFDE;
+}
+
+.tr__contents:last-child {
+  border-bottom: 2px solid #E0DFDE;
+}

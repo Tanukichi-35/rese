@@ -1,0 +1,141 @@
+@extends('layouts.app')
+
+@section('css')
+  <link rel="stylesheet" href="{{ asset('css/store.css') }}" />
+@endsection
+
+@section('content')
+<div class="div__main">
+
+  {{-- 編集フォーム --}}
+  <div class="div__edit">
+    <h3 class="h3__edit">店舗情報</h3>
+    <form action="/manager/store/edit" method="POST" class="form__edit" enctype="multipart/form-data">
+      @csrf
+      <table class="table__edit">
+        <tr>
+          <th><label for="input__name">店舗名</label></th>
+          <td></td>
+          <td>
+            <input type="text" name="name" id="input__name" value="{{$store->name}}">
+          </td>
+        </tr>
+        <tr>
+          <th>店舗代表者</th>
+          <td><label for="input__manager-name">（氏名）</label></td>
+          <td>
+            <input type="text" name="manager_name" id="input__manager-name" value="{{$store->manager->name}}">
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><label for="input__email">（メールアドレス）</label></td>
+          <td>
+            <input type="text" name="email" id="input__email" value="{{$store->manager->email}}">
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><label for="input__password">（パスワード）</label></td>
+          <td>
+            <a href="/manager/password" class="a__password">変更</a>
+            {{-- password modal
+            <div class="div__modal">
+              <div class="div__overlay"></div>
+              <div class="div__modal-page-contents">
+                <div class="div__modal-page-header">
+                  <h2 class="h2__modal-header">パスワードの変更</h2>
+                </div>
+                  <div class="div__table">
+                    <table class="table__modal">
+                      <tr>
+                        <th><label for="input__passwordPre">元のパスワード</label></th>
+                        <td>
+                          <input type="password" name="passwordPre" id="input__passwordPre">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th><label for="input__password">変更後のパスワード</label></th>
+                        <td>
+                          <input type="password" name="password" id="input__password">
+                        </td>
+                      </tr>
+                      <tr>
+                        <th><label for="input__passwordConfirm">変更後のパスワード<br>（確認）</label></th>
+                        <td>
+                          <input type="password" name="passwordConfirm" id="input__passwordConfirm">
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="div__ok-cancel">
+                    <label onclick="closeModal()">OK</label>
+                    <label onclick="discardInputPassword()">Cancel</label>
+                  </div>
+                </form>
+              </div>
+            </div> --}}
+          </td>
+        </tr>
+        <tr>
+          <th><label for="select__area">地域</label></th>
+          <td></td>
+          <td>
+            <select name="area_id" class="select__area" id="select__area">
+              @foreach (Area::All() as $area)
+              <option value="{{$area->id}}" @if($store->area->id == $area->id) selected @endif>{{$area->name}}</option>
+              @endforeach
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th><label for="select__category">ジャンル</label></th>
+          <td></td>
+          <td>
+            <select name="category_id" class="select__category" id="select__category">
+              @foreach (Category::All() as $category)
+              <option value="{{$category->id}}" @if($store->category->id == $category->id) selected @endif>{{$category->name}}</option>
+              @endforeach
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th><label for="input__description">詳細</label></th>
+          <td></td>
+          <td>
+            <textarea name="description" class="textarea__description" cols="30" rows="5">{{$store->description}}</textarea>
+          </td>
+        </tr>
+        <tr>
+          <th><label for="input__image">店舗画像</label></th>
+          <td></td>
+          <td>
+            <div class="div__file">
+              <img src="{{asset($store->imageURL)}}" alt="画像が選択されていません">
+              <input type="file" name="image"  accept=".jpg,.jpeg,.png,.svg" id="input__file" onchange="OnFileSelect(this)"/>
+              <label for="input__file">読込</label>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="div__submit">
+        <input type="text" name="id" value="{{$store->id}}" hidden>
+        <button class="button__submit">更新</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+@if(session('message'))
+<script>
+  let msg = "<?php echo session('message');?>";
+  alert(msg);
+</script>
+@endisset
+
+@endsection
+
+@section('script')
+  <script src="{{ asset('js/store.js') }}"></script>
+@endsection

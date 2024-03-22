@@ -39,7 +39,8 @@
   <div class="div__store-list">
     @foreach ($stores as $store)
     <div class="div__card">
-      <div class="div__image" style="background-image: url({{$store->imageURL}});"></div>
+      {{-- <div class="div__image" style="background-image: url({{$store->imageURL}});"></div> --}}
+    <div class="div__image" style="background-image: url({{asset($store->imageURL)}});"></div>
       <h3 class="h3__store-name">{{$store->name}}</h3>
       <div class="div__tag">
           <p class="p__area-tag">#{{$store->area->name}}</p>
@@ -51,11 +52,11 @@
         @csrf
           <input type="number" name="store_id" value="{{$store->id}}" hidden>
           @if($store->checkFavorite())
-            <button class="button__favorite" formaction="/favorite-off">
+            <button class="button__favorite" formaction="/favoriteOff">
               <img src="{{asset('img/heart_on.png')}}" alt="" style="height: 100%;">
             </button>
           @else
-            <button class="button__favorite" formaction="/favorite-on">
+            <button class="button__favorite" formaction="/favoriteOn">
               <img src="{{asset('img/heart_off.png')}}" alt="" style="height: 100%;">
             </button>
           @endif

@@ -21,7 +21,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'level'
     ];
 
     /**
@@ -42,11 +41,6 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    // Storeモデルとの紐づけ
-    public function store(){
-        return $this->hasOne('App\Models\Store');
-    }
 
     // Bookingモデルとの紐づけ
     public function bookings(){

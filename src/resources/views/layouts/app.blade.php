@@ -17,13 +17,7 @@
 <body>
   <header class="header">
     <div class="header__inner">
-      @php
-        $user_level = 0;
-        if(Auth::user()){
-          $user_level = Auth::user()->level;
-        }
-      @endphp
-      <button class="button__menu" onclick="switchMenu({{$user_level}})">
+      <button class="button__menu">
         <span class="header__menu-bar"></span>
         <span class="header__menu-bar"></span>
         <span class="header__menu-bar"></span>
@@ -39,33 +33,74 @@
   </main>
 
   {{-- modal-menu --}}
-  <div class="div__modal">
-    <div class="div__modal-contents">
-      <div class="div__modal-close">
-        <button class="button__modal-close"></button>
+  <div class="div__modal div__modal-menu">
+    <div class="div__modal-menu-contents">
+      <div class="div__modal-menu-close">
+        <button class="button__modal-close button__modal-menu-close"></button>
       </div>
       <nav class="nav__menu">
         <div class="div__menu">
-          <form class="menu-home" id="menu-home" action="/" method="GET" id="button__home" hidden>
-            @csrf
-            <button>ホーム</button>
-          </form>
-          <form class="menu-register" id="menu-register" action="/register" method="GET" id="button__register" hidden>
-            @csrf
-            <button>会員登録</button>
-          </form>
-          <form class="menu-login" id="menu-login" action="/login" method="GET" id="button__login" hidden>
-            @csrf
-            <button>ログイン</button>
-          </form>
-          <form class="menu-logout" id="menu-logout" action="/logout" method="POST" id="button__logout" hidden>
-            @csrf
-            <button>ログアウト</button>
-          </form>
-          <form class="menu-mypage" id="menu-mypage" action="/mypage" method="GET" id="button__mypage" hidden>
-            @csrf
-            <button>マイページ</button>
-          </form>
+          {{-- 管理者 --}}
+          @if (Auth::guard('admins')->check())
+            <form action="/admin/users" method="GET">
+              @csrf
+              <button>ユーザー一覧</button>
+            </form>
+            <form action="/admin/stores" method="GET">
+              @csrf
+              <button>店舗一覧</button>
+            </form>
+            <form action="/logout" method="POST">
+              @csrf
+              <button>ログアウト</button>
+            </form>
+          {{-- 店舗代表者 --}}
+          @elseif (Auth::guard('managers')->check())
+            <form action="/manager/store" method="GET">
+              @csrf
+              <button>店舗情報</button>
+            </form>
+            <form action="/manager/bookings" method="GET">
+              @csrf
+              <button>予約一覧</button>
+            </form>
+            <form action="/manager/reviews" method="GET">
+              @csrf
+              <button>レビュー一覧</button>
+            </form>
+            <form action="/logout" method="POST">
+              @csrf
+              <button>ログアウト</button>
+            </form>
+          {{-- 登録ユーザー --}}
+          @elseif (Auth::check())
+            <form action="/" method="GET">
+              @csrf
+              <button>飲食店一覧</button>
+            </form>
+            <form action="/mypage" method="GET">
+              @csrf
+              <button>マイページ</button>
+            </form>
+            <form action="/logout" method="POST">
+              @csrf
+              <button>ログアウト</button>
+            </form>
+          {{-- ゲストユーザー --}}
+          @else
+            <form action="/" method="GET">
+              @csrf
+              <button>飲食店一覧</button>
+            </form>
+            <form action="/register" method="GET">
+              @csrf
+              <button>会員登録</button>
+            </form>
+            <form action="/login" method="GET">
+              @csrf
+              <button>ログイン</button>
+            </form>
+          @endif
         </div>
       </nav>
     </div>  
