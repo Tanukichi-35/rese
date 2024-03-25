@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-  <link rel="stylesheet" href="{{ asset('css/bookings.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/listTable.css') }}" />
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
   <h2 class="h2__title">予約状況</h2>
   <div class="div__table-content">
     {{ $bookings->links() }}
-    <table class="table__bookings">
+    <table class="table__list">
       <tr class="tr__header">
         <th class="th__date">日付</th>
         <th class="th__time">時間</th>

@@ -10,38 +10,16 @@
   {{-- 登録フォーム --}}
   <div class="div__input-form">
     <div class="div__header">
-      <button class="button__back" onclick="goBackPage()">&lt;</button>
+      <a class="a__back" href="/manager/stores">&lt;</a>
       <h3 class="h3__input-form">店舗登録</h3>
     </div>
-    <form action="/admin/store/register" method="POST" class="form__input-form" enctype="multipart/form-data">
+    <form action="/manager/store/register" method="POST" class="form__input-form" enctype="multipart/form-data">
       @csrf
       <table class="table__input-form">
         <tr>
           <th><label for="input__name">店舗名</label></th>
           <td>
             <input type="text" name="name" id="input__name" value="店舗-1">
-          </td>
-        </tr>
-        <tr>
-          <th>店舗代表者</th>
-          <td></td>
-        </tr>
-        <tr>
-          <td><label for="input__manager-name">（氏名）</label></td>
-          <td>
-            <input type="text" name="manager_name" id="input__manager-name">
-          </td>
-        </tr>
-        <tr>
-          <td><label for="input__email">（メールアドレス）</label></td>
-          <td>
-            <input type="text" name="email" id="input__email">
-          </td>
-        </tr>
-        <tr>
-          <td><label for="input__password">（パスワード）</label></td>
-          <td>
-            <input type="password" name="password" id="input__password">
           </td>
         </tr>
         <tr>
@@ -67,7 +45,7 @@
         <tr>
           <th><label for="input__description">詳細</label></th>
           <td>
-            <textarea name="description" class="textarea__description" cols="30" rows="5">お店の売りを入力してください。</textarea>
+            <textarea name="description" class="textarea__description" cols="30" rows="5" placeholder="お店の特徴を入力してください。"></textarea>
           </td>
         </tr>
         <tr>
@@ -82,6 +60,7 @@
         </tr>
       </table>
       <div class="div__submit">
+        <input type="number" name="manager_id" value="{{Auth::guard('managers')->user()->id}}" hidden>
         <button class="button__submit">登録</button>
       </div>
     </form>

@@ -13,7 +13,7 @@ class Store extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'user_id',
+        'manager_id',
         'area_id',
         'category_id',
         'description',
@@ -22,7 +22,7 @@ class Store extends Model
 
     // Managerモデルとの紐づけ
     public function manager(){
-        return $this->hasOne('App\Models\Manager');
+        return $this->belongsTo('App\Models\Manager');
     }
 
     // Bookingモデルとの紐づけ

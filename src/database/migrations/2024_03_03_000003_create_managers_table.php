@@ -18,7 +18,6 @@ class CreateManagersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->foreignId('store_id')->constrained('stores');
             $table->rememberToken();
             $table->timestamps();
         });

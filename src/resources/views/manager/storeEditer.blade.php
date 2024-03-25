@@ -7,41 +7,19 @@
 @section('content')
 <div class="div__main">
 
-  {{-- 登録フォーム --}}
+  {{-- 編集フォーム --}}
   <div class="div__input-form">
     <div class="div__header">
-      <button class="button__back" onclick="goBackPage()">&lt;</button>
-      <h3 class="h3__input-form">店舗登録</h3>
+      <a class="a__back" href="/manager/stores">&lt;</a>
+      <h3 class="h3__input-form">店舗情報</h3>
     </div>
-    <form action="/admin/store/register" method="POST" class="form__input-form" enctype="multipart/form-data">
+    <form action="/manager/store/edit" method="POST" class="form__input-form" enctype="multipart/form-data">
       @csrf
       <table class="table__input-form">
         <tr>
           <th><label for="input__name">店舗名</label></th>
           <td>
-            <input type="text" name="name" id="input__name" value="店舗-1">
-          </td>
-        </tr>
-        <tr>
-          <th>店舗代表者</th>
-          <td></td>
-        </tr>
-        <tr>
-          <td><label for="input__manager-name">（氏名）</label></td>
-          <td>
-            <input type="text" name="manager_name" id="input__manager-name">
-          </td>
-        </tr>
-        <tr>
-          <td><label for="input__email">（メールアドレス）</label></td>
-          <td>
-            <input type="text" name="email" id="input__email">
-          </td>
-        </tr>
-        <tr>
-          <td><label for="input__password">（パスワード）</label></td>
-          <td>
-            <input type="password" name="password" id="input__password">
+            <input type="text" name="name" id="input__name" value="{{$store->name}}">
           </td>
         </tr>
         <tr>
@@ -49,7 +27,7 @@
           <td>
             <select name="area_id" class="select__area" id="select__area">
               @foreach (Area::All() as $area)
-              <option value="{{$area->id}}">{{$area->name}}</option>
+              <option value="{{$area->id}}" @if($store->area->id == $area->id) selected @endif>{{$area->name}}</option>
               @endforeach
             </select>
           </td>
@@ -59,7 +37,7 @@
           <td>
             <select name="category_id" class="select__category" id="select__category">
               @foreach (Category::All() as $category)
-              <option value="{{$category->id}}">{{$category->name}}</option>
+              <option value="{{$category->id}}" @if($store->category->id == $category->id) selected @endif>{{$category->name}}</option>
               @endforeach
             </select>
           </td>
@@ -67,22 +45,23 @@
         <tr>
           <th><label for="input__description">詳細</label></th>
           <td>
-            <textarea name="description" class="textarea__description" cols="30" rows="5">お店の売りを入力してください。</textarea>
+            <textarea name="description" class="textarea__description" cols="30" rows="5">{{$store->description}}</textarea>
           </td>
         </tr>
         <tr>
           <th><label for="input__image">店舗画像</label></th>
           <td>
             <div class="div__file">
-              <img src="" alt="画像が選択されていません">
-              <input type="file" name="image" accept=".jpg,.jpeg,.png,.svg" id="input__file" onchange="OnFileSelect(this)"/>
+              <img src="{{asset($store->imageURL)}}" alt="画像が選択されていません">
+              <input type="file" name="image"  accept=".jpg,.jpeg,.png,.svg" id="input__file" onchange="OnFileSelect(this)"/>
               <label for="input__file">読込</label>
             </div>
           </td>
         </tr>
       </table>
       <div class="div__submit">
-        <button class="button__submit">登録</button>
+        <input type="text" name="id" value="{{$store->id}}" hidden>
+        <button class="button__submit">更新</button>
       </div>
     </form>
   </div>

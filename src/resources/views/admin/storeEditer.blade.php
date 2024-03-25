@@ -1,37 +1,38 @@
 @extends('layouts.app')
 
 @section('css')
-  <link rel="stylesheet" href="{{ asset('css/store.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/info.css') }}" />
 @endsection
 
 @section('content')
 <div class="div__main">
 
   {{-- 編集フォーム --}}
-  <div class="div__edit">
+  <div class="div__input-form">
     <div class="div__header">
-      <button class="button__back" onclick="goBackPage()"><</button>
-      <h3 class="h3__edit">店舗情報</h3>
+      <button class="button__back" onclick="goBackPage()">&lt;</button>
+      <h3 class="h3__input-form">店舗情報</h3>
     </div>
-    <form action="/admin/store/edit" method="POST" class="form__edit" enctype="multipart/form-data">
+    <form action="/admin/store/edit" method="POST" class="form__input-form" enctype="multipart/form-data">
       @csrf
-      <table class="table__edit">
+      <table class="table__input-form">
         <tr>
           <th><label for="input__name">店舗名</label></th>
-          <td></td>
           <td>
             <input type="text" name="name" id="input__name" value="{{$store->name}}">
           </td>
         </tr>
         <tr>
           <th>店舗代表者</th>
+          <td></td>
+        </tr>
+        <tr>
           <td><label for="input__manager-name">（氏名）</label></td>
           <td>
             <input type="text" name="manager_name" id="input__manager-name" value="{{$store->manager->name}}">
           </td>
         </tr>
         <tr>
-          <th></th>
           <td><label for="input__email">（メールアドレス）</label></td>
           <td>
             <input type="text" name="email" id="input__email" value="{{$store->manager->email}}">
@@ -39,7 +40,6 @@
         </tr>
         <tr>
           <th><label for="select__area">地域</label></th>
-          <td></td>
           <td>
             <select name="area_id" class="select__area" id="select__area">
               @foreach (Area::All() as $area)
@@ -50,7 +50,6 @@
         </tr>
         <tr>
           <th><label for="select__category">ジャンル</label></th>
-          <td></td>
           <td>
             <select name="category_id" class="select__category" id="select__category">
               @foreach (Category::All() as $category)
@@ -61,14 +60,12 @@
         </tr>
         <tr>
           <th><label for="input__description">詳細</label></th>
-          <td></td>
           <td>
             <textarea name="description" class="textarea__description" cols="30" rows="5">{{$store->description}}</textarea>
           </td>
         </tr>
         <tr>
           <th><label for="input__image">店舗画像</label></th>
-          <td></td>
           <td>
             <div class="div__file">
               <img src="{{asset($store->imageURL)}}" alt="画像が選択されていません">
@@ -96,5 +93,5 @@
 @endsection
 
 @section('script')
-  <script src="{{ asset('js/store.js') }}"></script>
+  <script src="{{ asset('js/storeInfo.js') }}"></script>
 @endsection

@@ -6,13 +6,14 @@
 
 @section('content')
 <div class="div__main">
+  <h2 class="h2__user-name">{{$user->name}}さん</h2>
   
   {{-- 予約一覧 --}}
   <div class="div__left-content">
+    <h3 class="h3__booking">予約状況</h3>
     <div class="div__booking-list">
-      <h3 class="h3__booking">予約状況</h3>
       @for ($i = 0; $i < $bookings->count(); $i++)
-        <div class="div__booking">
+        <div class="div__booking shadow">
           <div class="div__booking-header">
             <div class="div__booking-title">
               <img src="{{asset('img/watch.png')}}" alt="" class="img_watch">
@@ -55,11 +56,10 @@
 
   {{-- お気に入り一覧 --}}
   <div class="div__right-content">
-    <h2 class="h2__user-name">{{$user->name}}さん</h2>
     <h3 class="h3__favorite">お気に入り店舗</h3>
     <div class="div__favorite-list">
       @foreach ($stores as $store)
-      <div class="div__card">
+      <div class="div__store-info shadow">
         <div class="div__image" style="background-image: url({{$store->imageURL}});"></div>
         <h3 class="h3__store-name">{{$store->name}}</h3>
         <div class="div__tag">

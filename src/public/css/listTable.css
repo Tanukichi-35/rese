@@ -1,0 +1,76 @@
+.div__main {
+  margin: 0;
+  height: 100%;
+  padding-top: 10px;
+  padding-left: 30px;
+  background-color: #F2F2F2;
+  text-align: center;
+
+  .h2__title {
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+
+  .div__table-content {
+    overflow-y: scroll;
+  }
+
+  nav {
+    width: 95%;
+  }
+}
+
+/* リストテーブル */
+.table__list {
+  width: 95%;
+  /* margin: auto; */
+  margin-top: 10px;
+  margin-bottom: 50px;
+
+  .tr__header {
+
+    >th{
+      text-align: left;
+      padding: 5px 10px;
+      border-top: 2px solid #E0DFDE;
+      white-space: nowrap;
+    }
+  }
+
+  .tr__contents{
+    height: 50px;
+
+    >td {
+      text-align: left;
+      padding: 5px 10px;
+      border-top: 2px solid #E0DFDE;
+      white-space: nowrap;
+    }
+  }
+
+  .tr__contents:last-child {
+    border-bottom: 2px solid #E0DFDE;
+  }
+}
+/* 
+.div__button {
+  display: flex;
+  flex-direction: row;
+  float: left;
+}
+
+.button__delete,
+.a__register,
+.a__edit{
+  background-color: #214BE0;
+  color: #fff;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 3px;
+  align-self: center;
+}
+
+.button__delete {
+  background-color: rgb(185, 75, 75);
+} */

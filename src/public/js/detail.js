@@ -58,6 +58,7 @@ $(".button__review-close").on('click', function () {
   $('.div__review').fadeOut();
 });
 
+// 評価レートの切り替え
 function clickStar($rate) {
   let i = 0;
   Array.from($(".img__star")).forEach(star => {

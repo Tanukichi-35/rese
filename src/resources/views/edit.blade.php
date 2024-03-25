@@ -5,23 +5,22 @@
 @endsection
 
 @section('content')
-<div class="div__main">
-  
+{{-- <div class="div__main"> --}}
   {{-- 店詳細 --}}
   <div class="div__store">
     <div class="div__store-name">
-        <button class="button__back" onclick="goBackPage()"><</button>
-        <h3 class="h3__store-name">{{$store->name}}</h3>
+        <button class="button__back" onclick="goBackPage()">&lt;</button>
+        <h2 class="h2__store-name">{{$store->name}}</h2>
     </div>
     <div class="div__store-image">
-      <img class="img__store-image" src="{{$store->imageURL}}" alt="">
+      <img class="img__store-image" src="{{asset($store->imageURL)}}" alt="">
     </div>
     <div class="div__store-tag">
       <p class="p__area-tag">#{{$store->area->name}}</p>
       <p class="p__category-tag">#{{$store->category->name}}</p>
     </div>
     <div class="div__store-description">
-      <p class="p__area-tag">{{$store->description}}</p>
+      <p>{{$store->description}}</p>
     </div>
   </div>
 
@@ -42,12 +41,13 @@
             @enderror
           </ul>
         </div>
-        {{-- {{dd(substr($booking->time, 0, -3))}} --}}
-        <select class="select__time" id="select__time" name="time">
-          @foreach ($store->getHours() as $key => $value)
-            <option value="{{$key}}" @if($value == substr($booking->time, 0, -3)) selected @endif>{{$value}}</option>
-          @endforeach
-        </select>
+        <div class="div__time">
+          <select class="select__time" id="select__time" name="time">
+            @foreach ($store->getHours() as $key => $value)
+              <option value="{{$key}}" @if($value == substr($booking->time, 0, -3)) selected @endif>{{$value}}</option>
+            @endforeach
+          </select>
+        </div>
         <div class="div__error">
           <ul>
             @error('time')
@@ -57,11 +57,13 @@
             @enderror
           </ul>
         </div>
-        <select class="select__number" id="select__number" name="number">
-          @foreach ($store->getNumbers() as $key => $value)
-            <option value="{{$key}}" @if($value == $booking->number) selected @endif>{{$value}}</option>
-          @endforeach
-        </select>
+        <div class="div__number">
+          <select class="select__number" id="select__number" name="number">
+            @foreach ($store->getNumbers() as $key => $value)
+              <option value="{{$key}}" @if($value == $booking->number) selected @endif>{{$value}}</option>
+            @endforeach
+          </select>
+        </div>
         <div class="div__error">
           <ul>
             @error('number')
@@ -90,13 +92,13 @@
         </tr>
       </table>
       </div>
-      <button class="button__submit">変更する</button>
+      <button class="button__booking">変更する</button>
     </form>
   </div>
 
-</div>
+{{-- </div> --}}
 @endsection
 
 @section('script')
-  <script src="{{ asset('js/edit.js') }}"></script>
+  <script src="{{ asset('js/detail.js') }}"></script>
 @endsection

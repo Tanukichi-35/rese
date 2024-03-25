@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('css')
-  <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/inputForm.css') }}" />
 @endsection
 
 @section('content')
-<div class="div__main">
-  <h2 class="h2__login">Login (管理者)</h2>
+<div class="div__main shadow">
+  <h2 class="h2__title">Login (管理者)</h2>
   <form action="/admin/login" method="POST" class="form__login">
     @csrf
-    <div class="div__input">
-      <div class="div__input-email">
+    <div class="div__input-form">
+      <div class="div__input">
         <img src="{{ asset('img/email.png')}}" alt="email" class="img__email">
         <input type="text" name="email" class="input__mail" placeholder="Email" value="{{ old('email') }}" >
       </div>
@@ -23,7 +23,7 @@
           @enderror
         </ul>
       </div>
-      <div class="div__input-password">
+      <div class="div__input">
         <img src="{{ asset('img/password.png')}}" alt="password" class="img__password">
         <input type="password" name="password" class="input__password" placeholder="password">
       </div>
@@ -41,7 +41,7 @@
           @enderror
         </ul>
       </div>
-      <button class="button__login">ログイン</button>
+      <button class="button__submit">ログイン</button>
     </div>
   </form>
 </div>

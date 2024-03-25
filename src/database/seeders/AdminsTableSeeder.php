@@ -17,7 +17,7 @@ class AdminsTableSeeder extends Seeder
     {
         $param = [
             'name' => '管理者',
-            'email' => 'admin@admin.com',
+            'email' => 'admin@ex.com',
             'password' => Hash::make('password'),
             'created_at' => now(),
             'updated_at' => now(),

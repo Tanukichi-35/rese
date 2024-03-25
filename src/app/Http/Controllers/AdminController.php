@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminRequest;
+use App\Http\Requests\ManagerRequest;
 use App\Http\Requests\StoreRequest;
 use App\Models\User;
 use App\Models\Manager;
@@ -50,53 +51,75 @@ class AdminController extends Controller
         return view('admin.users', compact('users'));
     }
 
-    // // ユーザーの作成
-    // public function userCreate(Request $request){
-    //     // dd($request);
-    //     User::create([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'password' => Hash::make($request->email)
-    //     ]);
+    // 店舗代表者一覧ページを表示
+    public function managers(){
+        // 全ての店舗代表者を取得
+        $managers = Manager::Paginate(10);
 
-    //     // 画面を更新
-    //     return redirect()->route('admin.users');
-    // }
+        return view('admin.managers', compact('managers'));
+    }
 
-    // // ユーザーの削除
-    // public function userBatchDestroy(Request $request){
-    //     foreach (User::all() as $user) {
-    //         if(!is_null($request->input($user->id))){
-    //             $user->delete();
-    //         }
-    //     };
+    // 店舗代表者の新規登録ページを表示
+    public function managerRegister(){
+        return view('admin.managerRegister');
+    }
 
-    //     // 画面を更新
-    //     return redirect()->route('admin.users');
-    // }
+    // 店舗代表者の登録
+    public function managerCreate(ManagerRequest $request){
 
-    // // ユーザー情報の更新
-    // public function userRestore(Request $request){
-    //     // dd($request);
-    //     $user = User::find($request->id);
-    //     // dd($user);
-    //     $user->update([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //     ]);
+        // 店舗代表者を登録
+        Manager::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-    //     // 画面を更新
-    //     return redirect()->route('admin.users');
-    // }
+        // 画面を更新
+        return redirect()->route('admin.managers');
+    }
 
-    // // ユーザーの削除
-    // public function userDestroy(Request $request){
-    //     $user = User::find($request->id);
-    //     $user->delete();
+    // 店舗代表者の削除
+    public function managerBatchDestroy(Request $request){
+        foreach (Manager::all() as $manager) {
+            if(!is_null($request->input($manager->id))){
+                $manager->delete();
+            }
+        };
 
-    //     // 画面を更新
-    //     return redirect()->route('admin.users');
-    // }
+        // 画面を更新
+        return redirect()->route('admin.managers');
+    }
+
+    // 店舗代表者情報の更新ページの表示
+    public function managerEdit($manager_id){
+        // IDが一致する店舗代表者を取得
+        $manager = Manager::find($manager_id);
+
+        return view('admin.managerEditer', compact('manager'));
+    }
+
+    // 店舗代表者情報の更新
+    public function managerRestore(Request $request){
+        $manager = Manager::find($request->id);
+
+        // 店舗代表者情報の更新
+        $manager->update([
+            'name' => !is_null($request->name)?$request->name:$manager->name,
+            'email' => !is_null($request->email)?$request->email:$manager->email,
+        ]);
+
+        // 画面を更新
+        return redirect()->route('admin.managers');
+    }
+
+    // 店舗代表者の削除
+    public function managerDestroy(Request $request){
+        $manager = Manager::find($request->id);
+        $manager->delete();
+
+        // 画面を更新
+        return redirect()->route('admin.managers');
+    }
 
     // 店舗一覧ページを表示
     public function stores(){
@@ -113,12 +136,8 @@ class AdminController extends Controller
 
     // 店舗の登録
     public function storeCreate(StoreRequest $request){
-        // dd($request);
-
         // 画像をアップロード
         $imagePath = FileIO::uploadImageFile($request->file('image'));
-        // $imagePath = $this->uploadFile($request->file('image'));
-        // dd(basename($imagePath));
 
         // 店舗を登録
         $store = Store::create([
@@ -159,13 +178,12 @@ class AdminController extends Controller
         // IDが一致する飲食店を取得
         $store = Store::find($store_id);
 
-        return view('admin.storeEdit', compact('store'));
+        return view('admin.storeEditer', compact('store'));
     }
 
     // 店舗情報の更新
     public function storeRestore(Request $request){
         $store = Store::find($request->id);
-        // dd(!is_null($request->manager_name));
 
         // 画像をアップロード
         $imagePath = $store->imageURL;
@@ -202,12 +220,4 @@ class AdminController extends Controller
         // 画面を更新
         return redirect()->route('admin.stores');
     }
-
-    // // ファイルをアップロード
-    // public static function uploadFile(UploadedFile $file){
-    //     // storeImageディレクトリを作成し画像を保存
-    //     $dirName = 'storeImages';
-    //     $fileName = $file->store('public/' . $dirName);
-    //     return 'storage/' . $dirName . '/' . basename($fileName);
-    // }
 }

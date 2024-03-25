@@ -5,12 +5,12 @@
 @endsection
 
 @section('content')
-<div class="div__main">
+{{-- <div class="div__main"> --}}
   {{-- 店詳細 --}}
   <div class="div__store">
     <div class="div__store-name">
-        <button class="button__back" onclick="goBackPage()"><</button>
-        <h3 class="h3__store-name">{{$store->name}}</h3>
+        <button class="button__back" onclick="goBackPage()">&lt;</button>
+        <h2 class="h2__store-name">{{$store->name}}</h2>
         <button href="/" class="button__review" id="button__review">レビュー</button>
     </div>
     <div class="div__store-image">
@@ -21,7 +21,7 @@
       <p class="p__category-tag">#{{$store->category->name}}</p>
     </div>
     <div class="div__store-description">
-      <p class="p__area-tag">{{$store->description}}</p>
+      <p>{{$store->description}}</p>
     </div>
   </div>
 
@@ -42,11 +42,13 @@
             @enderror
           </ul>
         </div>
-        <select class="select__time" id="select__time" name="time">
-          @foreach ($store->getHours() as $key => $value)
-            <option value="{{$key}}">{{$value}}</option>
-          @endforeach
-        </select>
+        <div class="div__time">
+          <select class="select__time" id="select__time" name="time">
+            @foreach ($store->getHours() as $key => $value)
+              <option value="{{$key}}">{{$value}}</option>
+            @endforeach
+          </select>
+        </div>
         <div class="div__error">
           <ul>
             @error('time')
@@ -56,11 +58,13 @@
             @enderror
           </ul>
         </div>
-        <select class="select__number" id="select__number" name="number">
-          @foreach ($store->getNumbers() as $key => $value)
-            <option value="{{$key}}">{{$value}}</option>
-          @endforeach
-        </select>
+        <div class="div__number">
+          <select class="select__number" id="select__number" name="number">
+            @foreach ($store->getNumbers() as $key => $value)
+              <option value="{{$key}}">{{$value}}</option>
+            @endforeach
+          </select>
+        </div>
         <div class="div__error">
           <ul>
             @error('number')
@@ -93,12 +97,12 @@
     </form>
   </div>
 
-</div>
+{{-- </div> --}}
 
 {{-- レビューページ（モーダルウィンドウ） --}}
 <div class="div__review">
   <div class="div__overlay"></div>
-  <div class="div__review-window">
+  <div class="div__review-window shadow">
     <div class="div__review-header">
       <h3 class="h3__register">レビュー</h3>
       <div class="div__review-close">

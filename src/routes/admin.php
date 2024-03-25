@@ -53,6 +53,41 @@ Route::prefix('admin')->middleware('auth.admins:admins')->group(function () {
     //     AdminController::class, 'userDestroy'
     // ]);
 
+    // 店舗代表者一覧ページを開く
+    Route::get('managers', [
+        AdminController::class, 'managers'
+    ])->name('admin.managers');
+
+    // 店舗代表者の新規登録ページを表示
+    Route::get('manager/register', [
+        AdminController::class, 'managerRegister'
+    ]);
+
+    // 店舗代表者の登録
+    Route::post('manager/register', [
+        AdminController::class, 'managerCreate'
+    ]);
+
+    // 店舗代表者の一括削除
+    Route::delete('manager/batchDelete', [
+        AdminController::class, 'managerBatchDestroy'
+    ]);
+
+    // 店舗代表者情報の更新ページの表示
+    Route::get('manager/edit/{manager_id}', [
+        AdminController::class, 'managerEdit'
+    ]);
+
+    // 店舗代表者情報の更新
+    Route::post('manager/edit', [
+        AdminController::class, 'managerRestore'
+    ]);
+
+    // 店舗代表者の削除
+    Route::delete('manager/delete', [
+        AdminController::class, 'managerDestroy'
+    ]);
+
     // 店舗一覧ページを表示
     Route::get('stores', [
         AdminController::class, 'stores'

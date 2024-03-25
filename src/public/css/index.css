@@ -1,63 +1,96 @@
-.div__main{
-  width: 95%;
-  margin: auto;
-}
-
 /* 検索フォーム */
-.div__search{
-  display: flex;
-  justify-content: right;
-}
+.div__search {
+  width: 100%;;
+  padding: 34px 0;
+  padding-right: 30px;
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
 
-.form__search {
-  width: 600px;
-  height: 30px;
-  background-color: #fff;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  border-radius: 5px;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.6);
-}
+  .form__search {
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+  }
 
-.select__search-area {
-  width: 100px;
-  background-color: transparent;
-  cursor: pointer;
-  appearance: none;
-}
+  select, input{
+    font-size: 0.7rem;
+  }
 
-.select__search-category {
-  width: 180px;
-  background-color: transparent;
-  cursor: pointer;
-  appearance: none;
-}
+  .div__area {
+    width: 20%;
+    min-width: 80px;
+  }
 
-.input__search-store {
-  width: 300px;
-  background-color: transparent;
-}
+  .select__search-area {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    cursor: pointer;
+    appearance: none;
+  }
 
-.div__area,
-.div__category{
-  display: inline-flex;
-  position: relative;
-}
+  .div__category {
+    width: 20%;
+    min-width: 80px;
+  }
 
-.div__area::after,
-.div__category::after{
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  width: 10px;
-  height: 7px;
-  transform: translateY(-50%);
-  background-color: #000;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  content: '';
-  pointer-events: none;
+  .select__search-category {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  .div__store {
+    width: 60%;
+    /* min-width: 80px; */
+    display: flex;
+    flex-direction: row;
+  }
+
+  .img__search{
+    padding: 10px;
+  }
+
+  .input__search-store {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+  }
+
+  .div__area,
+  .div__category {
+    /* display: inline-flex; */
+    position: relative;
+  }
+
+  .div__area::after,
+  .div__category::after {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 10px;
+    height: 7px;
+    transform: translateY(-50%);
+    background-color: #E2E2E2;
+    clip-path: polygon(50% 25%, 97% 0, 100% 3%, 60% 95%, 53% 100%, 47% 100%, 40% 95%, 0 3%, 3% 0);
+    content: '';
+    pointer-events: none;
+  }
+
+  .div__category::before,
+  .div__store::before {
+    content: "";
+    position: absolute;
+    transform: translateY(8px);
+    width: 1px;
+    height: 24px;
+    background-color: #E2E2E2;
+  }
 }
 
 /* 飲食店一覧 */
@@ -65,53 +98,118 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: left;
+  padding: 0 calc((100% - 250px * 7) / 2);
+
+  .div__store-info {
+    margin: 15px;
+    height: 200px;
+    width: 220px;
+    background-color: #fff;
+    border-radius: 5px;
+
+    .div__image {
+      height: 55%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .h3__store-name {
+      margin: 3px 10px 0 10px;
+      padding: 0;
+    }
+
+    .div__tag,
+    .div__button {
+      display: flex;
+      flex-direction: row;
+      position: relative
+    }
+
+    .div__tag p {
+      font-size: 0.7rem;
+      margin: 0 0 5px 10px;
+    }
+
+    .a__store-detail {
+      color: #fff;
+      background-color: #3560F6;
+      font-size: 0.6rem;
+      height: 25px;
+      margin-left: 10px;
+      padding: 5px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .button__favorite {
+      background-color: transparent;
+      height: 25px;
+      position: absolute;
+      right: 20px;
+    }
+  }
 }
 
-.div__card {
-  margin: 20px;
-  height: 180px;
-  width: 220px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.6);
+@media screen and (max-width : 1768px) {
+  .div__store-list {
+    padding: 0 calc((100% - 250px * 6) / 2);
+  }
 }
 
-.h3__store-name{
-  margin: 5px 5px 0 10px;
-  padding: 0;
+@media screen and (max-width : 1768px) {
+  .div__store-list {
+    padding: 0 calc((100% - 250px * 6) / 2);
+  }
 }
 
-.div__image{
-  height: 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 5px 5px 0 0;
+@media screen and (max-width : 1518px) {
+  .div__store-list {
+    padding: 0 calc((100% - 250px * 5) / 2);
+  }
 }
 
-.div__tag, .div__button{
-  display: flex;
-  flex-direction: row;
-  position: relative
+@media screen and (max-width : 1268px) {
+  .div__store-list {
+    padding: 0 calc((100% - 250px * 4) / 2);
+  }
 }
 
-.div__tag p{
-  margin: 0 0 5px 10px;
+@media screen and (max-width : 1018px) {
+  .div__store-list {
+    padding: 0 calc((100% - 250px * 3) / 2);
+  }
 }
 
-.a__store-detail{
-  color: #fff;
-  background-color: #3560F6;
-  height: 25px;
-  margin-left: 10px;
-  padding: 5px;
-  border-radius: 5px;
-  text-decoration: none;
+@media screen and (max-width : 768px) {
+  .div__grid-container {
+    grid-template-rows: 100px 50px 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .div__search {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+    justify-self: center;
+    width: 80%;
+    min-width: 350px;
+    padding:0;
+    padding-bottom: 10px;
+  }
+
+  .div__main {
+    grid-row: 3 / 3;
+    grid-column: 1 / 2;
+  }
+
+  .div__store-list {
+    padding: 0 calc((100% - 250px * 2) / 2);
+  }
 }
 
-.button__favorite{
-  background-color: transparent;
-  height: 25px;
-  position: absolute;
-  right: 20px;
+@media screen and (max-width : 518px) {
+  .div__store-list {
+    padding: 0 calc((100% - 250px) / 2);
+  }
 }

@@ -35,7 +35,7 @@ class Manager extends Authenticatable
     ];
 
     // Storeモデルとの紐づけ
-    public function store(){
-        return $this->belongsTo('App\Models\Store');
+    public function stores(){
+        return $this->hasMany('App\Models\Store');
     }
 }

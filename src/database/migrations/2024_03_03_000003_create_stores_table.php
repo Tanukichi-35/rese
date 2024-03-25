@@ -16,6 +16,7 @@ class CreateStoresTable extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('manager_id')->constrained('managers');
             $table->foreignId('area_id')->constrained('areas');
             $table->foreignId('category_id')->constrained('categories');
             $table->string('description')->nullable();

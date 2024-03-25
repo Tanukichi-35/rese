@@ -15,36 +15,41 @@
 </head>
 
 <body>
-  <header class="header">
-    <div class="header__inner">
-      <button class="button__menu">
-        <span class="header__menu-bar"></span>
-        <span class="header__menu-bar"></span>
-        <span class="header__menu-bar"></span>
-      </button>
-      <h2 class="header__logo">
-        Rese
-      </h2>
-    </div>
-  </header>
+  <div class="div__grid-container">
+    <header class="header">
+      <div class="header__inner">
+        <button class="button__menu">
+          <span class="header__menu-bar"></span>
+          <span class="header__menu-bar"></span>
+          <span class="header__menu-bar"></span>
+        </button>
+        <h2 class="header__logo">
+          Rese
+        </h2>
+      </div>
+    </header>
 
-  <main>
-    @yield('content')
-  </main>
-
+    {{-- <main> --}}
+      @yield('content')
+    {{-- </main> --}}
+  </div>
   {{-- modal-menu --}}
   <div class="div__modal div__modal-menu">
     <div class="div__modal-menu-contents">
       <div class="div__modal-menu-close">
         <button class="button__modal-close button__modal-menu-close"></button>
       </div>
-      <nav class="nav__menu">
+      <menu>
         <div class="div__menu">
           {{-- 管理者 --}}
           @if (Auth::guard('admins')->check())
             <form action="/admin/users" method="GET">
               @csrf
               <button>ユーザー一覧</button>
+            </form>
+            <form action="/admin/managers" method="GET">
+              @csrf
+              <button>店舗代表者一覧</button>
             </form>
             <form action="/admin/stores" method="GET">
               @csrf
@@ -56,18 +61,22 @@
             </form>
           {{-- 店舗代表者 --}}
           @elseif (Auth::guard('managers')->check())
-            <form action="/manager/store" method="GET">
+            <form action="/manager/info" method="GET">
               @csrf
-              <button>店舗情報</button>
+              <button>店舗代表者情報</button>
             </form>
-            <form action="/manager/bookings" method="GET">
+            <form action="/manager/stores" method="GET">
+              @csrf
+              <button>店舗一覧</button>
+            </form>
+            {{-- <form action="/manager/bookings" method="GET">
               @csrf
               <button>予約一覧</button>
             </form>
             <form action="/manager/reviews" method="GET">
               @csrf
               <button>レビュー一覧</button>
-            </form>
+            </form> --}}
             <form action="/logout" method="POST">
               @csrf
               <button>ログアウト</button>
@@ -102,7 +111,7 @@
             </form>
           @endif
         </div>
-      </nav>
+      </menu>
     </div>  
   </div>  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

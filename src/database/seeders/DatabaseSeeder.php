@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        \App\Models\User::factory(20)->create();
+        \App\Models\Manager::factory(20)->create();
+
         $this->call([
             UsersTableSeeder::class,
             AreasTableSeeder::class,
@@ -20,11 +23,9 @@ class DatabaseSeeder extends Seeder
             StoresTableSeeder::class,
             AdminsTableSeeder::class,
         ]);        
-        // $this->call(UsersTableSeeder::class);
-        // $this->call(AreasTableSeeder::class);
-        // $this->call(CategoriesTableSeeder::class);
-        // $this->call(StoresTableSeeder::class);
-        // $this->call(AdminsTableSeeder::class);
-        \App\Models\Manager::factory(20)->create();
+
+        \App\Models\Booking::factory(100)->create();
+        \App\Models\Favorite::factory(100)->create();
+        \App\Models\Review::factory(100)->create();
     }
 }
