@@ -79,7 +79,6 @@ class ManagerController extends Controller
     // パスワードの更新
     public function passwordRestore(PasswordRequest $request){
         $manager = Manager::find($request->id);
-        // dd(Hash::check("passwore", Hash::make("passwore")));
 
         if(!Hash::check($request->oldPassword, $manager->password)){
             return back()->with('failure' , 'パスワードが間違っています');

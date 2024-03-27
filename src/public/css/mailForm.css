@@ -1,0 +1,9 @@
+.div__checkbox {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    width: auto;
+    margin-right: 0.5rem;
+  }
+}

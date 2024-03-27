@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,5 +122,15 @@ Route::prefix('admin')->middleware('auth.admins:admins')->group(function () {
     // 店舗の削除
     Route::delete('store/delete', [
         AdminController::class, 'storeDestroy'
+    ]);
+
+    // お知らせメール送信フォームの表示
+    Route::get('mail', [
+        MailController::class, 'mail'
+    ])->name('admin.mail');
+
+    // お知らせメールを送信
+    Route::post('mail', [
+        MailController::class, 'send'
     ]);
 });

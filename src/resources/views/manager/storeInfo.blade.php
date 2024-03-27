@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-  <link rel="stylesheet" href="{{ asset('css/info.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/inputForm.css') }}" />
 @endsection
 
 @section('content')
@@ -97,5 +97,5 @@
 @endsection
 
 @section('script')
-  <script src="{{ asset('js/storeInfo.js') }}"></script>
+  <script src="{{ asset('js/inputForm.js') }}"></script>
 @endsection
