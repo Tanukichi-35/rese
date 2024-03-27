@@ -49,15 +49,7 @@
         <form method="POST">
         @csrf
           <input type="number" name="store_id" value="{{$store->id}}" hidden>
-          @if($store->checkFavorite())
-            <button class="button__favorite" formaction="/favoriteOff">
-              <img src="{{asset('img/heart_on.png')}}" alt="" style="height: 100%;">
-            </button>
-          @else
-            <button class="button__favorite" formaction="/favoriteOn">
-              <img src="{{asset('img/heart_off.png')}}" alt="" style="height: 100%;">
-            </button>
-          @endif
+          <img class="img__favorite" data-user_id={{Auth::user()->id}} data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
         </form>
       </div>
     </div>
@@ -68,4 +60,5 @@
 
 @section('script')
   <script src="{{ asset('js/index.js') }}"></script>
+  <script src="{{ asset('js/favorite.js') }}"></script>
 @endsection

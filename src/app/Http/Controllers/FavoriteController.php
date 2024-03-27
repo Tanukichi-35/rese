@@ -23,12 +23,7 @@ class FavoriteController extends Controller
       }
 
       // 画面を更新
-      if(strpos($_SERVER['HTTP_REFERER'],'mypage') === false){
-        return redirect('/')->withInput();
-      }
-      else{
-        return redirect('/mypage')->withInput();
-      }
+      return back()->withInput();
     }
 
     // お気に入り削除

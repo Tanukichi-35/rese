@@ -143,11 +143,11 @@
       text-decoration: none;
     }
 
-    .button__favorite {
-      background-color: transparent;
+    .img__favorite{
       height: 25px;
       position: absolute;
       right: 20px;
+      cursor: pointer;
     }
   }
 }
