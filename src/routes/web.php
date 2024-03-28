@@ -51,20 +51,37 @@ Route::get('/detail/{store_id}', [
 Route::middleware('verified')->group(function () {
 
     // マイページを表示
-    Route::get('/mypage', [AuthController::class, 'mypage']);
+    Route::get('/mypage', [
+        AuthController::class, 'mypage'
+    ])->name('mypage');;
 
     // 予約を作成
-    Route::post('/booking', [BookingController::class, 'booking']);
+    Route::post('/booking', [
+        BookingController::class, 'booking'
+    ]);
+
+    // 予約完了ページを表示
+    Route::get('/done', [
+        BookingController::class, 'done'
+    ])->name('done');
 
     // 予約の変更ページを表示
-    Route::get('/booking/restore/{booking_id}', [AuthController::class, 'edit']);
+    Route::get('/booking/restore/{booking_id}', [
+        AuthController::class, 'edit'
+    ]);
 
     // 予約を変更
-    Route::post('/booking/restore', [BookingController::class, 'restore']);
+    Route::post('/booking/restore', [
+        BookingController::class, 'restore'
+    ]);
 
     // 予約を削除
-    Route::post('/booking/delete', [BookingController::class, 'delete']);
+    Route::post('/booking/delete', [
+        BookingController::class, 'delete'
+    ]);
 
     // レビューを投稿
-    Route::post('/submit-review', [ReviewController::class, 'submit']);
+    Route::post('/submit-review', [
+        ReviewController::class, 'submit'
+    ]);
 });

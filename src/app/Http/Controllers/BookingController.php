@@ -22,6 +22,12 @@ class BookingController extends Controller
         ]);
 
         // 画面を更新
+        return redirect()->route('done');
+    }
+
+    // 予約の完了
+    public function done(){
+        // 画面を更新
         return view('done');
     }
 
