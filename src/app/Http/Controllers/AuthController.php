@@ -36,4 +36,9 @@ class AuthController extends Controller
 
         return view('edit', compact('store', 'booking'));
     }
+
+    // サンクスページを表示
+    public function thanks(){
+        return view('thanks');
+    }
 }

@@ -15,10 +15,7 @@ use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Contracts\RegisterResponse;
-use Laravel\Fortify\Http\Controllers\RegisteredUserController;
-use Laravel\Fortify\Http\Controllers\VerifyEmailController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\VerifyController;
+use Laravel\Fortify\Contracts\VerifyEmailResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -51,11 +48,13 @@ class FortifyServiceProvider extends ServiceProvider
             }
         });
 
-        // // ユーザー登録時の使用コントローラの変更
-        // $this->app->singleton(
-        //     RegisteredUserController::class,
-        //     RegisterController::class
-        // );
+        // メール認証時の遷移先の設定
+        $this->app->instance(VerifyEmailResponse::class, new class implements VerifyEmailResponse {
+            public function toResponse($request)
+            {
+                return redirect('thanks');
+            }
+        });
     }
 
     /**

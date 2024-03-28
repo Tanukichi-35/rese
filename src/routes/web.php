@@ -47,6 +47,11 @@ Route::get('/detail/{store_id}', [
     StoreController::class, 'showDetail'
 ]);
 
+// サンクスページを表示
+Route::get('/thanks', [
+    AuthController::class, 'thanks'
+]);
+
 // 会員認証
 Route::middleware('verified')->group(function () {
 

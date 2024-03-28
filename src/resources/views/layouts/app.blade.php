@@ -90,15 +90,15 @@
           @elseif (Auth::check())
             <form action="/" method="GET">
               @csrf
-              <button>飲食店一覧</button>
-            </form>
-            <form action="/mypage" method="GET">
-              @csrf
-              <button>マイページ</button>
+              <button>ホーム</button>
             </form>
             <form action="/logout" method="POST">
               @csrf
               <button>ログアウト</button>
+            </form>
+            <form action="/mypage" method="GET">
+              @csrf
+              <button>マイページ</button>
             </form>
           {{-- ゲストユーザー --}}
           @else
