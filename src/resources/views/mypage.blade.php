@@ -64,7 +64,7 @@
         <h3 class="h3__store-name">{{$store->name}}</h3>
         <div class="div__tag">
             <p class="p__area-tag">#{{$store->area->name}}</p>
-            <p class="p__category-tag">#{{$store->category->name}}</p>
+            <p class="p__genre-tag">#{{$store->genre->name}}</p>
         </div>
         <div class="div__button">
           <a href="/detail/{{$store->id}}" class="a__store-detail">詳しく見る</a>

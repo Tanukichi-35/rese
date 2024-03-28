@@ -27,15 +27,21 @@ class StoreRequest extends FormRequest
             'name' => 'required | string | max:255',
             'manager_id' => 'required',
             'area_id' => 'required',
-            'category_id' => 'required',
+            'genre_id' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'email.required' => 'メールアドレスを入力してください',
-            'password.required' => 'パスワードを入力してください',
+            'name.required' => '店舗名を入力してください。'
+            'name.string' => '店舗名は文字列で入力してください。'
+            'name.max' => '店舗名の最大文字数は255文字です。'
+            'manager_id.required' => '店舗代表者が設定されていません。',
+            'area_id.required' => '地域を入力してください。',
+            'genre_id.required' => 'ジャンルを入力してください。',
+            'cost.required' => '料金が入力されていません。',
+            'status.required' => 'ステータスが入力されていません。',
         ];
     }
 }

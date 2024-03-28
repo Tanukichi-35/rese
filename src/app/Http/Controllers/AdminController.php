@@ -143,7 +143,7 @@ class AdminController extends Controller
         $store = Store::create([
             'name' => $request->name,
             'area_id' => $request->area_id,
-            'category_id' => $request->category_id,
+            'genre_id' => $request->genre_id,
             'description' => $request->description,
             'imageURL' => $imagePath
         ]);
@@ -196,7 +196,7 @@ class AdminController extends Controller
         $store->update([
             'name' => !is_null($request->name)?$request->name:$store->name,
             'area_id' => $request->area_id,
-            'category_id' => $request->category_id,
+            'genre_id' => $request->genre_id,
             'description' => !is_null($request->description)?$request->description:$store->description,
             'imageURL' => $imagePath
         ]);

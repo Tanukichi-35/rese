@@ -10,6 +10,8 @@ use Auth;
 
 class BookingController extends Controller
 {
+    private $price = 3000;
+
     // 予約の作成
     public function booking(BookingRequest $request){
         // 予約アイテムの作成
@@ -19,6 +21,8 @@ class BookingController extends Controller
             'date' => $request->date,
             'time' => Store::getHour($request->time),
             'number' => $request->number,
+            'cost' => $request->number * $this->price,
+            'status' => 0,
         ]);
 
         // 画面を更新
@@ -37,6 +41,7 @@ class BookingController extends Controller
             'date' => $request->date,
             'time' => Store::getHour($request->time),
             'number' => $request->number,
+            'cost' => $request->number * $this->price,
         ]);
 
         // 画面を更新

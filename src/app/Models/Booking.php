@@ -14,6 +14,8 @@ class Booking extends Model
         'date',
         'time',
         'number',
+        'cost',
+        'status',
     ];
 
     // Userモデルとの紐づけ

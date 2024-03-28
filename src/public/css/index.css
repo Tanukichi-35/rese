@@ -32,12 +32,12 @@
     appearance: none;
   }
 
-  .div__category {
+  .div__genre {
     width: 20%;
     min-width: 80px;
   }
 
-  .select__search-category {
+  .select__search-genre {
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -63,13 +63,13 @@
   }
 
   .div__area,
-  .div__category {
+  .div__genre {
     /* display: inline-flex; */
     position: relative;
   }
 
   .div__area::after,
-  .div__category::after {
+  .div__genre::after {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -82,7 +82,7 @@
     pointer-events: none;
   }
 
-  .div__category::before,
+  .div__genre::before,
   .div__store::before {
     content: "";
     position: absolute;

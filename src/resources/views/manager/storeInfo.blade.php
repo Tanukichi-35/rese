@@ -52,11 +52,11 @@
           </td>
         </tr>
         <tr>
-          <th><label for="select__category">ジャンル</label></th>
+          <th><label for="select__genre">ジャンル</label></th>
           <td>
-            <select name="category_id" class="select__category" id="select__category">
-              @foreach (Category::All() as $category)
-              <option value="{{$category->id}}" @if($store->category->id == $category->id) selected @endif>{{$category->name}}</option>
+            <select name="genre_id" class="select__genre" id="select__genre">
+              @foreach (Genre::All() as $genre)
+              <option value="{{$genre->id}}" @if($store->genre->id == $genre->id) selected @endif>{{$genre->name}}</option>
               @endforeach
             </select>
           </td>

@@ -25,7 +25,7 @@
         <th class="th__name">店舗名</th>
         <th class="th__manager">店舗代表者</th>
         <th class="th__area">地域</th>
-        <th class="th__category">ジャンル</th>
+        <th class="th__genre">ジャンル</th>
         <th class="th__function"></th>
       </tr>
       @foreach ($stores as $store)
@@ -36,7 +36,7 @@
         <td>{{$store->name}}</td>
         <td>{{$store->manager->name}}</td>
         <td>{{$store->area->name}}</td>
-        <td>{{$store->category->name}}</td>
+        <td>{{$store->genre->name}}</td>
         <td>
           <div class="div__button">
             <button class="button__modal-detail">詳細</button>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="div__store-tag">
                       <p class="p__area-tag">#{{$store->area->name}}</p>
-                      <p class="p__category-tag">#{{$store->category->name}}</p>
+                      <p class="p__genre-tag">#{{$store->genre->name}}</p>
                     </div>
                     <div class="div__store-description">
                       <p>{{$store->description}}</p>

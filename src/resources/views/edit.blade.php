@@ -17,7 +17,7 @@
     </div>
     <div class="div__store-tag">
       <p class="p__area-tag">#{{$store->area->name}}</p>
-      <p class="p__category-tag">#{{$store->category->name}}</p>
+      <p class="p__genre-tag">#{{$store->genre->name}}</p>
     </div>
     <div class="div__store-description">
       <p>{{$store->description}}</p>

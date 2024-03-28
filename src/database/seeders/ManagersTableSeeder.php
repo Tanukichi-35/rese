@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class UsersTableSeeder extends Seeder
+class ManagersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,13 +16,12 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $param = [
-            'name' => 'テスト太郎',
-            'email' => 'test@user.com',
-            'email_verified_at' => now(),
+            'name' => '店舗代表者',
+            'email' => 'test@manager.com',
             'password' => Hash::make('password'),
             'created_at' => now(),
             'updated_at' => now(),
         ];
-        DB::table('users')->insert($param);
+        DB::table('managers')->insert($param);
     }
 }

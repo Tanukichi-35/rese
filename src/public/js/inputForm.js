@@ -1,21 +1,3 @@
-// パスワードの変更モーダルを表示
-$(".label__open-password-modal").on('click', function () {
-  $(this).next().fadeIn();
-});
-
-// モーダルを閉じる
-function closeModal() {
-  $('.div__modal').fadeOut();
-}
-
-// 入力パスワードの破棄
-function discardInputPassword() {
-  closeModal();
-  $('#input__passwordPre').val('');
-  $('#input__password').val('');
-  $('#input__passwordConfirm').val('');
-}
-
 // 画像選択時に画像を読み込む
 function OnFileSelect(inputElement){
   // ファイルを取得

@@ -4,7 +4,7 @@ $("#select__search-area").on('change', function () {
 });
 
 // カテゴリーのセレクトボックスを切り替え
-$("#select__search-category").on('change', function () {
+$("#select__search-genre").on('change', function () {
   $("#form__search").submit();
 });
 

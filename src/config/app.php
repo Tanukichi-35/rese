@@ -232,7 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Manager' => App\Models\Manager::class,
         'Area' => App\Models\Area::class,
-        'Category' => App\Models\Category::class,
+        'Genre' => App\Models\Genre::class,
         'FileIO' => App\Libs\FileIO::class,
     ],
 

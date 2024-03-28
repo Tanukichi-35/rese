@@ -27,7 +27,7 @@ class StoreController extends Controller
 
     // 飲食店の検索を実施
     public function search(Request $request){
-        $stores = Store::with('area')->AreaSearch($request->area_id)->CategorySearch($request->category_id)->StoreSearch($request->store_name)->get();
+        $stores = Store::with('area')->AreaSearch($request->area_id)->GenreSearch($request->genre_id)->StoreSearch($request->store_name)->get();
 
         return view('index', compact('stores', 'request'));
     }

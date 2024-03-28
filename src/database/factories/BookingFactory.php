@@ -17,12 +17,15 @@ class BookingFactory extends Factory
      */
     public function definition()
     {
+        $number = $this->faker->numberBetween(1, 10);
         return [
             'user_id' => $this->faker->numberBetween(1, 20),
             'store_id' => $this->faker->numberBetween(1, 20),
             'date' => $this->faker->dateTimeBetween($startDate = '+1 day', $endDate = '+4 week'),
             'time' => new DateTime("19:00"),
-            'number' => $this->faker->numberBetween(1, 10),
+            'number' => $number,
+            'cost' => $number * 3000,
+            'status' => 0,
             'created_at' => now(),
             'updated_at' => now(),
         ];

@@ -15,7 +15,7 @@ class Store extends Model
         'name',
         'manager_id',
         'area_id',
-        'category_id',
+        'genre_id',
         'description',
         'imageURL',
     ];
@@ -45,9 +45,9 @@ class Store extends Model
         return $this->belongsTo('App\Models\Area');
     }
 
-    // Categoryモデルとの紐づけ
-    public function category(){
-        return $this->belongsTo('App\Models\Category');
+    // Genreモデルとの紐づけ
+    public function genre(){
+        return $this->belongsTo('App\Models\Genre');
     }
 
     // お気に入りステータスの確認
@@ -103,11 +103,11 @@ class Store extends Model
         }
     }
 
-    // カテゴリーで検索
-    public function scopeCategorySearch($query, $category_id)
+    // ジャンルで検索
+    public function scopeGenreSearch($query, $genre_id)
     {
-        if (!empty($category_id) || $category_id != 0) {
-            $query->where('category_id', $category_id);
+        if (!empty($genre_id) || $genre_id != 0) {
+            $query->where('genre_id', $genre_id);
         }
     }
 

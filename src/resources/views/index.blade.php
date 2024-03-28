@@ -18,12 +18,12 @@
         @endforeach
       </select>
     </div>
-    <div class="div__category">
-      <select name="category_id" class="select__search-category" id="select__search-category">
+    <div class="div__genre">
+      <select name="genre_id" class="select__search-genre" id="select__search-genre"?>
         <option value="" style='display:none;' disabled selected>ジャンル</option>
-        <option value="0" @if(isset( $request ) && $request['category_id'] == 0) selected @endif>全て</option>
-        @foreach (Category::All() as $category)
-        <option value="{{$category->id}}" @if(isset( $request ) && $request['category_id'] == $category->id) selected @endif>{{$category->name}}</option>
+        <option value="0" @if(isset( $request ) && $request['genre_id'] == 0) selected @endif>全て</option>
+        @foreach (Genre::All() as $genre)
+        <option value="{{$genre->id}}" @if(isset( $request ) && $request['genre_id'] == $genre->id) selected @endif>{{$genre->name}}</option>
         @endforeach
       </select>
     </div>
@@ -42,7 +42,7 @@
       <h3 class="h3__store-name">{{$store->name}}</h3>
       <div class="div__tag">
           <p class="p__area-tag">#{{$store->area->name}}</p>
-          <p class="p__category-tag">#{{$store->category->name}}</p>
+          <p class="p__genre-tag">#{{$store->genre->name}}</p>
       </div>
       <div class="div__button">
         <a href="/detail/{{$store->id}}" class="a__store-detail">詳しく見る</a>

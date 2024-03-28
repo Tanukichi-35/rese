@@ -19,10 +19,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             AreasTableSeeder::class,
-            CategoriesTableSeeder::class,
+            GenresTableSeeder::class,
             StoresTableSeeder::class,
+            ManagersTableSeeder::class,
             AdminsTableSeeder::class,
-        ]);        
+        ]);
 
         \App\Models\Booking::factory(100)->create();
         \App\Models\Favorite::factory(100)->create();
