@@ -40,7 +40,7 @@ class RemindMail extends Mailable
         return $this->to($booking->user->email, $booking->user->name.'様')
                 ->from('admin@ex.com', '管理者')
                 ->subject('本日の予約をお知らせします')
-                ->view('emails.remind', compact('booking'));
-                // ->text('mail.registration_text',['applay_user_name'=>$name,
+                ->view('emails.remind', compact('booking'))
+                ->text('emails.remind_plain', compact('booking'));
     }
 }
