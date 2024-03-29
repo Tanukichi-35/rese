@@ -49,7 +49,11 @@
         <form method="POST">
         @csrf
           <input type="number" name="store_id" value="{{$store->id}}" hidden>
-          <img class="img__favorite" data-user_id={{Auth::user()->id}} data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
+          @if(Auth::user())
+            <img class="img__favorite" data-user_id={{Auth::user()->id}} data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
+          @else
+            <img class="img__favorite" data-user_id="0" data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
+          @endif
         </form>
       </div>
     </div>
