@@ -16,20 +16,39 @@
       @csrf
       <table class="table__input-form">
         <tr>
-          <th><label for="input__manager-name">氏名</label></th>
+          <th><label for="input__name">氏名</label></th>
           <td>
-            <input type="text" name="manager_name" id="input__manager-name" value="{{$manager->name}}">
+            <input type="text" name="name" id="input__name" value="{{$manager->name}}">
+            <div class="div__error">
+              <ul>
+                @error('name')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
+            </div>
           </td>
         </tr>
         <tr>
           <th><label for="input__email">メールアドレス</label></th>
           <td>
             <input type="text" name="email" id="input__email" value="{{$manager->email}}">
+            <div class="div__error">
+              <ul>
+                @error('email')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
+            </div>
           </td>
         </tr>
         <tr>
           <th><label for="input__password">パスワード</label></th>
           <td>
+            <input type="text" name="password" id="input__password" value="{{$manager->password}}" hidden>
             <a href="/manager/password" class="a__password">変更</a>
           </td>
         </tr>
@@ -40,13 +59,6 @@
     </form>
   </div>
 </div>
-
-@if(session('message'))
-<script>
-  let msg = "<?php echo session('message');?>";
-  alert(msg);
-</script>
-@endisset
 
 @endsection
 

@@ -10,7 +10,7 @@
   {{-- 編集フォーム --}}
   <div class="div__input-form">
     <div class="div__header">
-      <a class="a__back" href="/admin/managers">&lt;</a>
+      <button class="button__back" onclick="goBackPage()">&lt;</button>
       <h3 class="h3__input-form">店舗代表者編集</h3>
     </div>
     <form action="/admin/manager/edit" method="POST" class="form__input-form" enctype="multipart/form-data">
@@ -20,12 +20,30 @@
           <th><label for="input__name">氏名</label></th>
           <td>
             <input type="text" name="name" id="input__name" value="{{$manager->name}}">
+            <div class="div__error">
+              <ul>
+                @error('name')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
+            </div>
           </td>
         </tr>
         <tr>
           <th><label for="input__email">メールアドレス</label></th>
           <td>
             <input type="text" name="email" id="input__email" value="{{$manager->email}}">
+            <div class="div__error">
+              <ul>
+                @error('email')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
+            </div>
           </td>
         </tr>
       </table>
@@ -36,13 +54,6 @@
     </form>
   </div>
 </div>
-
-@if(session('message'))
-<script>
-  let msg = "<?php echo session('message');?>";
-  alert(msg);
-</script>
-@endisset
 
 @endsection
 

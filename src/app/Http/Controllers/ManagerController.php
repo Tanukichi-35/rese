@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ManagerRequest;
 use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\StoreRequest;
@@ -22,7 +23,7 @@ class ManagerController extends Controller
     }
 
     // ログイン処理
-    public function login(ManagerRequest $request){
+    public function login(LoginRequest $request){
         $credentials = $request->only(['email', 'password']);
 
         // ログイン処理
@@ -53,18 +54,20 @@ class ManagerController extends Controller
     }
 
     // 店舗代表者情報の更新
-    public function infoRestore(Request $request){
+    public function infoRestore(ManagerRequest $request){
         // ログインユーザーの取得
         $manager = Auth::guard('managers')->user();
 
         // 店舗代表者情報の更新
         $manager->update([
-            'name' => !is_null($request->manager_name)?$request->manager_name:$manager->name,
+            'name' => !is_null($request->name)?$request->name:$manager->name,
             'email' => !is_null($request->email)?$request->email:$manager->email,
         ]);
 
         // 画面を更新
-        return redirect()->route('manager.info');
+        // return redirect()->route('manager.info');
+        $message = '登録情報を更新しました';
+        return redirect()->route('manager.info')->with(compact('message'));
     }
 
     // パスワードの変更ページを表示
@@ -81,7 +84,7 @@ class ManagerController extends Controller
         $manager = Manager::find($request->id);
 
         if(!Hash::check($request->oldPassword, $manager->password)){
-            return back()->with('failure' , 'パスワードが間違っています');
+            return back()->with('failure' , '元のパスワードが一致しません');
         }
 
         if($request->password != $request->confirmPassword){
@@ -94,47 +97,11 @@ class ManagerController extends Controller
         ]);
 
         // 画面を更新
-        return redirect()->route('manager.info');
+        // return redirect()->route('manager.info');
+        // return view('manager.info', compact('manager'))->with('message' , 'パスワードを更新しました。');
+        $message = 'パスワードを更新しました';
+        return redirect()->route('manager.info')->with(compact('message'));
     }
-
-    // // 店舗ページを表示
-    // public function store(){
-    //     // 店舗情報を取得
-    //     $store = Auth::guard('managers')->user()->store;
-
-    //     return view('manager.storeInfo', compact('store'));
-    // }
-
-    // // 店舗情報の更新
-    // public function storeRestore(Request $request){
-    //     $store = Store::find($request->id);
-    //     // dd(!is_null($request->manager_name));
-
-    //     // 画像をアップロード
-    //     $imagePath = $store->imageURL;
-    //     if(!is_null($request->file('image'))){
-    //         FileIO::deleteImageFile($store->imageURL);
-    //         $imagePath = FileIO::uploadImageFile($request->file('image'));
-    //     }
-
-    //     // 店舗情報の更新
-    //     $store->update([
-    //         'name' => !is_null($request->name)?$request->name:$store->name,
-    //         'area_id' => $request->area_id,
-    //         'genre_id' => $request->genre_id,
-    //         'description' => !is_null($request->description)?$request->description:$store->description,
-    //         'imageURL' => $imagePath
-    //     ]);
-
-    //     // 店舗代表者情報の更新
-    //     $store->manager->update([
-    //         'name' => !is_null($request->manager_name)?$request->manager_name:$store->manager->name,
-    //         'email' => !is_null($request->email)?$request->email:$store->manager->email,
-    //     ]);
-
-    //     // 画面を更新
-    //     return redirect()->route('manager.storeInfo');
-    // }
 
     // 店舗一覧ページを表示
     public function stores(){
@@ -153,6 +120,7 @@ class ManagerController extends Controller
     // 店舗の登録
     public function storeCreate(StoreRequest $request){
         // 画像をアップロード
+        $imagePath = null;
         if(!is_null($request->file('image'))){
             $imagePath = FileIO::uploadImageFile($request->file('image'));
         }
@@ -168,10 +136,12 @@ class ManagerController extends Controller
         ]);
 
         // 画面を更新
-        return redirect()->route('manager.stores');
+        // return redirect()->route('manager.stores');
+        $message = '新しく店舗を登録しました';
+        return redirect()->route('manager.stores')->with(compact('message'));
     }
 
-    // 店舗および店舗代表者の削除
+    // 店舗の削除
     public function storeBatchDestroy(Request $request){
         foreach (Store::all() as $store) {
             if(!is_null($request->input($store->id))){
@@ -180,7 +150,9 @@ class ManagerController extends Controller
         };
 
         // 画面を更新
-        return redirect()->route('manager.stores');
+        // return redirect()->route('manager.stores');
+        $message = '登録情報を削除しました';
+        return redirect()->route('manager.stores')->with(compact('message'));
     }
 
     // 店舗情報の更新ページの表示
@@ -192,7 +164,7 @@ class ManagerController extends Controller
     }
 
     // 店舗情報の更新
-    public function storeRestore(Request $request){
+    public function storeRestore(StoreRequest $request){
         $store = Store::find($request->id);
 
         // 画像をアップロード
@@ -212,7 +184,10 @@ class ManagerController extends Controller
         ]);
 
         // 画面を更新
-        return redirect()->route('manager.stores');
+        // return redirect()->route('manager.stores');
+        // return back()->withInput();
+        $message = '登録情報を更新しました';
+        return redirect()->route('manager.stores')->with(compact('message'));
     }
 
     // 店舗の削除
@@ -221,7 +196,9 @@ class ManagerController extends Controller
         $store->delete();
 
         // 画面を更新
-        return redirect()->route('manager.stores');
+        // return redirect()->route('manager.stores');
+        $message = '登録情報を削除しました';
+        return redirect()->route('manager.stores')->with(compact('message'));
     }
 
     // 予約一覧ページを表示

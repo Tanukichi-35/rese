@@ -10,7 +10,7 @@
   {{-- 登録フォーム --}}
   <div class="div__input-form">
     <div class="div__header">
-      <a class="a__back" href="/admin/managers">&lt;</a>
+      <button class="button__back" onclick="goBackPage()">&lt;</button>
       <h3 class="h3__input-form">店舗代表者登録</h3>
     </div>
     <form action="/admin/manager/register" method="POST" class="form__input-form" enctype="multipart/form-data">
@@ -20,18 +20,45 @@
           <th><label for="input__name">氏名</label></th>
           <td>
             <input type="text" name="name" id="input__name">
+            <div class="div__error">
+              <ul>
+                @error('name')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
+            </div>
           </td>
         </tr>
         <tr>
           <th><label for="input__email">メールアドレス</label></th>
           <td>
             <input type="text" name="email" id="input__email">
+            <div class="div__error">
+              <ul>
+                @error('email')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
+            </div>
           </td>
         </tr>
         <tr>
           <th><label for="input__password">パスワード</label></th>
           <td>
             <input type="password" name="password" id="input__password">
+            <div class="div__error">
+              <ul>
+                @error('password')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
+            </div>
           </td>
         </tr>
       </table>
@@ -41,13 +68,6 @@
     </form>
   </div>
 </div>
-
-@if(session('message'))
-<script>
-  let msg = "<?php echo session('message');?>";
-  alert(msg);
-</script>
-@endisset
 
 @endsection
 

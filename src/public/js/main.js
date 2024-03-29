@@ -12,3 +12,10 @@ $(".button__modal-close").on('click', function () {
 function goBackPage() {
   window.history.back();
 }
+
+// フラッシュメッセージ
+(function() {
+    $(function(){
+        $('#div__flash-message').fadeOut(2000);
+    });
+})();

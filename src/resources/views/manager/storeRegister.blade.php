@@ -10,7 +10,7 @@
   {{-- 登録フォーム --}}
   <div class="div__input-form">
     <div class="div__header">
-      <a class="a__back" href="/manager/stores">&lt;</a>
+      <button class="button__back" onclick="goBackPage()">&lt;</button>
       <h3 class="h3__input-form">店舗登録</h3>
     </div>
     <form action="/manager/store/register" method="POST" class="form__input-form" enctype="multipart/form-data">
@@ -19,7 +19,16 @@
         <tr>
           <th><label for="input__name">店舗名</label></th>
           <td>
-            <input type="text" name="name" id="input__name" value="店舗-1">
+            <input type="text" name="name" id="input__name" placeholder="店舗名" value="{{ old('name') }}">
+            <div class="div__error">
+              <ul>
+                @error('name')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
+            </div>
           </td>
         </tr>
         <tr>
@@ -30,6 +39,15 @@
               <option value="{{$area->id}}">{{$area->name}}</option>
               @endforeach
             </select>
+            <div class="div__error">
+              <ul>
+                @error('area')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
+            </div>
           </td>
         </tr>
         <tr>
@@ -40,12 +58,30 @@
               <option value="{{$genre->id}}">{{$genre->name}}</option>
               @endforeach
             </select>
+            <div class="div__error">
+              <ul>
+                @error('genre')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
+            </div>
           </td>
         </tr>
         <tr>
           <th><label for="input__description">詳細</label></th>
           <td>
             <textarea name="description" class="textarea__description" cols="30" rows="5" placeholder="お店の特徴を入力してください。"></textarea>
+            <div class="div__error">
+              <ul>
+                @error('description')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
+            </div>
           </td>
         </tr>
         <tr>
@@ -55,6 +91,15 @@
               <img src="" alt="画像が選択されていません">
               <input type="file" name="image" accept=".jpg,.jpeg,.png,.svg" id="input__file" onchange="OnFileSelect(this)"/>
               <label for="input__file">読込</label>
+            </div>
+            <div class="div__error">
+              <ul>
+                @error('imageURL')
+                <li class="li__error">
+                  {{$message}}
+                </li>
+                @enderror
+              </ul>
             </div>
           </td>
         </tr>
@@ -66,13 +111,6 @@
     </form>
   </div>
 </div>
-
-@if(session('message'))
-<script>
-  let msg = "<?php echo session('message');?>";
-  alert(msg);
-</script>
-@endisset
 
 @endsection
 

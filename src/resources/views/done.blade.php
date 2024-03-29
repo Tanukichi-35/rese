@@ -8,7 +8,7 @@
 <div class="div__main">
   <div class="div__inner">
     <h2 class="h2__message">ご予約ありがとうございます</h2>
-    <a href="/" class="a__back">戻る</a>
+    <button class="button__back" onclick="goBackPage()">戻る</button>
   </div>
 </div>
 @endsection

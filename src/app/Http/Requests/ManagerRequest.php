@@ -24,6 +24,7 @@ class ManagerRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required',
             'email' => 'required',
             'password' => 'required',
         ];
@@ -32,6 +33,7 @@ class ManagerRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.required' => '氏名を入力してください',
             'email.required' => 'メールアドレスを入力してください',
             'password.required' => 'パスワードを入力してください',
         ];

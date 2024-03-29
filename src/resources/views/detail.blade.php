@@ -143,13 +143,6 @@
   </div>
 </div>
 
-@if(session('message'))
-<script>
-  let msg = "<?php echo session('message');?>";
-  alert(msg);
-</script>
-@endisset
-
 @endsection
 
 @section('script')

@@ -45,7 +45,9 @@ class BookingController extends Controller
         ]);
 
         // 画面を更新
-        return view('restore');
+        // return view('restore');
+         $message = '予約を変更しました';
+        return redirect()->route('mypage')->with(compact('message'));
     }
 
     // 予約の削除
@@ -53,6 +55,8 @@ class BookingController extends Controller
         $booking = Booking::find($request->id);
         $booking->delete();
 
-        return redirect('/mypage');
-    }
+        // return redirect('/mypage');
+         $message = '予約をキャンセルしました';
+        return redirect()->route('mypage')->with(compact('message'));
+   }
 }

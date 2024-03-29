@@ -16,6 +16,7 @@
 </head>
 
 <body>
+
   <div class="div__grid-container">
     <header class="header">
       <div class="header__inner">
@@ -30,10 +31,15 @@
       </div>
     </header>
 
+    {{-- message --}}
+    @if(session('message'))
+    <div id="div__flash-message">{{session('message')}}</div>
+    @endif
+
     {{-- <main> --}}
-      @yield('content')
-    {{-- </main> --}}
+    @yield('content')
   </div>
+
   {{-- modal-menu --}}
   <div class="div__modal div__modal-menu">
     <div class="div__modal-menu-contents">
