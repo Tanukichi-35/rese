@@ -20,8 +20,24 @@
               <span >予約{{$i+1}}</span>
             </div>
             <div class="div__button">
-              <a href="/booking/QR/{{$bookings[$i]->id}}"><img src="{{asset ('img/QR.png')}}" alt="" class="img__QR"></a>
-              <a href="/booking/restore/{{$bookings[$i]->id}}"><img src="{{asset ('img/edit.png')}}" alt="" class="img__edit"></a>
+              {{-- <a href="/booking/QR/{{$bookings[$i]->id}}"><img src="{{asset ('img/QR.png')}}" alt="" class="img__QR"></a> --}}
+              <img src="{{asset ('img/QR.png')}}" alt="" class="img__QR">
+              {{-- modal-QR-page --}}
+              <div class="div__modal div__modal-QR">
+                <div class="div__overlay"></div>
+                <div class="div__modal-page-contents">
+                  <div class="div__modal-page-header">
+                    <h2 class="h2__modal-QR-header">予約情報</h2>
+                    <div class="div__modal-page-close">
+                      <button class="button__modal-close button__modal-page-close"></button>
+                    </div>
+                  </div>
+                  <div class="div__modal-page-content">
+                    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->generate($bookings[$i]->uuid)) !!} ">
+                  </div>
+                </div>
+              </div>
+              <a href="/booking/restore/{{$bookings[$i]->uuid}}"><img src="{{asset ('img/edit.png')}}" alt="" class="img__edit"></a>
               <div class="div__delete">
                 <form action="/booking/delete" method="POST" class="form__delete" onsubmit="return confirmDeleteBooking()">
                 @csrf
@@ -71,14 +87,10 @@
           <form method="POST">
           @csrf
             <input type="number" name="store_id" value="{{$store->id}}" hidden>
-            @if($store->checkFavorite())
-              <button class="button__favorite" formaction="/favoriteOff">
-                <img src="{{asset('img/heart_on.png')}}" alt="" style="height: 100%;">
-              </button>
+            @if(Auth::user())
+              <img class="img__favorite" data-user_id={{Auth::user()->id}} data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
             @else
-              <button class="button__favorite" formaction="/favoriteOn">
-                <img src="{{asset('img/heart_off.png')}}" alt="" style="height: 100%;">
-              </button>
+              <img class="img__favorite" data-user_id="0" data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
             @endif
           </form>
         </div>
@@ -92,4 +104,5 @@
 
 @section('script')
   <script src="{{ asset('js/mypage.js') }}"></script>
+  <script src="{{ asset('js/favorite.js') }}"></script>
 @endsection

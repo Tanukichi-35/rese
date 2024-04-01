@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookingRequest;
 use App\Models\Store;
@@ -16,12 +17,13 @@ class BookingController extends Controller
     public function booking(BookingRequest $request){
         // 予約アイテムの作成
         Booking::create([
+            'uuid' => (string) Str::uuid(),
             'user_id' => Auth::user()->id,
             'store_id' => $request->store_id,
             'date' => $request->date,
             'time' => Store::getHour($request->time),
             'number' => $request->number,
-            'cost' => $request->number * $this->price,
+            'price' => $request->number * $this->price,
             'status' => 0,
         ]);
 
@@ -41,7 +43,7 @@ class BookingController extends Controller
             'date' => $request->date,
             'time' => Store::getHour($request->time),
             'number' => $request->number,
-            'cost' => $request->number * $this->price,
+            'price' => $request->number * $this->price,
         ]);
 
         // 画面を更新

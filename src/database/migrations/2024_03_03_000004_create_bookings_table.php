@@ -15,12 +15,13 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('store_id')->constrained('stores');
             $table->date('date');
             $table->time('time');
             $table->tinyInteger('number');
-            $table->integer('cost');
+            $table->integer('price');
             $table->tinyInteger('status');
             $table->timestamps();
         });

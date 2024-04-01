@@ -71,7 +71,7 @@ Route::middleware('verified')->group(function () {
     ])->name('done');
 
     // 予約の変更ページを表示
-    Route::get('/booking/restore/{booking_id}', [
+    Route::get('/booking/restore/{booking_uuid}', [
         AuthController::class, 'edit'
     ]);
 

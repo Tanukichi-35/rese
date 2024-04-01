@@ -29,9 +29,9 @@ class AuthController extends Controller
     }
 
     // 予約変更ページを表示
-    public function edit($booking_id){
+    public function edit($booking_uuid){
         // IDが一致する飲食店を取得
-        $booking = Booking::find($booking_id);
+        $booking = Booking::where('uuid', '=', $booking_uuid)->first();
         $store = $booking -> store;
 
         return view('edit', compact('store', 'booking'));

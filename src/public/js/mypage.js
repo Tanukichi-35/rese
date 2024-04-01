@@ -53,3 +53,13 @@ function confirmDeleteBooking() {
     const select = confirm("予約をキャンセルしますか？");
     return select;
 }
+
+// QRボタンでQRページを開く
+$(".img__QR").on('click', function () {
+  $(this).next().fadeIn();
+});
+
+// xボタンでQRページを閉じる
+$(".button__modal-close").on('click', function () {
+  $('.div__modal-QR').fadeOut();
+});
