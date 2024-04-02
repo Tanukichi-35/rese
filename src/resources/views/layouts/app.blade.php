@@ -9,7 +9,7 @@
   <title>Rese</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+JP&display=swap" rel="stylesheet">   
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+JP&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/common.css') }}" />
   @yield('css')
@@ -88,6 +88,10 @@
               @csrf
               <button>レビュー一覧</button>
             </form> --}}
+            <form action="/manager/qr" method="GET">
+              @csrf
+              <button>QRコード読取</button>
+            </form>
             <form action="/logout" method="POST">
               @csrf
               <button>ログアウト</button>

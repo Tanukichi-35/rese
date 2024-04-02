@@ -50,8 +50,8 @@ function inputNumber() {
 
 // 予約の削除を確認
 function confirmDeleteBooking() {
-    const select = confirm("予約をキャンセルしますか？");
-    return select;
+  const select = confirm("予約をキャンセルしますか？");
+  return select;
 }
 
 // QRボタンでQRページを開く

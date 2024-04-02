@@ -21,7 +21,7 @@ $('.img__favorite').on('click', function () {
         url: postURL,
         type: "POST",
         data: {
-            "user_id": obj.data('user_id'),
+            // "user_id": obj.data('user_id'),
             "store_id": obj.data('store_id')
         },
     }).done(function (res) {

@@ -102,4 +102,19 @@ Route::prefix('manager')->middleware('auth.managers:managers')->group(function (
     Route::get('reviews', [
         ManagerController::class, 'reviews'
     ])->name('manager.reviews');
+
+    // QRコードの読み取りページを表示
+    Route::get('qr', [
+        ManagerController::class, 'readQR'
+    ])->name('manager.readQR');
+
+    // QRコードの処理
+    Route::post('qr', [
+        ManagerController::class, 'checkQR'
+    ]);
+
+    // QRコードの読み取りページを表示
+    Route::post('getQRData', [
+        ManagerController::class, 'getQRData'
+    ]);
 });

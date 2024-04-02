@@ -218,4 +218,41 @@ class ManagerController extends Controller
 
         return view('manager.reviews', compact('reviews'));
     }
+
+    // QRコードの読み取りページを表示
+    public function readQR(){
+        return view('manager.readQR');
+    }
+
+    // QRコード内容から予約情報のステータスを更新
+    public function checkQR(Request $request){
+        // dd($request->uuid);
+        $booking = Booking::Where('uuid', '=', $request->uuid)->first();
+        $booking->update([
+            'status' => $booking->status + 2
+        ]);
+
+        return view('manager.confirm');
+    }
+
+    // QRコードのデータ(uuid)から予約データを取得
+    public function getQRData(Request $request){
+        $booking = Booking::Where('uuid', '=', $request->uuid)->first();
+        if(is_null($booking)){
+            return 'failure';
+        }
+        else if($booking->store->manager != Auth::guard('managers')->user()){
+            return 'mismatch';
+        }
+        else if($booking->status >= 2){
+            return 'done';
+        }
+        return response()->json([
+            'store' => $booking->store->name,
+            'user' => $booking->user->name,
+            'date' => $booking->date,
+            'time' => substr($booking->time, 0, -3),
+            'number' => $booking->number.'名',
+        ]);
+    }
 }
