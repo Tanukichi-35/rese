@@ -31,6 +31,10 @@
 
 <table>
   <tr>
+    <th>予約店舗</th>
+    <td>{{$booking->store->name}}</td>
+  </tr>
+  <tr>
     <th>予約時間</th>
     <td>{{substr($booking->time, 0, -3)}}</td>
   </tr>

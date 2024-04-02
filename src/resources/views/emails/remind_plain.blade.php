@@ -3,6 +3,7 @@
 いつも当店をご利用いただき、誠にありがとうございます。
 本日のご予約の詳細についてお知らせいたします。
 
+予約店舗：{{$booking->store->name}}
 予約時間：{{substr($booking->time, 0, -3)}}
 予約名：{{$booking->user->name}}
 予約人数：{{$booking->number}}人
