@@ -36,6 +36,7 @@ class MailController extends Controller
       $managers = Manager::All();
       foreach ($managers as $manager) {
           $mail = new InformationMail();
+          $name = $manager->name;
           $mail->to($manager->email, $manager->name.'様')
                 ->subject($request->subject)
                 ->view('emails.information', compact('name', 'text'))
