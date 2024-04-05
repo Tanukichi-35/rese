@@ -9,19 +9,11 @@ use Auth;
 
 class AuthController extends Controller
 {
-    // // 飲食店一覧ページを表示
-    // public function index(){
-    //     // 全ての飲食店を取得
-    //     $stores = Store::All();
-
-    //     return view('index', compact('stores'));
-    // }
-
     // マイページを表示
     public function mypage(){
         $user = Auth::user();
-        // 予約情報を取得
-        $bookings = $user->bookings;
+        // 当日以降の予約情報を取得
+        $bookings = $user->bookings->where('date', '>=', now()->format('Y-m-d'));
         // お気に入り店を取得
         $stores = $user->favoriteStores();
 
@@ -31,7 +23,8 @@ class AuthController extends Controller
     // 予約変更ページを表示
     public function edit($booking_uuid){
         // IDが一致する飲食店を取得
-        $booking = Booking::where('uuid', '=', $booking_uuid)->first();
+        // $booking = Booking::where('uuid', '=', $booking_uuid)->first();
+        $booking = Booking::getBooking($booking_uuid);
         $store = $booking -> store;
 
         return view('edit', compact('store', 'booking'));

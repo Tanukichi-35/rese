@@ -11,24 +11,26 @@ use Auth;
 
 class BookingController extends Controller
 {
-    private $price = 3000;
-
     // 予約の作成
     public function booking(BookingRequest $request){
         // 予約アイテムの作成
-        Booking::create([
+        $booking = Booking::create([
             'uuid' => (string) Str::uuid(),
             'user_id' => Auth::user()->id,
             'store_id' => $request->store_id,
             'date' => $request->date,
             'time' => Store::getHour($request->time),
             'number' => $request->number,
-            'price' => $request->number * $this->price,
+            'payment' => $request->number * $request->fee,
             'status' => 0,
         ]);
+        // dd($booking);
+
+        $payment = $request->number * $request->fee;
 
         // 画面を更新
-        return redirect()->route('done');
+        // return view('done', compact('payment'));
+        return redirect()->route('done')->with(compact('booking'));
     }
 
     // 予約の完了
@@ -43,7 +45,7 @@ class BookingController extends Controller
             'date' => $request->date,
             'time' => Store::getHour($request->time),
             'number' => $request->number,
-            'price' => $request->number * $this->price,
+            'payment' => $request->number * $request->fee,
         ]);
 
         // 画面を更新

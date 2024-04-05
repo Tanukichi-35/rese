@@ -21,7 +21,7 @@ class CreateBookingsTable extends Migration
             $table->date('date');
             $table->time('time');
             $table->tinyInteger('number');
-            $table->integer('price');
+            $table->integer('payment');
             $table->tinyInteger('status');
             $table->timestamps();
         });

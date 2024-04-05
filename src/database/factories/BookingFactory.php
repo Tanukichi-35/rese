@@ -25,7 +25,7 @@ class BookingFactory extends Factory
             'date' => $this->faker->dateTimeBetween($startDate = '+1 day', $endDate = '+4 week'),
             'time' => new DateTime("19:00"),
             'number' => $number,
-            'price' => $number * 3000,
+            'payment' => $number * 3000,
             'status' => 0,
             'created_at' => now(),
             'updated_at' => now(),

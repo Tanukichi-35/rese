@@ -39,6 +39,10 @@
           <th>人数：</th>
           <td id="td__number"></td>
         </tr>
+        <tr>
+          <th>支払い：</th>
+          <td id="td__checkout"></td>
+        </tr>
       </table>
       <input id="input__QR-data" name="uuid" type="text" hidden>
       <div class="div__button">

@@ -19,3 +19,8 @@ function goBackPage() {
         $('#div__flash-message').fadeOut(2000);
     });
 })();
+
+// 決済に関する注意喚起
+function alertMessageCheckout() {
+  alert("決済後はシステム上での予約の変更ができません");
+}

@@ -12,15 +12,16 @@
   <div class="div__left-content">
     <h3 class="h3__booking">予約状況</h3>
     <div class="div__booking-list">
-      @for ($i = 0; $i < $bookings->count(); $i++)
+      <?php $i = 1?>
+      @foreach ($bookings as $booking)
         <div class="div__booking shadow">
           <div class="div__booking-header">
             <div class="div__booking-title">
               <img src="{{asset('img/watch.png')}}" alt="" class="img_watch">
-              <span >予約{{$i+1}}</span>
+              <span >予約{{$i++}}</span>
             </div>
             <div class="div__button">
-              {{-- <a href="/booking/QR/{{$bookings[$i]->id}}"><img src="{{asset ('img/QR.png')}}" alt="" class="img__QR"></a> --}}
+              {{-- <a href="/booking/QR/{{$booking->id}}"><img src="{{asset ('img/QR.png')}}" alt="" class="img__QR"></a> --}}
               <img src="{{asset ('img/QR.png')}}" alt="" class="img__QR">
               {{-- modal-QR-page --}}
               <div class="div__modal div__modal-QR">
@@ -33,40 +34,63 @@
                     </div>
                   </div>
                   <div class="div__modal-page-content">
-                    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->generate($bookings[$i]->uuid)) !!} ">
+                    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->generate($booking->uuid)) !!} ">
                   </div>
                 </div>
               </div>
-              <a href="/booking/restore/{{$bookings[$i]->uuid}}"><img src="{{asset ('img/edit.png')}}" alt="" class="img__edit"></a>
+              @if (!$booking->isCheckout())
+              <a href="/booking/restore/{{$booking->uuid}}"><img src="{{asset ('img/edit.png')}}" alt="" class="img__edit"></a>
               <div class="div__delete">
                 <form action="/booking/delete" method="POST" class="form__delete" onsubmit="return confirmDeleteBooking()">
                 @csrf
-                  <input type="number" name="id" value="{{$bookings[$i]->id}}" hidden>
+                  <input type="number" name="id" value="{{$booking->id}}" hidden>
                   <button class="button__delete"></button>
                 </form>
               </div>
+              @endif
             </div>
           </div>
           <table class="table__monitor">
             <tr>
               <th>店名</th>
-              <td>{{$bookings[$i]->store->name}}</td>
+              <td>{{$booking->store->name}}</td>
             </tr>
             <tr>
               <th>日付</th>
-              <td>{{$bookings[$i]->date}}</td>
+              <td>{{$booking->date}}</td>
             </tr>
             <tr>
               <th>時間</th>
-              <td>{{substr($bookings[$i]->time, 0, -3)}}</td>
+              <td>{{substr($booking->time, 0, -3)}}</td>
             </tr>
             <tr>
               <th>人数</th>
-              <td>{{$bookings[$i]->number}}</td>
+              <td>{{$booking->number}}</td>
             </tr>
           </table>
+          @if (!$booking->isCheckout())
+            <form class="form__stripe" id="form__stripe" action="{{route('stripe.charge')}}" method="POST" onclick="alertMessageCheckout()">
+            @csrf
+              <input type="hidden" name="uuid" value="{{$booking->uuid}}">
+              <script
+                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="{{ env('STRIPE_KEY') }}"
+                  data-amount="{{$booking->payment}}"
+                  data-name="お支払い画面"
+                  data-label="事前決済"
+                  data-description="現在はデモ画面です"
+                  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                  data-locale="auto"
+                  data-currency="JPY">
+              </script>
+            </form>
+          @else
+            <p class="p__processed">事前決済済</p>
+          @endif
         </div>
-      @endfor
+      @endforeach
+      {{-- @for ($i = 0; $i < $bookings->count(); $i++)
+      @endfor --}}
     </div>
   </div>
 

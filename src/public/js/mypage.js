@@ -63,3 +63,22 @@ $(".img__QR").on('click', function () {
 $(".button__modal-close").on('click', function () {
   $('.div__modal-QR').fadeOut();
 });
+
+window.addEventListener('pageshow',()=>{
+  const entries = window.performance.getEntriesByType('navigation')
+  for (const entry of entries) {
+      // if (entry.type === 'navigate') {
+      //     console.log('ページ遷移')
+      // }
+      // if (entry.type === 'reload') {
+      //     console.log('ページ更新')
+      // }
+      if (entry.type === 'back_forward') {
+          location.reload();
+          // console.log('戻る・進む')
+      }
+      // if (entry.type === 'prerender') {
+      //     console.log('その他')
+      // }
+  }
+});

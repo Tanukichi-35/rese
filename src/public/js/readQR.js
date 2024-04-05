@@ -10,6 +10,7 @@ var user = document.getElementById("td__user");
 var time = document.getElementById("td__time");
 var date = document.getElementById("td__date");
 var number = document.getElementById("td__number");
+var checkout = document.getElementById("td__checkout");
 
 // 背面カメラを利用し画像を取得
 navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
@@ -86,6 +87,10 @@ function getData(uuid){
       date.innerText = res.date;
       time.innerText = res.time;
       number.innerText = res.number;
+      if(res.isCheckout)
+        checkout.innerText = "清算済";
+      else
+        checkout.innerText = "未清算";
       input.value = uuid;
       form.hidden = false;
     }

@@ -7,6 +7,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\StripeController;
 
 include __DIR__ . '/admin.php';
 include __DIR__ . '/manager.php';
@@ -89,4 +90,9 @@ Route::middleware('verified')->group(function () {
     Route::post('/submit-review', [
         ReviewController::class, 'submit'
     ]);
+
+    // 決済
+    Route::post('/charge',[
+        StripeController::class, 'charge'
+    ])->name('stripe.charge');
 });

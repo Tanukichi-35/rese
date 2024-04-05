@@ -58,6 +58,9 @@
             @enderror
           </ul>
         </div>
+        <div class="div__fee" hidden>
+          <input type="number" name="fee" class="input__fee" value="3000">
+        </div>
         <div class="div__number">
           <select class="select__number" id="select__number" name="number">
             @foreach ($store->getNumbers() as $key => $value)
