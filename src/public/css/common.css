@@ -227,18 +227,6 @@ button {
   text-decoration: none;
 }
 
-.a__back {
-  width: 22px;
-  height: 22px;
-  text-align: center;
-  margin-top: -2px;
-  color: #000;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.6);
-  text-decoration: none;
-}
-
 /* エラーメッセージ */
 .div__error {
   margin: 0;
