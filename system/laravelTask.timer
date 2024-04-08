@@ -1,0 +1,9 @@
+[Unit]
+Description=laravel Task
+
+[Timer]
+OnCalendar=*:0/1
+Unit=laravelTask.service
+
+[Install]
+WantedBy=timers.target

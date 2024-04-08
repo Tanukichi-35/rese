@@ -1,0 +1,10 @@
+[Unit]
+Description=laravel Task
+
+[Service]
+Type=simple
+WorkingDirectory=/home/tanuko/coachtech/laravel/rese
+ExecStart=docker compose exec php /var/www/artisan schedule:run 
+
+[Install]
+WantedBy=multi-user.target
