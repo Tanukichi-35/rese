@@ -8,3 +8,8 @@ $("#select__search-genre").on('change', function () {
   $("#form__search").submit();
 });
 
+// 検索アイコンから検索を実行
+$("#img__search").on('click', function () {
+  $("#form__search").submit();
+});
+

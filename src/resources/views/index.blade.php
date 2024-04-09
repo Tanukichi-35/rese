@@ -28,7 +28,7 @@
       </select>
     </div>
     <div class="div__store">
-      <img class="img__search" src="{{asset('img/search.png')}}" alt="">
+      <img class="img__search" id="img__search" src="{{asset('img/search.png')}}" alt="">
       <input type="text" name="store_name" class="input__search-store" id="select__search-store" placeholder="店名で検索" @if (isset( $request )) value="{{$request['store_name']}}"@endif>
     </div>
   </form>

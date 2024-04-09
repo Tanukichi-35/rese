@@ -54,6 +54,7 @@
 
   .img__search{
     padding: 10px;
+    cursor: pointer;
   }
 
   .input__search-store {
