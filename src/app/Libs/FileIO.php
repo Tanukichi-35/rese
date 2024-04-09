@@ -17,7 +17,9 @@ class FileIO
     }
 
     // イメージファイルの削除
-    public static function deleteImageFile(string $filePath){
-        return Storage::delete('public/' . self::$dirName . '/' . basename($filePath));
+    public static function deleteImageFile($filePath){
+        if(!is_null($filePath)){
+            return Storage::delete('public/' . self::$dirName . '/' . basename($filePath));
+        }
     }
 }
