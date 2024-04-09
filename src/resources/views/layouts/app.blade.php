@@ -36,6 +36,11 @@
     <div id="div__flash-message">{{session('message')}}</div>
     @endif
 
+    {{-- error message --}}
+    @if(session('error'))
+    <div id="div__flash-error">{{session('error')}}</div>
+    @endif
+
     {{-- <main> --}}
     @yield('content')
   </div>

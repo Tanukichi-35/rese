@@ -14,7 +14,7 @@ class ReviewController extends Controller
         $user_id = Auth::user()->id;
         $store_id = $request->store_id;
         if(Review::checkReview($user_id, $store_id)){
-          return redirect('/detail/'.$store_id)->with('message','既にレビューを投稿済みです。');
+          return redirect('/detail/'.$store_id)->with('error','既にレビューを投稿済みです。');
         }
         else{
           // 新しくレビューアイテムを作成
