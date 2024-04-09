@@ -42,7 +42,7 @@
                       <h2 class="h2__store-name">{{$store->name}}</h2>
                   </div>
                   <div class="div__store-image">
-                    <img class="img__store-image" src="{{asset($store->imageURL)}}" alt="">
+                    <img class="img__store-image" src="{{asset($store->imageURL)}}" alt="画像が登録されていません">
                   </div>
                   <div class="div__store-tag">
                     <p class="p__area-tag">#{{$store->area->name}}</p>

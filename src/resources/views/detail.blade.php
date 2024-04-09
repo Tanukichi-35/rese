@@ -14,7 +14,7 @@
         <button href="/" class="button__review" id="button__review">レビュー</button>
     </div>
     <div class="div__store-image">
-      <img class="img__store-image" src="{{asset($store->imageURL)}}" alt="">
+      <img class="img__store-image" src="{{asset($store->imageURL)}}" alt="画像が登録されていません">
     </div>
     <div class="div__store-tag">
       <p class="p__area-tag">#{{$store->area->name}}</p>
