@@ -45,7 +45,7 @@
           <p class="p__genre-tag">#{{$store->genre->name}}</p>
       </div>
       <div class="div__button">
-        <a href="/detail/{{$store->id}}" class="a__store-detail">詳しく見る</a>
+        <a href="/detail/{{$store->id}}" class="a__store-detail">詳しくみる</a>
         <form method="POST">
         @csrf
           <input type="number" name="store_id" value="{{$store->id}}" hidden>

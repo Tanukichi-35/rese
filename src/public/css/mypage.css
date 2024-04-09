@@ -271,13 +271,13 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: left;
-  padding: 0 calc((100% - 250px * 6) / 2);
+  padding: 0 calc((100% - 300px * 5) / 2);
 }
 
 .div__store-info {
-  margin: 15px;
-  height: 200px;
-  width: 220px;
+  margin: 10px;
+  height: 250px;
+  width: 280px;
   background-color: #fff;
   border-radius: 5px;
 
@@ -285,11 +285,12 @@
     height: 55%;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     border-radius: 5px 5px 0 0;
   }
 
   .h3__store-name {
-    margin: 3px 10px 0 10px;
+    margin: 10px 5px 5px 15px;
     padding: 0;
   }
 
@@ -301,17 +302,17 @@
   }
 
   .div__tag p {
-    font-size: 0.7rem;
-    margin: 0 0 5px 10px;
+    font-size: 0.8rem;
+    margin: 0 0 10px 15px;
   }
 
   .a__store-detail {
     color: #fff;
     background-color: #3560F6;
-    font-size: 0.6rem;
-    height: 25px;
-    margin-left: 10px;
-    padding: 5px;
+    font-size: 0.7rem;
+    /* height: 25px; */
+    margin-left: 15px;
+    padding: 5px 10px;
     border-radius: 5px;
     text-decoration: none;
   }
@@ -327,33 +328,33 @@
 
 @media screen and (max-width : 2018px) {
   .div__favorite-list {
-    padding: 0 calc((100% - 250px * 5) / 2);
+    padding: 0 calc((100% - 300px * 4) / 2);
   }
 }
 
 @media screen and (max-width : 1768px) {
   .div__favorite-list {
-    padding: 0 calc((100% - 250px * 4) / 2);
+    padding: 0 calc((100% - 300px * 3) / 2);
   }
 }
 
 @media screen and (max-width : 1518px) {
   .div__favorite-list {
-    padding: 0 calc((100% - 250px * 3) / 2);
+    padding: 0 calc((100% - 300px * 2) / 2);
   }
 }
 
 @media screen and (max-width : 1268px) {
   .div__favorite-list {
-    padding: 0 calc((100% - 250px * 2) / 2);
+    padding: 0 calc((100% - 300px * 1) / 2);
   }
 }
-
+/* 
 @media screen and (max-width : 1018px) {
   .div__favorite-list {
-    padding: 0 calc((100% - 250px) / 2);
+    padding: 0 calc((100% - 300px) / 2);
   }
-}
+} */
 
 @media screen and (max-width : 768px) {
   .div__main {
@@ -377,12 +378,12 @@
   }
 
   .div__favorite-list {
-    padding: 0 calc((100% - 250px * 2) / 2);
+    padding: 0 calc((100% - 300px ) / 2);
   }
 }
-
+/* 
 @media screen and (max-width : 518px) {
   .div__favorite-list {
     padding: 0 calc((100% - 250px) / 2);
   }
-}
+} */
