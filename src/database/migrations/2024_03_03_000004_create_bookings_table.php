@@ -24,6 +24,7 @@ class CreateBookingsTable extends Migration
             $table->integer('payment');
             $table->tinyInteger('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

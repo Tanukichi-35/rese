@@ -22,6 +22,7 @@ class CreateStoresTable extends Migration
             $table->string('description')->nullable();
             $table->string('imageURL')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
