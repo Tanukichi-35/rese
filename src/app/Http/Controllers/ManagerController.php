@@ -151,16 +151,20 @@ class ManagerController extends Controller
 
         // 画面を更新
         // return redirect()->route('manager.stores');
-        $message = '登録情報を削除しました';
-        return redirect()->route('manager.stores')->with(compact('message'));
+        $error = '登録情報を削除しました';
+        return redirect()->route('manager.stores')->with(compact('error'));
     }
 
     // 店舗情報の更新ページの表示
     public function storeEdit($store_id){
         // IDが一致する飲食店を取得
-        $store = Store::find($store_id);
+        $store = Auth::guard('managers')->user()->stores->find($store_id);
 
-        return view('manager.storeEditer', compact('store'));
+        if(is_null($store)){
+            $error = '店舗情報が見つかりません';
+            return redirect()->route('manager.stores')->with(compact('error'));
+        }
+        return view('manager.storeEditor', compact('store'));
     }
 
     // 店舗情報の更新
@@ -197,17 +201,22 @@ class ManagerController extends Controller
 
         // 画面を更新
         // return redirect()->route('manager.stores');
-        $message = '登録情報を削除しました';
-        return redirect()->route('manager.stores')->with(compact('message'));
+        $error = '登録情報を削除しました';
+        return redirect()->route('manager.stores')->with(compact('error'));
     }
 
     // 予約一覧ページを表示
-    public function bookings(){
+    public function bookings($store_id){
         // 当該店舗の予約を取得
-        $store = Auth::guard('managers')->user()->store;
+        $store = Auth::guard('managers')->user()->stores->find($store_id);
+        if(is_null($store)){
+            $error = '店舗情報が見つかりません';
+            return redirect()->route('manager.stores')->with(compact('error'));
+        }
+
         $bookings = Booking::Where('store_id', '=', $store->id)->Paginate(10);
 
-        return view('manager.bookings', compact('bookings'));
+        return view('manager.bookings', compact('store', 'bookings'));
     }
 
     // レビュー一覧ページを表示

@@ -90,8 +90,8 @@ class AdminController extends Controller
 
         // 画面を更新
         // return redirect()->route('admin.managers');
-        $message = '登録情報を削除しました';
-        return redirect()->route('admin.managers')->with(compact('message'));
+        $error = '登録情報を削除しました';
+        return redirect()->route('admin.managers')->with(compact('error'));
     }
 
     // 店舗代表者情報の更新ページの表示
@@ -99,6 +99,10 @@ class AdminController extends Controller
         // IDが一致する店舗代表者を取得
         $manager = Manager::find($manager_id);
 
+        if(is_null($manager)){
+            $error = '店舗代表者情報が見つかりません';
+            return redirect()->route('manager.stores')->with(compact('error'));
+        }
         return view('admin.managerEditer', compact('manager'));
     }
 
@@ -125,8 +129,8 @@ class AdminController extends Controller
 
         // 画面を更新
         //return redirect()->route('admin.managers');
-        $message = '登録情報を削除しました';
-        return redirect()->route('admin.managers')->with(compact('message'));
+        $error = '登録情報を削除しました';
+        return redirect()->route('admin.managers')->with(compact('error'));
     }
 
     // 店舗一覧ページを表示

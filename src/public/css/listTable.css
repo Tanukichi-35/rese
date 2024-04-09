@@ -6,6 +6,15 @@
   background-color: #F2F2F2;
   text-align: center;
 
+  .div__header{
+    display: flex;
+    flex-direction: row;
+
+    .button__back{
+      margin-right: 10px;
+    }
+  }
+
   .h2__title {
     margin: 0;
     margin-bottom: 10px;

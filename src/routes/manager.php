@@ -94,9 +94,9 @@ Route::prefix('manager')->middleware('auth.managers:managers')->group(function (
     ]);
 
     // 予約一覧ページを表示
-    Route::get('bookings', [
+    Route::get('bookings/{store_id}', [
         ManagerController::class, 'bookings'
-    ])->name('manager.bookings');
+    ]);
 
     // レビュー一覧ページを表示
     Route::get('reviews', [

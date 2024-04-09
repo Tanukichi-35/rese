@@ -69,6 +69,7 @@
                 </div>
               </div>
             </div>
+            <a class="a__edit" href="/manager/bookings/{{$store->id}}">予約情報</a>
             <a class="a__edit" href="/manager/store/edit/{{$store->id}}">編集</a>
             <form action="/manager/store/delete" method="POST" class="form__delete">
               @csrf
