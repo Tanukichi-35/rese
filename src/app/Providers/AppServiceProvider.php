@@ -27,8 +27,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::defaultView('vender.pagination.topics');
 
-        // 本番環境ではURL生成でhttpsを強制
-        if(env('APP_ENV') === 'product') {
+        // ローカル環境以外ではURL生成でhttpsを強制
+        if(env('APP_ENV') !== 'local') {
             $url->forceScheme('https');
         }
         //
