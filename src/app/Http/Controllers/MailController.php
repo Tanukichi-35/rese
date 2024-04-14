@@ -15,6 +15,7 @@ class MailController extends Controller
     return view('admin.mail');
   }
 
+  // メール送信処理
   public function send(Request $request){
 
     $text = $request->text;
@@ -32,6 +33,7 @@ class MailController extends Controller
           Mail::send($mail);
       }
     }
+
     if($request->toManagers){
       $managers = Manager::All();
       foreach ($managers as $manager) {
@@ -47,16 +49,19 @@ class MailController extends Controller
     }
 
     if (count(Mail::failures()) > 0) {
-        $message = 'メール送信に失敗しました';
+        $error = 'メール送信に失敗しました';
 
-        // 元の画面に戻る
-        return back()->withErrors($messages);
+        return back()->withInput()->with(compact('error'));
+    }
+    else if(!$request->toUsers && !$request->toUsers){
+        $error = '送信先が設定されていません';
+
+        return back()->withInput()->with(compact('error'));
     }
     else{
-        $messages = 'メールを送信しました';
+        $message = 'メールを送信しました';
 
-        // 別のページに遷移する
-        return redirect()->route('admin.mail')->with(compact('messages'));
-    }		
+        return redirect()->route('admin.mail')->with(compact('message'));
+    }
   }
 }

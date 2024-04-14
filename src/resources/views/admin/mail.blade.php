@@ -37,31 +37,13 @@
         <tr>
           <th><label for="input__subject">件名</label></th>
           <td>
-            <input type="text" name="subject" id="input__subject">
-            <div class="div__error">
-              <ul>
-                @error('name')
-                <li class="li__error">
-                  {{$message}}
-                </li>
-                @enderror
-              </ul>
-            </div>
+            <input type="text" name="subject" id="input__subject" value="{{old('subject')}}">
           </td>
         </tr>
         <tr>
           <th><label for="input__text">本文</label></th>
           <td>
-            <textarea name="text" class="textarea__text" id="input__text" cols="30" rows="20"></textarea>
-            <div class="div__error">
-              <ul>
-                @error('name')
-                <li class="li__error">
-                  {{$message}}
-                </li>
-                @enderror
-              </ul>
-            </div>
+            <textarea name="text" class="textarea__text" id="input__text" cols="30" rows="20">{{old('text')}}</textarea>
           </td>
         </tr>
       </table>
