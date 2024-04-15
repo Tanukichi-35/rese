@@ -21,7 +21,11 @@
       @foreach ($stores as $store)
       <tr class="tr__contents">
         <td>{{$store->name}}</td>
-        <td>{{$store->manager->name}}</td>
+        @if (is_null($store->manager))
+          <td>-</td>
+        @else
+          <td>{{$store->manager->name}}</td>
+        @endif
         <td>{{$store->area->name}}</td>
         <td>{{$store->genre->name}}</td>
         <td class="td__button">

@@ -47,7 +47,6 @@
 
   .div__store {
     width: 60%;
-    /* min-width: 80px; */
     display: flex;
     flex-direction: row;
   }
@@ -65,7 +64,6 @@
 
   .div__area,
   .div__genre {
-    /* display: inline-flex; */
     position: relative;
   }
 
@@ -138,7 +136,6 @@
       color: #fff;
       background-color: #3560F6;
       font-size: 0.7rem;
-      /* height: 25px; */
       margin-left: 15px;
       padding: 5px 10px;
       border-radius: 5px;
@@ -203,9 +200,3 @@
     padding: 0 calc((100% - 300px) / 2);
   }
 }
-
-/* @media screen and (max-width : 518px) {
-  .div__store-list {
-    padding: 0 calc((100% - 300px) / 2);
-  }
-} */

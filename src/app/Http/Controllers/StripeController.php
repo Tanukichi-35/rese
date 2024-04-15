@@ -11,9 +11,8 @@ class StripeController extends Controller
 {
     public function charge(Request $request)
     {
-        // $booking = Booking::where('uuid', '=', $request->uuid)->first();
         $booking = Booking::getBooking($request->uuid);
-        Stripe::setApiKey(env('STRIPE_SECRET'));    //シークレットキー
+        Stripe::setApiKey(env('STRIPE_SECRET'));        //シークレットキー
 
         $charge = Charge::create(array(
             'amount' => $booking->payment,
@@ -26,6 +25,5 @@ class StripeController extends Controller
         ]);
 
         return redirect()->route('done');
-        // return back();
     }
 }

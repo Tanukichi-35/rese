@@ -33,7 +33,6 @@
 /* リストテーブル */
 .table__list {
   width: 95%;
-  /* margin: auto; */
   margin-top: 10px;
   margin-bottom: 50px;
 
@@ -62,24 +61,3 @@
     border-bottom: 2px solid #E0DFDE;
   }
 }
-/* 
-.div__button {
-  display: flex;
-  flex-direction: row;
-  float: left;
-}
-
-.button__delete,
-.a__register,
-.a__edit{
-  background-color: #214BE0;
-  color: #fff;
-  padding: 5px;
-  margin: 5px;
-  border-radius: 3px;
-  align-self: center;
-}
-
-.button__delete {
-  background-color: rgb(185, 75, 75);
-} */

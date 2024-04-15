@@ -49,6 +49,7 @@
       </table>
       <div class="div__submit">
         <input type="text" name="id" value="{{$manager->id}}" hidden>
+        <input type="text" name="password" value="dummy" hidden>
         <button class="button__submit">更新</button>
       </div>
     </form>

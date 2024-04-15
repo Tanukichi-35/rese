@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-{{-- <div class="div__main"> --}}
   {{-- 店詳細 --}}
   <div class="div__store">
     <div class="div__store-name">
@@ -98,8 +97,6 @@
       <button class="button__booking">変更する</button>
     </form>
   </div>
-
-{{-- </div> --}}
 @endsection
 
 @section('script')

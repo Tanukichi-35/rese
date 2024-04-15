@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FavoriteController;
@@ -33,28 +32,28 @@ Route::get('/search', [
     StoreController::class, 'search'
 ]);
 
-// お気に入り追加
-Route::post('/favoriteOn', [
-    FavoriteController::class, 'favoriteOn'
-]);
-
-// お気に入り削除
-Route::post('/favoriteOff', [
-    FavoriteController::class, 'favoriteOff'
-]);
-
 // 飲食店の詳細ページを表示
 Route::get('/detail/{store_id}', [
     StoreController::class, 'showDetail'
 ]);
 
-// サンクスページを表示
-Route::get('/thanks', [
-    AuthController::class, 'thanks'
+// お気に入り追加
+Route::post('/favoriteOn', [
+    FavoriteController::class, 'create'
+]);
+
+// お気に入り削除
+Route::post('/favoriteOff', [
+    FavoriteController::class, 'destroy'
 ]);
 
 // 会員認証
 Route::middleware('verified')->group(function () {
+
+    // サンクスページを表示
+    Route::get('/thanks', [
+        AuthController::class, 'thanks'
+    ]);
 
     // マイページを表示
     Route::get('/mypage', [
@@ -63,7 +62,7 @@ Route::middleware('verified')->group(function () {
 
     // 予約を作成
     Route::post('/booking', [
-        BookingController::class, 'booking'
+        BookingController::class, 'create'
     ]);
 
     // 予約完了ページを表示
@@ -82,13 +81,13 @@ Route::middleware('verified')->group(function () {
     ]);
 
     // 予約を削除
-    Route::post('/booking/delete', [
-        BookingController::class, 'delete'
+    Route::delete('/booking/delete', [
+        BookingController::class, 'destroy'
     ]);
 
     // レビューを投稿
-    Route::post('/submit-review', [
-        ReviewController::class, 'submit'
+    Route::post('/review', [
+        ReviewController::class, 'create'
     ]);
 
     // 決済

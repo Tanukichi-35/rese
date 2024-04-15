@@ -21,7 +21,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  /* font-size: 0; */
   
   .div__input{
     width: 90%;

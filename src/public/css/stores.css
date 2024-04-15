@@ -121,7 +121,6 @@
   .h2__store-name {
     height: 30px;
     line-height: 30px;
-    /* margin-left: 15px; */
   }
 
   .button__review {
@@ -134,7 +133,6 @@
 
   .div__store-image{
     width: 100%;
-    /* height: 45vh; */
   }
 
   .img__store-image {

@@ -7,7 +7,6 @@
 @section('content')
 <div class="div__main">
   <h2 class="h2__user-name">{{$user->name}}さん</h2>
-  
   {{-- 予約一覧 --}}
   <div class="div__left-content">
     <h3 class="h3__booking">予約状況</h3>
@@ -21,7 +20,6 @@
               <span >予約{{$i++}}</span>
             </div>
             <div class="div__button">
-              {{-- <a href="/booking/QR/{{$booking->id}}"><img src="{{asset ('img/QR.png')}}" alt="" class="img__QR"></a> --}}
               <img src="{{asset ('img/QR.png')}}" alt="" class="img__QR">
               {{-- modal-QR-page --}}
               <div class="div__modal div__modal-QR">
@@ -43,6 +41,7 @@
               <div class="div__delete">
                 <form action="/booking/delete" method="POST" class="form__delete" onsubmit="return confirmDeleteBooking()">
                 @csrf
+                @method('DELETE')
                   <input type="number" name="id" value="{{$booking->id}}" hidden>
                   <button class="button__delete"></button>
                 </form>
@@ -89,8 +88,6 @@
           @endif
         </div>
       @endforeach
-      {{-- @for ($i = 0; $i < $bookings->count(); $i++)
-      @endfor --}}
     </div>
   </div>
 
@@ -122,7 +119,6 @@
       @endforeach
     </div>
   </div>
-
 </div>
 @endsection
 

@@ -10,7 +10,7 @@ use Auth;
 class FavoriteController extends Controller
 {
     // お気に入り追加
-    public function favoriteOn(Request $request){
+    public function create(Request $request){
       if(Auth::user()) {
         // 新しくお気に入りアイテムを作成
         Favorite::create([
@@ -27,7 +27,7 @@ class FavoriteController extends Controller
     }
 
     // お気に入り削除
-    public function favoriteOff(Request $request){
+    public function destroy(Request $request){
       if(Auth::user()){
         // 該当のお気に入りアイテムを削除
         $favorite = Favorite::getFavorite(Auth::user()->id, $request->store_id);

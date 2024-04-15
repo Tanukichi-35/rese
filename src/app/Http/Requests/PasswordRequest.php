@@ -24,9 +24,9 @@ class PasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'oldPassword' => 'required',
-            'password' => 'required',
-            'confirmPassword' => 'required',
+            'oldPassword' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
+            'confirmPassword' => 'required|string|max:255',
         ];
     }
 
@@ -34,8 +34,14 @@ class PasswordRequest extends FormRequest
     {
         return [
             'oldPassword.required' => '元のパスワードを入力してください',
+            'oldPassword.string' => '元のパスワードは文字列で入力してください',
+            'oldPassword.max' => '元のパスワードは255文字以内です',
             'password.required' => 'パスワードを入力してください',
+            'password.string' => 'パスワードは文字列で入力してください',
+            'password.max' => 'パスワードは255文字以内です',
             'confirmPassword.required' => '確認のパスワードを入力してください',
+            'confirmPassword.string' => '確認のパスワードは文字列で入力してください',
+            'confirmPassword.max' => '確認のパスワードは255文字以内です',
         ];
     }
 }

@@ -6,7 +6,6 @@
 
 @section('content')
 <div class="div__main">
-
   {{-- 編集フォーム --}}
   <div class="div__input-form">
     <div class="div__header">
@@ -59,7 +58,6 @@
     </form>
   </div>
 </div>
-
 @endsection
 
 @section('script')

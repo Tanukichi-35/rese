@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,16 +30,6 @@ Route::prefix('manager')->middleware('auth.managers:managers')->group(function (
         ManagerController::class, 'logout'
     ]);
 
-    // // 店舗ページを表示
-    // Route::get('store', [
-    //     ManagerController::class, 'store'
-    // ])->name('manager.storeInfo');
-
-    // // 店舗情報の更新
-    // Route::post('store/edit', [
-    //     ManagerController::class, 'storeRestore'
-    // ]);
-
     // 店舗代表者情報ページを表示
     Route::get('info', [
         ManagerController::class, 'info'
@@ -45,7 +37,7 @@ Route::prefix('manager')->middleware('auth.managers:managers')->group(function (
 
     // 店舗代表者情報の更新
     Route::post('info/edit', [
-        ManagerController::class, 'infoRestore'
+        ManagerController::class, 'restore'
     ]);
 
     // パスワードの変更ページを表示
@@ -60,61 +52,56 @@ Route::prefix('manager')->middleware('auth.managers:managers')->group(function (
 
     // 店舗一覧ページを表示
     Route::get('stores', [
-        ManagerController::class, 'stores'
+        StoreController::class, 'stores'
     ])->name('manager.stores');
 
     // 店舗の新規登録ページを表示
     Route::get('store/register', [
-        ManagerController::class, 'storeRegister'
+        StoreController::class, 'register'
     ]);
 
     // 店舗の登録
     Route::post('store/register', [
-        ManagerController::class, 'storeCreate'
+        StoreController::class, 'create'
     ]);
 
     // 店舗の一括削除
     Route::delete('store/batchDelete', [
-        ManagerController::class, 'storeBatchDestroy'
+        StoreController::class, 'batchDestroy'
     ]);
 
     // 店舗情報の更新ページの表示
     Route::get('store/edit/{store_id}', [
-        ManagerController::class, 'storeEdit'
+        StoreController::class, 'edit'
     ]);
 
     // 店舗情報の更新
     Route::post('store/edit', [
-        ManagerController::class, 'storeRestore'
+        StoreController::class, 'restore'
     ]);
 
     // 店舗の削除
     Route::delete('store/delete', [
-        ManagerController::class, 'storeDestroy'
+        StoreController::class, 'destroy'
     ]);
 
     // 予約一覧ページを表示
     Route::get('bookings/{store_id}', [
-        ManagerController::class, 'bookings'
+        BookingController::class, 'bookings'
     ]);
-
-    // レビュー一覧ページを表示
-    Route::get('reviews', [
-        ManagerController::class, 'reviews'
-    ])->name('manager.reviews');
 
     // QRコードの読み取りページを表示
     Route::get('qr', [
-        ManagerController::class, 'readQR'
+        BookingController::class, 'readQR'
     ])->name('manager.readQR');
 
     // QRコードの処理
     Route::post('qr', [
-        ManagerController::class, 'checkQR'
+        BookingController::class, 'checkQR'
     ]);
 
     // QRコードの読み取りページを表示
     Route::post('getQRData', [
-        ManagerController::class, 'getQRData'
+        BookingController::class, 'getQRData'
     ]);
 });

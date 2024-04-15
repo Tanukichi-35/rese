@@ -6,14 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ManagerRequest;
 use App\Http\Requests\PasswordRequest;
-use App\Http\Requests\StoreRequest;
 use App\Models\Manager;
-use App\Models\Store;
-use App\Models\Booking;
-use App\Models\Review;
 use Auth;
 use Hash;
-use FileIO;
 
 class ManagerController extends Controller
 {
@@ -53,10 +48,60 @@ class ManagerController extends Controller
         return view('manager.info', compact('manager'));
     }
 
+    // 店舗代表者一覧ページを表示
+    public function managers(){
+        // 全ての店舗代表者を取得
+        $managers = Manager::Paginate(10);
+
+        return view('admin.managers', compact('managers'));
+    }
+
+    // 店舗代表者の新規登録ページを表示
+    public function register(){
+        return view('admin.managerRegister');
+    }
+
+    // 店舗代表者の登録
+    public function create(ManagerRequest $request){
+
+        // 店舗代表者を登録
+        Manager::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        // 画面を更新
+        // return redirect()->route('admin.managers');
+        $message = '新しく店舗代表者を登録しました';
+        return redirect()->route('admin.managers')->with(compact('message'));
+    }
+
+    // 店舗代表者情報の更新ページの表示
+    public function edit($manager_id){
+        // IDが一致する店舗代表者を取得
+        $manager = Manager::find($manager_id);
+
+        if(is_null($manager)){
+            $error = '店舗代表者情報が見つかりません';
+            return redirect()->route('manager.stores')->with(compact('error'));
+        }
+        return view('admin.managerEditer', compact('manager'));
+    }
+
     // 店舗代表者情報の更新
-    public function infoRestore(ManagerRequest $request){
-        // ログインユーザーの取得
-        $manager = Auth::guard('managers')->user();
+    // public function restore(Request $request){
+    public function restore(ManagerRequest $request){
+        if(Auth::guard('admins')->check()){         // 管理者権限
+            // 該当店舗代表者の取得
+            $manager = Manager::find($request->id);
+            $routeName = 'admin.managers';
+        }
+        else if(Auth::guard('managers')->check()){  // 店舗代表者権限
+            // ログインユーザーの取得
+            $manager = Auth::guard('managers')->user();
+            $routeName = 'manager.info';
+        }
 
         // 店舗代表者情報の更新
         $manager->update([
@@ -65,9 +110,8 @@ class ManagerController extends Controller
         ]);
 
         // 画面を更新
-        // return redirect()->route('manager.info');
         $message = '登録情報を更新しました';
-        return redirect()->route('manager.info')->with(compact('message'));
+        return redirect()->route($routeName)->with(compact('message'));
     }
 
     // パスワードの変更ページを表示
@@ -97,174 +141,30 @@ class ManagerController extends Controller
         ]);
 
         // 画面を更新
-        // return redirect()->route('manager.info');
-        // return view('manager.info', compact('manager'))->with('message' , 'パスワードを更新しました。');
         $message = 'パスワードを更新しました';
         return redirect()->route('manager.info')->with(compact('message'));
     }
 
-    // 店舗一覧ページを表示
-    public function stores(){
-        // 担当店舗を取得
-        $manager = Auth::guard('managers')->user();
-        $stores = Store::Where('manager_id', '=', $manager->id)->Paginate(10);
-
-        return view('manager.stores', compact('stores'));
-    }
-
-    // 店舗の新規登録ページを表示
-    public function storeRegister(){
-        return view('manager.storeRegister');
-    }
-
-    // 店舗の登録
-    public function storeCreate(StoreRequest $request){
-        // 画像をアップロード
-        $imagePath = null;
-        if(!is_null($request->file('image'))){
-            $imagePath = FileIO::uploadImageFile($request->file('image'));
-        }
-
-        // 店舗を登録
-        $store = Store::create([
-            'name' => $request->name,
-            'manager_id' => $request->manager_id,
-            'area_id' => $request->area_id,
-            'genre_id' => $request->genre_id,
-            'description' => $request->description,
-            'imageURL' => $imagePath
-        ]);
+    // 店舗代表者の削除
+    public function destroy(Request $request){
+        $manager = Manager::find($request->id);
+        $manager->delete();
 
         // 画面を更新
-        // return redirect()->route('manager.stores');
-        $message = '新しく店舗を登録しました';
-        return redirect()->route('manager.stores')->with(compact('message'));
+        $error = '登録情報を削除しました';
+        return redirect()->route('admin.managers')->with(compact('error'));
     }
 
-    // 店舗の削除
-    public function storeBatchDestroy(Request $request){
-        foreach (Store::all() as $store) {
-            if(!is_null($request->input($store->id))){
-                $store->delete();
+    // 店舗代表者の一括削除
+    public function BatchDestroy(Request $request){
+        foreach (Manager::all() as $manager) {
+            if(!is_null($request->input($manager->id))){
+                $manager->delete();
             }
         };
 
         // 画面を更新
-        // return redirect()->route('manager.stores');
         $error = '登録情報を削除しました';
-        return redirect()->route('manager.stores')->with(compact('error'));
-    }
-
-    // 店舗情報の更新ページの表示
-    public function storeEdit($store_id){
-        // IDが一致する飲食店を取得
-        $store = Auth::guard('managers')->user()->stores->find($store_id);
-
-        if(is_null($store)){
-            $error = '店舗情報が見つかりません';
-            return redirect()->route('manager.stores')->with(compact('error'));
-        }
-        return view('manager.storeEditor', compact('store'));
-    }
-
-    // 店舗情報の更新
-    public function storeRestore(StoreRequest $request){
-        $store = Store::find($request->id);
-
-        // 画像をアップロード
-        $imagePath = $store->imageURL;
-        if(!is_null($request->file('image'))){
-            FileIO::deleteImageFile($store->imageURL);
-            $imagePath = FileIO::uploadImageFile($request->file('image'));
-        }
-
-        // 店舗情報の更新
-        $store->update([
-            'name' => !is_null($request->name)?$request->name:$store->name,
-            'area_id' => $request->area_id,
-            'genre_id' => $request->genre_id,
-            'description' => !is_null($request->description)?$request->description:$store->description,
-            'imageURL' => $imagePath
-        ]);
-
-        // 画面を更新
-        // return redirect()->route('manager.stores');
-        // return back()->withInput();
-        $message = '登録情報を更新しました';
-        return redirect()->route('manager.stores')->with(compact('message'));
-    }
-
-    // 店舗の削除
-    public function storeDestroy(Request $request){
-        $store = Store::find($request->id);
-        $store->delete();
-
-        // 画面を更新
-        // return redirect()->route('manager.stores');
-        $error = '登録情報を削除しました';
-        return redirect()->route('manager.stores')->with(compact('error'));
-    }
-
-    // 予約一覧ページを表示
-    public function bookings($store_id){
-        // 当該店舗の予約を取得
-        $store = Auth::guard('managers')->user()->stores->find($store_id);
-        if(is_null($store)){
-            $error = '店舗情報が見つかりません';
-            return redirect()->route('manager.stores')->with(compact('error'));
-        }
-
-        $bookings = Booking::Where('store_id', '=', $store->id)->Paginate(10);
-
-        return view('manager.bookings', compact('store', 'bookings'));
-    }
-
-    // レビュー一覧ページを表示
-    public function reviews(){
-        // 当該店舗のレビューを取得
-        $store = Auth::guard('managers')->user()->store;
-        $reviews = Review::Where('store_id', '=', $store->id)->Paginate(10);
-
-        return view('manager.reviews', compact('reviews'));
-    }
-
-    // QRコードの読み取りページを表示
-    public function readQR(){
-        return view('manager.readQR');
-    }
-
-    // QRコード内容から予約情報のステータスを更新
-    public function checkQR(Request $request){
-        // dd($request->uuid);
-        // $booking = Booking::Where('uuid', '=', $request->uuid)->first();
-        $booking = Booking::getBooking($request->uuid);
-        $booking->update([
-            'status' => $booking->status + 2
-        ]);
-
-        return view('manager.confirm');
-    }
-
-    // QRコードのデータ(uuid)から予約データを取得
-    public function getQRData(Request $request){
-        // $booking = Booking::Where('uuid', '=', $request->uuid)->first();
-        $booking = Booking::getBooking($request->uuid);
-        if(is_null($booking)){
-            return 'failure';
-        }
-        else if($booking->store->manager != Auth::guard('managers')->user()){
-            return 'mismatch';
-        }
-        else if($booking->isVisited()){
-            return 'done';
-        }
-        return response()->json([
-            'store' => $booking->store->name,
-            'user' => $booking->user->name,
-            'date' => $booking->date,
-            'time' => substr($booking->time, 0, -3),
-            'number' => $booking->number.'名',
-            'isCheckout' => $booking->isCheckout(),
-        ]);
+        return redirect()->route('admin.managers')->with(compact('error'));
     }
 }

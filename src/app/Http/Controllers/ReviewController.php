@@ -9,7 +9,7 @@ use Auth;
 class ReviewController extends Controller
 {
     // レビューを投稿
-    public function submit(Request $request){
+    public function create(Request $request){
       if(Auth::user()) {
         $user_id = Auth::user()->id;
         $store_id = $request->store_id;

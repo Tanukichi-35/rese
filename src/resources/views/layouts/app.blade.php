@@ -71,33 +71,25 @@
               @csrf
               <button>お知らせメール</button>
             </form>
-            <form action="/logout" method="POST">
+            <form action="/admin/logout" method="POST">
               @csrf
               <button>ログアウト</button>
             </form>
           {{-- 店舗代表者 --}}
           @elseif (Auth::guard('managers')->check())
-            <form action="/manager/info" method="GET">
-              @csrf
-              <button>店舗代表者情報</button>
-            </form>
             <form action="/manager/stores" method="GET">
               @csrf
               <button>店舗一覧</button>
             </form>
-            {{-- <form action="/manager/bookings" method="GET">
+            <form action="/manager/info" method="GET">
               @csrf
-              <button>予約一覧</button>
+              <button>店舗代表者情報</button>
             </form>
-            <form action="/manager/reviews" method="GET">
-              @csrf
-              <button>レビュー一覧</button>
-            </form> --}}
             <form action="/manager/qr" method="GET">
               @csrf
               <button>QRコード読取</button>
             </form>
-            <form action="/logout" method="POST">
+            <form action="/manager/logout" method="POST">
               @csrf
               <button>ログアウト</button>
             </form>
@@ -119,7 +111,7 @@
           @else
             <form action="/" method="GET">
               @csrf
-              <button>飲食店一覧</button>
+              <button>ホーム</button>
             </form>
             <form action="/register" method="GET">
               @csrf
