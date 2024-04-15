@@ -62,12 +62,12 @@
 | バリデーション               | 認証と予約の際にバリデーションをかける。FormRequest を使用する。<br>Users 認証は Fortify を使用。Managers、Admins 認証は LoginRequest、予約は BookingRequest を使用。                                                                                                                                                 |
 | レスポンシブデザイン         | タブレット・スマートフォン用のレスポンシブデザインを作成する。<br>ブレイクポイントは 768px とする。最少は 360px を想定。                                                                                                                                                                                              |
 | 管理画面                     | 管理者と店舗代表者と利用者の 3 つの権限を作成する。<br>店舗代表者が店舗情報の作成、更新と予約情報の確認ができる管理画面を作成する。<br>管理者側は店舗代表者を作成できる管理画面を作成する。<br>テーブルはそれぞれ別々に作成し、ログインページもそれぞれ用意した。<br>店舗代表者は一人で複数店舗を管理することを想定。 |
-| ストレージ                   | お店の画像をストレージに保存することができる。                                                                                                                                                                                                                                                                        |
+| ストレージ                   | お店の画像をストレージに保存することができる。<br>(rese/storage/app/public/storeImage/)                                                                                                                                                                                                                                                                        |
 | 認証                         | メールによって本人確認を行うことができる。                                                                                                                                                                                                                                                                            |
 | メール送信                   | 管理画面から利用者にお知らせメールを送信することができる。<br>お知らせメール配信ページから利用者あるいは店舗代表者に対しメールを送信できる。                                                                                                                                                                          |
 | リマインダー                 | タスクスケジューラーを利用して、予約当日の朝に予約情報のリマインダーを送る。<br>リマインドメールは午前 8：00 の時点で当日の予約を行っているユーザーに対し送信する。<br>タイマーは systemd のタイマーを使用する。                                                                                                      |
 | QR コード                    | 利用者が来店した際に店舗側に見せる QR コードを発行し、お店側は照合することができる。<br>利用者側がマイページ上で表示した予約情報データを含む QR コードを店舗側が読み込むことで来店確認を行うことができる。<br>QR コードの読み込みにカメラ機能を使用するため、ローカル環境以外では SSL 化を行い https 接続を行う。     |
-| 決済機能                     | Stripe を利用して決済をすることができる。<br>価格は一律 1 人当たり￥ 3,000 とし、予約人数から支払額を算出する。<br>決済は予約完了時、あるいはマイページから行うことができる。<br>決済完了後はシステム上で予約の変更、キャンセルは不可とする。                                                                         |
+| 決済機能                     | Stripe を利用して決済をすることができる。<br>価格は一律 1 人当たり￥ 3,000 とし、予約人数から支払額を算出する。<br>決済は予約完了時、あるいはマイページから行うことができる。<br>(メールアドレス：適当、カード番号：4242 4242 4242 4242、有効期限：切れていない日付、セキュリティコード：適当に3桁)<br>決済完了後はシステム上で予約の変更、キャンセルは不可とする。                                                                         |
 | AWS                          | ストレージを S3、バックエンドを EC2、データベースを RDS として環境を構築する。                                                                                                                                                                                                                                        |
 | 環境の切り分け               | 開発環境と本番環境の切り分けを行う。<br>本番環境でのみ、ストレージは S3、データベースは RDS を利用する。<br>また、".env"内の APP_ENV キーで処理を切り分ける。<br>ローカル環境：local, テスト環境：testing、本番環境：production                                                                                       |
 
@@ -121,28 +121,30 @@
 
 ### Docker ビルド
 
-1. `git clone {URL}`
-2. `docker-compose up -d --build`
+1. プロジェクトを取得 (terminal)  
+   `git clone {URL}`
+2. コンテナの作成、実行 (terminal)  
+   `docker-compose up -d --build`
 
 ＊ MySQL は、OS によって起動しない場合があるのでそれぞれの PC に合わせて、docker-compose.yml ファイルを編集してください。
 
 ### 環境構築
 
-1. PHP コンテナに入る
+1. PHP コンテナに入る (terminal)  
    `docker-compose exec php bash`
-2. ライブラリのインストール
+2. ライブラリのインストール (PHP)  
    `composer install`
-3. .env.example ファイルから.env を作成し、環境変数を変更
+3. .env.example ファイルから.env を作成し、環境変数を変更(terminal)  
 
    - "docker-compose.yml"を参考に DB の設定を修正
    - 送信元アドレスの値(MAIL_FROM_ADDRESS)に任意の値を入力
    - STRIPE_KEY、STRIPE_SECRET の項目を追加し、Stripe にログインし、開発者向け API キーをそれぞれ入力
 
-4. アプリケーションキーの作成
+4. アプリケーションキーの作成 (PHP)  
    `php artisan key:generate`
-5. テーブルの作成
+5. テーブルの作成 (PHP)  
    `php artisan migrate`
-6. ダミーデータの作成
+6. ダミーデータの作成 (PHP)  
    `php artisan db:seed`
 
    - テストユーザー ID  
@@ -158,16 +160,18 @@
       password : password
      (/admin/login)
 
-7. ストレージディレクトリとのリンクを作成
+7. ストレージディレクトリとのリンクを作成 (PHP)  
    `php artisan storage:link`
-8. タイマーの設定ファイルの再読み込み
+8. タイマーファイル(rese/system/laravelTask.timer)の"WorkingDirectory"のパスを環境に合わせて修正  
+   プロジェクトファイルまでのフルパスを指定する
+9. タイマーの設定ファイルの再読み込み(terminal)  
    `sudo systemctl daemon-reload`
-9. タイマーを登録
-   `sudo systemctl enable {プロジェクトディレクトリまでのパス}/rese/system/laravelTask.timer`
-   `sudo systemctl enable {プロジェクトディレクトリまでのパス}/rese/system/laravelTask.service`
-10. タイマーの実行
+10. タイマーを登録 (terminal)  
+    `sudo systemctl enable {プロジェクトディレクトリまでのパス}/rese/system/laravelTask.timer`
+    `sudo systemctl enable {プロジェクトディレクトリまでのパス}/rese/system/laravelTask.service`
+11. タイマーの実行 (terminal)  
     `sudo systemctl start laravelTask.timer`
-11. 実行確認
+12. 実行確認 (terminal)  
     `systemctl list-timers`
 
 ### その他
