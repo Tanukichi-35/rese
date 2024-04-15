@@ -53,7 +53,7 @@ class MailController extends Controller
 
         return back()->withInput()->with(compact('error'));
     }
-    else if(!$request->toUsers && !$request->toUsers){
+    else if(!$request->toUsers && !$request->toManagers){
         $error = '送信先が設定されていません';
 
         return back()->withInput()->with(compact('error'));
