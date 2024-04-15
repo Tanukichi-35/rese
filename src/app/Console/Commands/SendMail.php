@@ -41,10 +41,8 @@ class SendMail extends Command
      */
     public function handle()
     {
-        logger('test');
         $dateTime = new Datetime();
         $bookings = Booking::Where('date', '=', $dateTime->format('Y-m-d'))->get();
-        // logger($bookings);
 
         foreach ($bookings as $booking) {
             $mail = new RemindMail($booking);
