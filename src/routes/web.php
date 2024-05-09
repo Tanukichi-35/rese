@@ -27,6 +27,11 @@ Route::get('/', [
     StoreController::class, 'index'
 ]);
 
+// 飲食店のソートを実行
+Route::get('/sort', [
+    StoreController::class, 'sort'
+]);
+
 // 飲食店の検索を実行
 Route::get('/search', [
     StoreController::class, 'search'

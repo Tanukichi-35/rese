@@ -7,29 +7,42 @@
 @section('content')
 {{-- 検索 --}}
 <div class="div__search">
-  <form action="/search" method="GET" class="form__search shadow" id="form__search" >
+  <form action="/search" method="GET" class="form__search" id="form__search" >
     @csrf
-    <div class="div__area">
-      <select name="area_id" class="select__search-area"  id="select__search-area">
-        <option value="" style='display:none;' disabled selected>地域</option>
-        <option value="0" @if(isset( $request ) && $request['area_id'] == 0) selected @endif>全て</option>
-        @foreach (Area::All() as $area)
-        <option value="{{$area->id}}" @if(isset( $request ) && $request['area_id'] == $area->id) selected @endif>{{$area->name}}</option>
-        @endforeach
-      </select>
+    {{-- ソート --}}
+    <div class="div__sort">
+      <div class="div__order">
+        <select name="order" id="select__order" class="select__order shadow">
+            <option value="" style='display:none;' disabled @if(!isset($request, $request->order)) selected @endif>並び替え：評価高/低</option>
+            <option value="0" @if(isset( $request, $request->order ) && $request->order == 0) selected @endif onclick="sort()">ランダム</option>
+            <option value="1" @if(isset( $request, $request->order ) && $request->order == 1) selected @endif onclick="sort()">評価が高い順</option>
+            <option value="2" @if(isset( $request, $request->order ) && $request->order == 2) selected @endif onclick="sort()">評価が低い順</option>
+        </select>
+      </div>
     </div>
-    <div class="div__genre">
-      <select name="genre_id" class="select__search-genre" id="select__search-genre"?>
-        <option value="" style='display:none;' disabled selected>ジャンル</option>
-        <option value="0" @if(isset( $request ) && $request['genre_id'] == 0) selected @endif>全て</option>
-        @foreach (Genre::All() as $genre)
-        <option value="{{$genre->id}}" @if(isset( $request ) && $request['genre_id'] == $genre->id) selected @endif>{{$genre->name}}</option>
-        @endforeach
-      </select>
-    </div>
-    <div class="div__store">
-      <img class="img__search" id="img__search" src="{{asset('img/search.png')}}" alt="">
-      <input type="text" name="store_name" class="input__search-store" id="select__search-store" placeholder="店名で検索" @if (isset( $request )) value="{{$request['store_name']}}"@endif>
+    <div class="div__filter shadow">
+      <div class="div__area">
+        <select name="area_id" class="select__search-area"  id="select__search-area" onchange="search()">
+          <option value="" style='display:none;' disabled @if(!isset($request, $request->area_id)) selected @endif>地域</option>
+          <option value="0" @if(isset( $request, $request->area_id ) && $request->area_id == 0) selected @endif>全て</option>
+          @foreach (Area::All() as $area)
+          <option value="{{$area->id}}" @if(isset( $request, $request->area_id ) && $request->area_id == $area->id) selected @endif>{{$area->name}}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="div__genre">
+        <select name="genre_id" class="select__search-genre" id="select__search-genre"  onchange="search()">
+          <option value="" style='display:none;' disabled @if(!isset($request, $request->genre_id)) selected @endif>ジャンル</option>
+          <option value="0" @if(isset( $request, $request->genre_id ) && $request->genre_id == 0) selected @endif>全て</option>
+          @foreach (Genre::All() as $genre)
+          <option value="{{$genre->id}}" @if(isset( $request, $request->genre_id ) && $request->genre_id == $genre->id) selected @endif>{{$genre->name}}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="div__store">
+        <img class="img__search" id="img__search" src="{{asset('img/search.png')}}" alt=""  onclick="search()">
+        <input type="text" name="store_name" class="input__search-store" id="select__search-store" placeholder="店名で検索" @if (isset( $request )) value="{{$request['store_name']}}"@endif>
+      </div>
     </div>
   </form>
 </div>
