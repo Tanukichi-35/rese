@@ -44,12 +44,20 @@ class StoreController extends Controller
                 break;
             case 1:
                 $stores = $stores->sortbyDesc(function ($stores) {
-                    return $stores->reviews->avg('rate');
+                    // 評価が無いものは最後尾
+                    if ($stores->reviews->count() == 0)
+                        return 0;
+                    else
+                        return $stores->reviews->avg('rate');
                 });
                 break;
             case 2:
                 $stores = $stores->sortby(function ($stores) {
-                    return $stores->reviews->avg('rate');
+                    // 評価が無いものは最後尾
+                    if ($stores->reviews->count() == 0)
+                        return 6;
+                    else
+                        return $stores->reviews->avg('rate');
                 });
                 break;
             default:
