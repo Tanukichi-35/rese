@@ -11,7 +11,7 @@
     @csrf
     <div class="div__input-form">
       <div class="div__input">
-        <img src="{{ asset('img/person.png')}}" alt="name" class="img__name">
+        <img src="{{ asset('img/person.svg')}}" alt="name" class="img__name">
         <input type="text" name="name" class="input__name" placeholder="Username" value="{{ old('name') }}" >
       </div>
       <div class="div__error">
@@ -24,7 +24,7 @@
         </ul>
       </div>
       <div class="div__input">
-        <img src="{{ asset('img/email.png')}}" alt="email" class="img__email">
+        <img src="{{ asset('img/email.svg')}}" alt="email" class="img__email">
         <input type="text" name="email" class="input__mail" placeholder="Email" value="{{ old('email') }}" >
       </div>
       <div class="div__error">
@@ -37,7 +37,7 @@
         </ul>
       </div>
       <div class="div__input">
-        <img src="{{ asset('img/password.png')}}" alt="password" class="img__password">
+        <img src="{{ asset('img/password.svg')}}" alt="password" class="img__password">
         <input type="password" name="password" class="input__password" placeholder="Password">
       </div>
       <div class="div__error">

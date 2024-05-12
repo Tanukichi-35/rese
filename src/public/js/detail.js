@@ -63,10 +63,10 @@ function clickStar($rate) {
   let i = 0;
   Array.from($(".img__star")).forEach(star => {
     if (i < $rate) {
-      star.src = '../img/star_on.png';
+      star.src = '../img/star_on.svg';
     }
     else {
-      star.src = '../img/star_off.png';
+      star.src = '../img/star_off.svg';
     }
     i++;
   });

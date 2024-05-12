@@ -42,9 +42,9 @@
         <div class="div__show-rate">
           @for ($i = 1; $i <= 5; $i++)
             @if ($i <= $review->rate)
-              <img src="{{asset('img/star_on.png')}}" alt="">
+              <img src="{{asset('img/star_on.svg')}}" alt="">
             @else
-              <img src="{{asset('img/star_off.png')}}" alt="">
+              <img src="{{asset('img/star_off.svg')}}" alt="">
             @endif
           @endfor
         </div>
@@ -153,9 +153,9 @@
             <div class="div__show-rate">
               @for ($i = 1; $i <= 5; $i++)
                 @if ($i <= $review->rate)
-                  <img src="{{asset('img/star_on.png')}}" alt="">
+                  <img src="{{asset('img/star_on.svg')}}" alt="">
                 @else
-                  <img src="{{asset('img/star_off.png')}}" alt="">
+                  <img src="{{asset('img/star_off.svg')}}" alt="">
                 @endif
               @endfor
             </div>

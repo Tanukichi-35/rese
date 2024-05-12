@@ -4,10 +4,10 @@ function clickStar($rate) {
   let i = 0;
   Array.from($(".img__star")).forEach(star => {
     if (i < $rate) {
-      star.src = $("#p__url").text() + '/star_on.png';
+      star.src = $("#p__url").text() + '/star_on.svg';
     }
     else {
-      star.src = $("#p__url").text() + '/star_off.png';
+      star.src = $("#p__url").text() + '/star_off.svg';
     }
     i++;
   });

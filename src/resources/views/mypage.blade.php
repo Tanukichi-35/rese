@@ -16,11 +16,11 @@
         <div class="div__booking shadow">
           <div class="div__booking-header">
             <div class="div__booking-title">
-              <img src="{{asset('img/watch.png')}}" alt="" class="img_watch">
+              <img src="{{asset('img/watch.svg')}}" alt="" class="img_watch">
               <span >予約{{$i++}}</span>
             </div>
             <div class="div__button">
-              <img src="{{asset ('img/QR.png')}}" alt="" class="img__QR">
+              <img src="{{asset ('img/QR.svg')}}" alt="" class="img__QR">
               {{-- modal-QR-page --}}
               <div class="div__modal div__modal-QR">
                 <div class="div__overlay"></div>
@@ -37,7 +37,7 @@
                 </div>
               </div>
               @if (!$booking->isCheckout())
-              <a href="/booking/restore/{{$booking->uuid}}"><img src="{{asset ('img/edit.png')}}" alt="" class="img__edit"></a>
+              <a href="/booking/restore/{{$booking->uuid}}"><img src="{{asset ('img/edit.svg')}}" alt="" class="img__edit"></a>
               <div class="div__delete">
                 <form action="/booking/delete" method="POST" class="form__delete" onsubmit="return confirmDeleteBooking()">
                 @csrf
@@ -109,9 +109,9 @@
           @csrf
             <input type="number" name="store_id" value="{{$store->id}}" hidden>
             @if(Auth::user())
-              <img class="img__favorite" data-user_id={{Auth::user()->id}} data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
+              <img class="img__favorite" data-user_id={{Auth::user()->id}} data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.svg'):asset('img/heart_off.svg')}}">
             @else
-              <img class="img__favorite" data-user_id="0" data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
+              <img class="img__favorite" data-user_id="0" data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.svg'):asset('img/heart_off.svg')}}">
             @endif
           </form>
         </div>

@@ -25,9 +25,9 @@
           @csrf
             <input type="number" name="store_id" value="{{$store->id}}" hidden>
             @if(Auth::user())
-              <img class="img__favorite" data-user_id={{Auth::user()->id}} data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
+              <img class="img__favorite" data-user_id={{Auth::user()->id}} data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.svg'):asset('img/heart_off.svg')}}">
             @else
-              <img class="img__favorite" data-user_id="0" data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
+              <img class="img__favorite" data-user_id="0" data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.svg'):asset('img/heart_off.svg')}}">
             @endif
           </form>
         </div>
@@ -51,9 +51,9 @@
           <input type="number" class="input__rate" name="rate" value="{{old('rate', 1)}}" hidden>
           @endisset
           <p id="p__url" hidden>{{asset('img')}}</p>
-          <img class="img__star" src="{{asset('img/star_on.png')}}" alt="" onclick="clickStar(1)">
+          <img class="img__star" src="{{asset('img/star_on.svg')}}" alt="" onclick="clickStar(1)">
           @for ($i = 2; $i <= 5; $i++)
-            <img class="img__star" src="{{asset('img/star_off.png')}}" alt="" onclick="clickStar({{$i}})">
+            <img class="img__star" src="{{asset('img/star_off.svg')}}" alt="" onclick="clickStar({{$i}})">
           @endfor
         </div>
         <div class="div__error">
@@ -86,7 +86,7 @@
           <h3 class="h3__image">画像の追加</h3>
           <div class="div__file">
             <div id="div__image"></div>
-            <input type="file" name="images[]" accept=".jpg,.jpeg,.png" id="input__file" multiple value="{{old('images[]')}}"/>
+            <input type="file" name="images[]" accept=".jpg,.jpeg,.svg" id="input__file" multiple value="{{old('images[]')}}"/>
             <div class="div__image-message">
               <span>クリックして写真を追加</span>
               <span>またはドラッグアンドドロップ</span>

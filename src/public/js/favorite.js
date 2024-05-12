@@ -1,5 +1,5 @@
-const onImg =  '../../img/heart_on.png'
-const offImg =  '../../img/heart_off.png'
+const onImg =  '../../img/heart_on.svg'
+const offImg =  '../../img/heart_off.svg'
 
 // お気に入りボタン
 $('.img__favorite').on('click', function () {
@@ -25,10 +25,10 @@ $('.img__favorite').on('click', function () {
     }).done(function (res) {
         console.log('success', res);
         if (isOn) {
-            obj.attr('src', '../../img/heart_off.png');
+            obj.attr('src', '../../img/heart_off.svg');
         }
         else {
-            obj.attr('src', '../../img/heart_on.png');
+            obj.attr('src', '../../img/heart_on.svg');
         }
     }).fail(function(XMLHttpRequest, textStatus, errorThrown){
         console.log(XMLHttpRequest.status);

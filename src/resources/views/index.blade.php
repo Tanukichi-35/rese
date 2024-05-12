@@ -40,7 +40,7 @@
         </select>
       </div>
       <div class="div__store">
-        <img class="img__search" id="img__search" src="{{asset('img/search.png')}}" alt=""  onclick="search()">
+        <img class="img__search" id="img__search" src="{{asset('img/search.svg')}}" alt=""  onclick="search()">
         <input type="text" name="store_name" class="input__search-store" id="select__search-store" placeholder="店名で検索" @if (isset( $request )) value="{{$request['store_name']}}"@endif>
       </div>
     </div>
@@ -63,9 +63,9 @@
         @csrf
           <input type="number" name="store_id" value="{{$store->id}}" hidden>
           @if(Auth::user())
-            <img class="img__favorite" data-user_id={{Auth::user()->id}} data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
+            <img class="img__favorite" data-user_id={{Auth::user()->id}} data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.svg'):asset('img/heart_off.svg')}}">
           @else
-            <img class="img__favorite" data-user_id="0" data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.png'):asset('img/heart_off.png')}}">
+            <img class="img__favorite" data-user_id="0" data-store_id={{$store->id}} src="{{$store->checkFavorite()?asset('img/heart_on.svg'):asset('img/heart_off.svg')}}">
           @endif
         </form>
       </div>
