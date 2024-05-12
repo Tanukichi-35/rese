@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,16 @@ Route::prefix('admin')->middleware('auth.admins:admins')->group(function () {
     Route::get('stores', [
         StoreController::class, 'stores'
     ])->name('admin.stores');
+
+    // 口コミ一覧ページを表示
+    Route::get('reviews', [
+        ReviewController::class, 'reviews'
+    ])->name('admin.reviews');
+
+    // 口コミを削除
+    Route::delete('/review/delete', [
+        ReviewController::class, 'destroy'
+    ]);
 
     // お知らせメール送信フォームの表示
     Route::get('mail', [

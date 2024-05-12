@@ -67,6 +67,10 @@
               @csrf
               <button>店舗一覧</button>
             </form>
+            <form action="/admin/reviews" method="GET">
+              @csrf
+              <button>口コミ一覧</button>
+            </form>
             <form action="/admin/mail" method="GET">
               @csrf
               <button>お知らせメール</button>

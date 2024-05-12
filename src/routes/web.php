@@ -110,7 +110,7 @@ Route::middleware('verified')->group(function () {
         ReviewController::class, 'restore'
     ]);
 
-    // 口コミを更新
+    // 口コミを削除
     Route::delete('/detail/delete-review', [
         ReviewController::class, 'destroy'
     ]);

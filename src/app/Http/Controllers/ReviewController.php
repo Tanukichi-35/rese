@@ -14,6 +14,15 @@ class ReviewController extends Controller
 {
   private const dirName = 'reviewImages';
 
+  // 口コミ一覧ページの表示
+  public function reviews()
+  {
+    // 全ての口コミを取得
+    $reviews = Review::Paginate(10);
+
+    return view('admin.reviews', compact('reviews'));
+  }
+
   // 口コミ投稿ページの表示
   public function review($store_id)
   {
@@ -114,6 +123,9 @@ class ReviewController extends Controller
     $review->delete();
 
     // 画面を更新
-    return redirect('/')->with('message', '口コミを削除しました');
+    if(Auth::check('admin'))
+      return back()->with('error', '口コミを削除しました');
+    else
+      return redirect('/')->with('message', '口コミを削除しました');
   }
 }

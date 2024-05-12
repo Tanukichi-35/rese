@@ -88,7 +88,7 @@
           <td>
             <div class="div__file">
               <img src="{{asset($store->imageURL)}}" alt="画像が選択されていません">
-              <input type="file" name="image"  accept=".jpg,.jpeg,.png,.svg" id="input__file" onchange="OnFileSelect(this)"/>
+              <input type="file" name="image"  accept=".jpg,.jpeg,.png" id="input__file" onchange="OnFileSelect(this)"/>
               <label for="input__file">読込</label>
             </div>
             <div class="div__error">
