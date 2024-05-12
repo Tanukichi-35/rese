@@ -86,7 +86,7 @@
           <h3 class="h3__image">画像の追加</h3>
           <div class="div__file">
             <div id="div__image"></div>
-            <input type="file" name="images[]" accept=".jpeg,.png" id="input__file" multiple value="{{old('images[]')}}"/>
+            <input type="file" name="images[]" accept=".jpg,.jpeg,.png" id="input__file" multiple value="{{old('images[]')}}"/>
             <div class="div__image-message">
               <span>クリックして写真を追加</span>
               <span>またはドラッグアンドドロップ</span>

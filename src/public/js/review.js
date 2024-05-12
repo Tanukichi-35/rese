@@ -53,8 +53,8 @@ $dropArea.on('change', function(e) {
   let err = false;
   if (this.files) { // ファイル存在チェック
     Array.from(this.files).forEach(file => {
-      if (!file.name.match('.(jpeg|png)')) { // 許可する拡張子以外の場合
-        alert('拡張子が jpeg, png以外のファイルはアップロードできません。');
+      if (!file.name.match('.(jpg|jpeg|png)')) { // 許可する拡張子以外の場合
+        alert('拡張子が jpg, jpeg, png以外のファイルはアップロードできません。');
         err = true;
         return // 処理を中断
       }
