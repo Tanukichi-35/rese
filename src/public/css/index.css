@@ -132,6 +132,10 @@
     .h3__store-name {
       margin: 10px 5px 5px 15px;
       padding: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 250px;
+      overflow: hidden;
     }
 
     .div__tag,
