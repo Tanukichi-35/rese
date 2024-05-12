@@ -7,7 +7,7 @@
 
 @section('content')
 <div class="div__main">
-  <h2 class="h2__title">レビュー一覧</h2>
+  <h2 class="h2__title">口コミ一覧</h2>
   <div class="div__table-content">
     {{ $reviews->links() }}
     <table class="table__list">

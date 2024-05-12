@@ -51,7 +51,7 @@
   <div class="div__store-list">
     @foreach ($stores as $store)
     <div class="div__store-info shadow">
-    <div class="div__image" style="background-image: url({{asset($store->imageURL)}});"></div>
+      <div class="div__image" style="background-image: url({{asset($store->imageURL)}});"></div>
       <h3 class="h3__store-name">{{$store->name}}</h3>
       <div class="div__tag">
           <p class="p__area-tag">#{{$store->area->name}}</p>

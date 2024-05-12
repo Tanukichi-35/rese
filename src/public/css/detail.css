@@ -25,14 +25,14 @@
     margin-left: 15px;
   }
 
-  .button__review {
+  /* .button__review {
     background-color: #3560F6;
     height: 26px;
     margin-left: 30px;
     padding: 3px 5px;
     border-radius: 5px;
-  }
-
+  } */
+  
   .div__store-image{
     width: 100%;
     height: 65vh;
@@ -57,6 +57,55 @@
 
   .div__store-description p {
     margin: 0;
+    margin-bottom: 15px;
+  }
+
+  .a__review{
+    color: #000;
+  }
+
+  .button__review {
+  background-color: #5580F7;
+  width: 100%;
+  height: 32px;
+  border-radius: 2px;
+  }
+
+  .div__self-review{
+    margin: 20px 0;
+    border-top: solid 2px #E2E2E2;
+    border-bottom: solid 2px #E2E2E2;
+
+    .div__edit-review {
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+      align-items: center;
+
+      .a__edit-review{
+        height: 30px;
+        line-height: 30px;
+        color: #000;
+        margin-right: 10px;
+      }
+
+      .button__delete-review{
+        height: 30px;
+        line-height: 30px;
+        color: #000;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+    }
+
+    .div__show-rate {
+      margin: 20px 0;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
   }
 }
 
@@ -157,170 +206,167 @@
   }
 }
 
-/* レビューページ */
+/* 全口コミ表示ページ */
 .div__review {
   display: none;
   position: relative;
+
+  .div__overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    opacity: .6;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .div__review-window {
+    width: 90%;
+    max-width: 800px;
+    height: 60%;
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    background: #fff;
+  }
+
+  .div__review-header {
+    height: 45px;
+    position: relative;
+    background-color: #003FF5;
+    border-radius: 5px 5px 0 0;
+
+    .h3__register {
+      height: 45px;
+      margin: 0;
+      padding: 10px 20px;
+      color: #fff;
+    }
+  
+    .div__review-close {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+    }
+  
+    .button__review-close {
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      width: 25px;
+      display: block;
+      height: 25px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      position: relative;
+    }
+  
+    .button__review-close::before,
+    .button__review-close::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1px;
+      height: 10px;
+      background-color: #fff;
+    }
+  
+    .button__review-close::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+  
+    .button__review-close::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+
+  .div__show-review {
+    width: 90%;
+    height: 80%;
+    margin: auto;
+    overflow: auto;
+
+    .div__review-content {
+      margin-bottom: 30px;
+
+
+      .p__user-name {
+        font-weight: bold;
+      }
+
+      .span__review-date {
+        font-weight: lighter;
+        margin-left: 30px;
+      }
+
+      .div__image {
+        margin-left: 10px;
+        margin-bottom: 10px;
+        height: 100px;
+        display: flex;
+        flex-direction: row;
+        overflow: auto;
+
+        .img_review {
+          /* width: 100px; */
+          height: 100px;
+          padding: 10px;
+          cursor: pointer;
+        }
+      }
+
+      .div__show-rate {
+        display: flex;
+        flex-direction: row;
+        margin-left: 10px;
+
+        img {
+          width: 20px;
+        }
+      }
+
+      .p__comment {
+        margin-left: 10px;
+      }
+    }
+  }
 }
 
-.div__overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  opacity: .6;
-  z-index: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.div__review-window {
-  width: 90%;
-  max-width: 400px;
-  height: 500px;
-  position: fixed;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 5px;
-  background: #fff;
-}
-
-.div__review-header{
-  height: 45px;
+.div__image-modal{
+  display: none;
   position: relative;
-  background-color: #003FF5;
-  border-radius: 5px 5px 0 0;
+
+  .div__overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: lightgray;
+    opacity: .6;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #img__review-image{
+    position: fixed;
+    width: 90vw;
+    height: 90vh;
+    object-fit: scale-down;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
 }
 
-.h3__register{
-  height: 45px;
-  margin: 0;
-  padding: 10px 20px;
-  color: #fff;
-}
-
-.div__review-close {
-  position: absolute;
-  right: 20px;
-  top: 10px;
-}
-
-.button__review-close {
-  background: transparent;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  width: 25px;
-  display: block;
-  height: 25px;
-  border: 1px solid #fff;
-  border-radius: 50%;
-  position: relative;
-}
-
-.button__review-close::before,
-.button__review-close::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 1px;
-  height: 10px;
-  background-color: #fff;
-}
-
-.button__review-close::before {
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.button__review-close::after {
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-.div__show-review{
-  height: calc(100% - 250px);
-  width: 90%;
-  margin: auto;
-  overflow: auto;
-}
-
-.div__review-content{
-  margin-bottom: 30px;
-}
-
-.p__user-name{
-  font-weight: bold;
-}
-
-.span__review-date{
-  font-weight: lighter;
-  margin-left: 30px;
-}
-
-.div__show-rate{
-  display: flex;
-  flex-direction: row;
-  margin-left: 10px;
-}
-
-.div__show-rate img {
-  width: 20px;
-}
-
-.p__comment{
-  margin-left: 10px;
-}
-
-.div__submit-review{
-  position: fixed;
-  width: 90%;
-  height: 180px;
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  border-top: solid 1px #8B7969;
-  padding-top: 5px;
-}
-
-.h4__review-submit{
-  margin: 0;
-  font-weight: 400;
-}
-
-.div__rate{
-  display: flex;
-  flex-direction: row;
-}
-
-.div__rate img {
-  width: 30px;
-}
-
-.textarea__comment{
-  width: 100%;
-  margin: auto;
-  font-size: 0.8rem;
-  border: 1px solid #000;
-  border-radius: 3px;
-  padding-left: 5px;
-  padding-top: 5px;
-  margin-top: 10px;
-  resize: none;
-}
-
-.button__review-submit{
-  background-color: #3560F6;
-  height: 25px;
-  padding: 0 10px;
-  position: absolute;
-  right: 0;
-  bottom: 15px;
-  border-radius: 5px;
-  font-size: 0.8rem;
-}
 
 @media screen and (max-width : 768px) {
   .div__grid-container {

@@ -22,52 +22,59 @@ class Store extends Model
     ];
 
     // Managerモデルとの紐づけ
-    public function manager(){
+    public function manager()
+    {
         return $this->belongsTo('App\Models\Manager');
     }
 
     // Bookingモデルとの紐づけ
-    public function bookings(){
+    public function bookings()
+    {
         return $this->hasMany('App\Models\Booking');
     }
 
     // Favoriteモデルとの紐づけ
-    public function favorites(){
+    public function favorites()
+    {
         return $this->hasMany('App\Models\Favorite');
     }
 
     // Reviewモデルとの紐づけ
-    public function reviews(){
+    public function reviews()
+    {
         return $this->hasMany('App\Models\Review');
     }
 
     // Areaモデルとの紐づけ
-    public function area(){
+    public function area()
+    {
         return $this->belongsTo('App\Models\Area');
     }
 
     // Genreモデルとの紐づけ
-    public function genre(){
+    public function genre()
+    {
         return $this->belongsTo('App\Models\Genre');
     }
 
     // お気に入りステータスの確認
-    public function checkFavorite(){
-        if(Auth::user()){
+    public function checkFavorite()
+    {
+        if (Auth::user()) {
             return Favorite::checkFavorite(Auth::user()->id, $this->id);
-        }
-        else{
+        } else {
             return Favorite::checkFavorite(0, $this->id);
         }
     }
 
     // 営業時間の取得
-    public function getHours(){
+    public function getHours()
+    {
         $time = new DateTime("17:00");
         $hours = [
             "1" => $time->format("H:i"),
         ];
-        for ($i = 2; $i <= 9; $i++) { 
+        for ($i = 2; $i <= 9; $i++) {
             $hours[$i] = $time->modify("+30 minutes")->format("H:i");
         }
 
@@ -75,9 +82,10 @@ class Store extends Model
     }
 
     // インデックスから予約時間の取得
-    public static function getHour(int $index){
+    public static function getHour(int $index)
+    {
         $time = new DateTime("17:00");
-        for ($i = 1; $i < $index; $i++) { 
+        for ($i = 1; $i < $index; $i++) {
             $time->modify("+30 minutes");
         }
 
@@ -85,12 +93,13 @@ class Store extends Model
     }
 
     // 人数の取得
-    public function getNumbers(){
+    public function getNumbers()
+    {
         $numbers = [
             "1" => "1人",
         ];
-        for ($i = 2; $i <= 10; $i++) { 
-            $numbers[$i] = $i."人";
+        for ($i = 2; $i <= 10; $i++) {
+            $numbers[$i] = $i . "人";
         }
 
         return $numbers;
@@ -116,7 +125,7 @@ class Store extends Model
     public function scopeStoreSearch($query, $store_name)
     {
         if (!empty($store_name)) {
-            $query->where('name', "like", "%".$store_name."%");
+            $query->where('name', "like", "%" . $store_name . "%");
         }
     }
 }

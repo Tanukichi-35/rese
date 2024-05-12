@@ -44,25 +44,29 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     // Bookingモデルとの紐づけ
-    public function bookings(){
+    public function bookings()
+    {
         return $this->hasMany('App\Models\Booking');
     }
 
     // Favoriteモデルとの紐づけ
-    public function favorites(){
+    public function favorites()
+    {
         return $this->hasMany('App\Models\Favorite');
     }
 
     // Reviewモデルとの紐づけ
-    public function reviews(){
+    public function reviews()
+    {
         return $this->hasMany('App\Models\Review');
     }
 
     // お気に入りの店の取得
-    public function favoriteStores(){
+    public function favoriteStores()
+    {
         $favorites = $this->favorites;
         $stores = [];
-        for ($i=0; $i < $favorites->count(); $i++) { 
+        for ($i = 0; $i < $favorites->count(); $i++) {
             $stores[$i] = $favorites[$i]->store;
         }
         return $stores;

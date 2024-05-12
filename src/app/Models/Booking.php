@@ -21,27 +21,32 @@ class Booking extends Model
     ];
 
     // Userモデルとの紐づけ
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 
     // Storeモデルとの紐づけ
-    public function store(){
+    public function store()
+    {
         return $this->belongsTo('App\Models\Store');
     }
 
     // uuidの一致する予約を取得
-    public static function getBooking($uuid){
+    public static function getBooking($uuid)
+    {
         return self::Where('uuid', '=', $uuid)->first();
     }
 
     // 決済済？
-    public function isCheckout(){
+    public function isCheckout()
+    {
         return $this->status % 2 != 0;
     }
 
     // 来店済？
-    public function isVisited(){
+    public function isVisited()
+    {
         return $this->status >= 2;
     }
 }

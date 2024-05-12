@@ -90,13 +90,33 @@ Route::middleware('verified')->group(function () {
         BookingController::class, 'destroy'
     ]);
 
-    // レビューを投稿
-    Route::post('/review', [
+    // 口コミ投稿ページの表示
+    Route::get('/detail/{store_id}/review', [
+        ReviewController::class, 'review'
+    ]);
+
+    // 口コミを投稿
+    Route::post('/detail/{store_id}/review', [
         ReviewController::class, 'create'
     ]);
 
+    // 口コミ投稿編集ページの表示
+    Route::get('/detail/{review_id}/edit-review', [
+        ReviewController::class, 'edit'
+    ]);
+
+    // 口コミを更新
+    Route::post('/detail/{review_id}/edit-review', [
+        ReviewController::class, 'restore'
+    ]);
+
+    // 口コミを更新
+    Route::delete('/detail/delete-review', [
+        ReviewController::class, 'destroy'
+    ]);
+
     // 決済
-    Route::post('/charge',[
+    Route::post('/charge', [
         StripeController::class, 'charge'
     ])->name('stripe.charge');
 });

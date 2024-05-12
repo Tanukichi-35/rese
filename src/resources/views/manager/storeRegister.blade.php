@@ -71,7 +71,7 @@
         <tr>
           <th><label for="input__description">詳細</label></th>
           <td>
-            <textarea name="description" class="textarea__description" cols="30" rows="5" placeholder="お店の特徴を入力してください。"></textarea>
+            <textarea name="description" class="textarea__description" cols="30" rows="5" placeholder="お店の特徴を入力してください。">{{old('description')}}</textarea>
             <div class="div__error">
               <ul>
                 @error('description')

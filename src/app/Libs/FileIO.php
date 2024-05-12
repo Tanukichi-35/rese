@@ -7,32 +7,32 @@ use Illuminate\Http\UploadedFile;
 
 class FileIO
 {
-    private static $dirName = 'storeImages';
+    // private static $dirName = 'storeImages';
 
     // イメージファイルをアップロード
-    public static function uploadImageFile(UploadedFile $file){
+    public static function uploadImageFile($dirName, UploadedFile $file){
         if(env('APP_ENV') === 'production') {
             // S3バケットのstoreImageディレクトリを作成し画像を保存
-            $path = Storage::disk('s3')->putFile(self::$dirName, $file, 'public');
+            $path = Storage::disk('s3')->putFile($dirName, $file, 'public');
             return Storage::disk('s3')->url($path);
         }
         else{
             // storeImageディレクトリを作成し画像を保存
-            $fileName = $file->store('public/' . self::$dirName);
-            return 'storage/' . self::$dirName . '/' . basename($fileName);
+            $fileName = $file->store('public/' . $dirName);
+            return 'storage/' . $dirName . '/' . basename($fileName);
         }
     }
 
     // イメージファイルの削除
-    public static function deleteImageFile($filePath){
+    public static function deleteImageFile($dirName, $filePath){
         if(!is_null($filePath)){
             if(env('APP_ENV') === 'production') {
                 // S3対応（ディレクトリ名をファイル名でアクセス）
                 $fileName = explode("/", $filePath)[4];
-                return Storage::disk('s3')->delete(self::$dirName.'/'.$fileName);
+                return Storage::disk('s3')->delete($dirName.'/'.$fileName);
             }
             else{
-                return Storage::delete('public/' . self::$dirName . '/' . basename($filePath));
+                return Storage::delete('public/' . $dirName . '/' . basename($filePath));
             }
         }
     }

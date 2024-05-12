@@ -10,7 +10,7 @@
     <div class="div__store-name">
         <button class="button__back" onclick="goBackPage()">&lt;</button>
         <h2 class="h2__store-name">{{$store->name}}</h2>
-        <button href="/" class="button__review" id="button__review">レビュー</button>
+        {{-- <button href="/" class="button__review" id="button__review">口コミ</button> --}}
     </div>
     <div class="div__store-image">
       <img class="img__store-image" src="{{asset($store->imageURL)}}" alt="画像が登録されていません">
@@ -21,6 +21,38 @@
     </div>
     <div class="div__store-description">
       <p>{{$store->description}}</p>
+    </div>
+    <div class="div__store-review">
+      @php
+          if(Auth::check())
+            $review = Auth::user()->reviews->where('store_id', $store->id)->first();
+      @endphp
+      @if(isset($review) && $review)
+      <button class="button__review" id="button__review">全ての口コミ情報</button>
+      <div class="div__self-review">
+        <div class="div__edit-review">
+          <a href="/detail/{{$review->id}}/edit-review" class="a__edit-review">口コミを編集</a>
+          <form action="/detail/delete-review" method="POST" class="form__delete-review" onsubmit="return confirmDeleteReview()">
+          @csrf
+          @method('DELETE')
+            <input type="number" name="id" value="{{$review->id}}" hidden>
+            <button class="button__delete-review">口コミを削除</button>
+          </form>
+        </div>
+        <div class="div__show-rate">
+          @for ($i = 1; $i <= 5; $i++)
+            @if ($i <= $review->rate)
+              <img src="{{asset('img/star_on.png')}}" alt="">
+            @else
+              <img src="{{asset('img/star_off.png')}}" alt="">
+            @endif
+          @endfor
+        </div>
+        <p class="p__comment">{{$review->comment}}</p>
+      </div>
+      @else
+      <a href="/detail/{{$store->id}}/review" class="a__review">口コミを投稿する</a>
+      @endif
     </div>
   </div>
 
@@ -99,12 +131,12 @@
     </form>
   </div>
 
-  {{-- レビューページ（モーダルウィンドウ） --}}
+  {{-- 全口コミ表示ページ（モーダルウィンドウ） --}}
   <div class="div__review">
     <div class="div__overlay"></div>
     <div class="div__review-window shadow">
       <div class="div__review-header">
-        <h3 class="h3__register">レビュー</h3>
+        <h3 class="h3__register">口コミ</h3>
         <div class="div__review-close">
           <button class="button__review-close"></button>
         </div>
@@ -113,10 +145,17 @@
         @foreach ($store->reviews as $review)
           <div class="div__review-content">
             <p class="p__user-name">{{$review->user->name}} <span class="span__review-date">{{($review->created_at->format('Y/m/d'))}}</span></p>
+            <div class="div__image">
+              @foreach ($review->reviewImages as $reviewImage)
+                <img class="img_review" src="{{asset($reviewImage->imageURL)}}" alt="">
+              @endforeach
+            </div>
             <div class="div__show-rate">
               @for ($i = 1; $i <= 5; $i++)
                 @if ($i <= $review->rate)
                   <img src="{{asset('img/star_on.png')}}" alt="">
+                @else
+                  <img src="{{asset('img/star_off.png')}}" alt="">
                 @endif
               @endfor
             </div>
@@ -124,24 +163,24 @@
           </div>
         @endforeach
       </div>
-      <div class="div__submit-review">
-        <form action="/review" method="POST" class="form__review">
-        @csrf
-          <h4 class="h4__review-submit">評価する</h4>
-          <input type="number" name="store_id" value="{{$store->id}}" hidden>
-          <input type="number" class="input__rate" name="rate" value="1" hidden>
-          <div class="div__rate">
-            <img class="img__star" src="{{asset('img/star_on.png')}}" alt="" onclick="clickStar(1)">
-            @for ($i = 2; $i <= 5; $i++)
-              <img class="img__star" src="{{asset('img/star_off.png')}}" alt="" onclick="clickStar({{$i}})">
-            @endfor
-          </div>
-          <textarea name="comment" class="textarea__comment" cols="30" rows="3" placeholder="例：〇〇が美味しかった。"></textarea>
-          <button class="button__review-submit">投稿</button>
-        </form>
-      </div>
     </div>
   </div>
+
+  {{-- 画像の拡大表示（モーダルウィンドウ） --}}
+  <div class="div__image-modal">
+    <div class="div__overlay"></div>
+    {{-- <div class="div__image-window" id="div__image-window" shadow> --}}
+      <img id="img__review-image" src="" alt="">
+      {{-- <div class="div__image-header">
+        <div class="div__image-close">
+          <button class="button__image-close"></button>
+        </div>
+      </div> --}}
+      {{-- <div class="div__show-image">
+        <img id="img__review-image" src="" alt="">
+      </div> --}}
+    {{-- </div> --}}
+  </div>  
 @endsection
 
 @section('script')

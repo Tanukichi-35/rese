@@ -48,12 +48,12 @@ function inputNumber() {
   $("#table__number").text($number);
 }
 
-// レビューボタンでレビューページを開く
+// 口コミボタンで口コミページを開く
 $(".button__review").on('click', function () {
   $(".div__review").fadeIn();
 });
 
-// xボタンでレビューページを閉じる
+// xボタンで口コミページを閉じる
 $(".button__review-close").on('click', function () {
   $('.div__review').fadeOut();
 });
@@ -72,3 +72,20 @@ function clickStar($rate) {
   });
   $(".input__rate").val($rate)
 }
+
+// 口コミの削除を確認
+function confirmDeleteReview() {
+  const select = confirm("子の口コミを削除しますか？");
+  return select;
+}
+
+// 画像クリックで画像ページを開く
+$(".img_review").on('click', function (e) {
+  $(".div__image-modal").fadeIn();
+  $("#img__review-image").attr("src", e.currentTarget.src);
+});
+
+// xボタンで画像ページを閉じる
+$("#img__review-image").on('click', function () {
+  $('.div__image-modal').fadeOut();
+});

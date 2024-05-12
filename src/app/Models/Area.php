@@ -13,7 +13,8 @@ class Area extends Model
     ];
 
     // Storeモデルとの紐づけ
-    public function stores(){
+    public function stores()
+    {
         return $this->hasMany('App\Models\Store');
     }
 }

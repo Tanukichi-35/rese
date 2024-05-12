@@ -11,6 +11,8 @@ use FileIO;
 
 class StoreController extends Controller
 {
+    private const dirName = 'storeImages';
+
     // 飲食店一覧ページを表示
     public function index()
     {
@@ -25,7 +27,7 @@ class StoreController extends Controller
     {
         // IDが一致する飲食店を取得
         $store = Store::find($store_id);
-        // 飲食店のレビューを取得
+        // 飲食店の口コミを取得
         $reviews = $store->reviews;
 
         return view('detail', compact('store', 'reviews'));
@@ -41,7 +43,7 @@ class StoreController extends Controller
                 $stores = $stores->shuffle();
                 break;
             case 1:
-                $stores = $stores->sortbyDesc(function ($stores){
+                $stores = $stores->sortbyDesc(function ($stores) {
                     return $stores->reviews->avg('rate');
                 });
                 break;
@@ -89,7 +91,7 @@ class StoreController extends Controller
         }
 
         if (!empty($request->store_name)) {
-            $item = $item->filter(function($item) use($request){
+            $item = $item->filter(function ($item) use ($request) {
                 return preg_match("/$request->store_name/", $item->name);
             });
         }
@@ -125,7 +127,7 @@ class StoreController extends Controller
         // 画像をアップロード
         $imagePath = null;
         if (!is_null($request->file('image'))) {
-            $imagePath = FileIO::uploadImageFile($request->file('image'));
+            $imagePath = FileIO::uploadImageFile(self::dirName, $request->file('image'));
         }
 
         // 店舗を登録
@@ -165,8 +167,8 @@ class StoreController extends Controller
         // 画像をアップロード
         $imagePath = $store->imageURL;
         if (!is_null($request->file('image'))) {
-            FileIO::deleteImageFile($store->imageURL);
-            $imagePath = FileIO::uploadImageFile($request->file('image'));
+            FileIO::deleteImageFile(self::dirName, $store->imageURL);
+            $imagePath = FileIO::uploadImageFile(self::dirName, $request->file('image'));
         }
 
         // 店舗情報の更新
