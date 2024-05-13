@@ -17,4 +17,14 @@ class Area extends Model
     {
         return $this->hasMany('App\Models\Store');
     }
+
+    // 名前からIDを取得
+    public static function getID(string $name)
+    {
+        $area = self::where('name', $name)->first();
+        if ($area)
+            return $area->id;
+        else
+            return 1;
+    }
 }

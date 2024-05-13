@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
 use App\Models\Store;
+use App\Models\Area;
+use App\Models\Genre;
 use Auth;
 use Exception;
 use FileIO;
@@ -33,11 +35,13 @@ class StoreController extends Controller
         return view('detail', compact('store', 'reviews'));
     }
 
-    // 飲食店のソートを実施
-    public function sort(Request $request)
+    // 飲食店の検索を実施
+    public function search(Request $request)
     {
-        // dd($request);
-        $stores = Store::all();
+        // フィルター処理
+        $stores = Store::with('area')->AreaSearch($request->area_id)->GenreSearch($request->genre_id)->StoreSearch($request->store_name)->get();
+
+        // ソート処理
         switch ($request->order) {
             case 0:
                 $stores = $stores->shuffle();
@@ -63,48 +67,8 @@ class StoreController extends Controller
             default:
                 break;
         }
-        $request->session()->put('storesOrder', $stores);
-        $stores = $this->filter($request, $stores);
 
         return view('index', compact('stores', 'request'));
-    }
-
-    // 飲食店の検索を実施
-    public function search(Request $request)
-    {
-        $stores = $this->getStores($request);
-        $stores = $this->filter($request, $stores);
-
-        return view('index', compact('stores', 'request'));
-    }
-
-    // ソート済みの場合、ソート済みの飲食店情報を取得する
-    public function getStores(Request $request)
-    {
-        if ($request->has('order') && $request->session()->has('storesOrder'))
-            return $request->session()->get('storesOrder');
-        else
-            return Store::all();
-    }
-
-    // 検索フィルタ
-    public function filter(Request $request, $item)
-    {
-        if (!empty($request->area_id) || $request->area_id != 0) {
-            $item = $item->where('area_id', $request->area_id);
-        }
-
-        if (!empty($request->genre_id) || $request->genre_id != 0) {
-            $item = $item->where('genre_id', $request->genre_id);
-        }
-
-        if (!empty($request->store_name)) {
-            $item = $item->filter(function ($item) use ($request) {
-                return preg_match("/$request->store_name/", $item->name);
-            });
-        }
-
-        return $item;
     }
 
     // 店舗一覧ページを表示
@@ -227,5 +191,41 @@ class StoreController extends Controller
         // 画面を更新
         $error = '登録情報を削除しました';
         return redirect()->route('manager.stores')->with(compact('error'));
+    }
+
+    // 店舗データのインポート
+    public function import(Request $request)
+    {
+        if ($request->hasFile('csv')) {
+            // リクエストからファイルを取得
+            $file = $request->file('csv');
+            $path = $file->getRealPath();
+            // ファイルを開く
+            $fp = fopen($path, 'r');
+            // ヘッダー行をスキップ
+            fgetcsv($fp);
+            // 1行ずつ読み込む
+            try {
+                while (($csvData = fgetcsv($fp)) !== FALSE) {
+                    // 店舗情報を作成
+                    Store::create([
+                        'name' => mb_substr($csvData[1], 0, 50),
+                        'manager_id' => Auth::guard('managers')->user()->id,
+                        'area_id' => Area::getID($csvData[2]),
+                        'genre_id' => Genre::getID($csvData[3]),
+                        'description' => mb_substr($csvData[4], 0, 400),
+                        'imageURL' => $csvData[5]
+                    ]);
+                }
+            } catch (Exception $e) {
+                return back()->with('error', 'csvファイルの読み込みに失敗しました。');
+            } finally {
+                fclose($fp);
+            }
+            // ファイルを閉じる
+        } else {
+            return back()->with('error', 'csvファイルの読み込みに失敗しました。');
+        }
+        return back()->with('message', 'csvデータをインポートしました');
     }
 }

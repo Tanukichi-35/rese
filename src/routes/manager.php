@@ -65,6 +65,11 @@ Route::prefix('manager')->middleware('auth.managers:managers')->group(function (
         StoreController::class, 'create'
     ]);
 
+    // 店舗データのインポート
+    Route::post('store/import', [
+        StoreController::class, 'import'
+    ]);
+
     // 店舗の一括削除
     Route::delete('store/batchDelete', [
         StoreController::class, 'batchDestroy'

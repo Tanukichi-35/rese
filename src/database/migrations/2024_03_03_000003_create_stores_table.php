@@ -19,7 +19,7 @@ class CreateStoresTable extends Migration
             $table->foreignId('manager_id')->constrained('managers');
             $table->foreignId('area_id')->constrained('areas');
             $table->foreignId('genre_id')->constrained('genres');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('imageURL')->nullable();
             $table->timestamps();
             $table->softDeletes();
