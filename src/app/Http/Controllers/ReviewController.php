@@ -29,15 +29,12 @@ class ReviewController extends Controller
     // IDが一致する飲食店を取得
     $store = Store::find($store_id);
 
-    // return view('reviewRegister', compact('store'));
     return view('review', compact('store'));
   }
 
   // 口コミを投稿
   public function create(ReviewRequest $request)
   {
-    // dd($request);
-
     if (Auth::user()) {
       $user_id = Auth::user()->id;
       $store_id = $request->store_id;
@@ -94,6 +91,7 @@ class ReviewController extends Controller
     ]);
 
     // 画像のアップロードと登録
+    // dd($request->file('images'));
     if (!is_null($request->file('images'))) {
       foreach ($request->file('images') as $image) {
         $imagePath = FileIO::uploadImageFile(self::dirName, $image);

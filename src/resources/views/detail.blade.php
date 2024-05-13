@@ -51,6 +51,7 @@
         <p class="p__comment">{{$review->comment}}</p>
       </div>
       @else
+      <button class="button__review" id="button__review">口コミ情報</button>
       <a href="/detail/{{$store->id}}/review" class="a__review">口コミを投稿する</a>
       @endif
     </div>

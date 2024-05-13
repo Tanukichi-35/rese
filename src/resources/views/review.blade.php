@@ -37,7 +37,7 @@
 
   {{-- 口コミ投稿フォーム --}}
   <div class="div__review">
-    <form action="/detail/{{$store->id}}/edit-review" method="POST" id="form__review" enctype="multipart/form-data">
+    <form action="/detail/{{$store->id}}/review" method="POST" id="form__review" enctype="multipart/form-data">
       @csrf
       @isset($review)
       <input type="text" name="id" value="{{$review->id}}" hidden/>
@@ -97,7 +97,11 @@
       </div>
     </form>
   </div>
-  <div class="div__review-submit" id="div__review-submit">@isset($review) 更新 @else 口コミを投稿 @endisset</div>
+  @isset($review)
+  <div class="div__review-submit" id="div__review-edit" onclick="editReview({{$review->id}})">更新</div>
+  @else
+  <div class="div__review-submit" id="div__review-submit" onclick="submitReview({{$store->id}})">口コミを投稿</div>
+  @endisset
 @endsection
 
 @section('script')

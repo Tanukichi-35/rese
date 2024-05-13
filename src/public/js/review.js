@@ -77,9 +77,16 @@ $dropArea.on('change', function(e) {
 });
 
 // formの外から送信
-$('#div__review-submit').on('click', function (e) {
+function submitReview (store_id) {
   $('#form__review').submit();
-});
+};
+
+function editReview(review_id) {
+  console.log(review_id);
+  $('#form__review').attr('action', '/detail/' + review_id + '/edit-review');
+  console.log($('#form__review'));
+  $('#form__review').submit();
+};
 
 // rate値入力
 (function () {

@@ -75,7 +75,7 @@ function clickStar($rate) {
 
 // 口コミの削除を確認
 function confirmDeleteReview() {
-  const select = confirm("子の口コミを削除しますか？");
+  const select = confirm("口コミを削除しますか？");
   return select;
 }
 
