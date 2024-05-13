@@ -14,9 +14,9 @@
       <div class="div__order">
         <select name="order" id="select__order" class="select__order shadow">
             <option value="" style='display:none;' disabled @if(!isset($request, $request->order)) selected @endif>並び替え：評価高/低</option>
-            <option value="0" @if(isset( $request, $request->order ) && $request->order == 0) selected @endif onclick="sort()">ランダム</option>
-            <option value="1" @if(isset( $request, $request->order ) && $request->order == 1) selected @endif onclick="sort()">評価が高い順</option>
-            <option value="2" @if(isset( $request, $request->order ) && $request->order == 2) selected @endif onclick="sort()">評価が低い順</option>
+            <option value="0" @if(isset( $request, $request->order ) && $request->order == 0) selected @endif onclick="search()">ランダム</option>
+            <option value="1" @if(isset( $request, $request->order ) && $request->order == 1) selected @endif onclick="search()">評価が高い順</option>
+            <option value="2" @if(isset( $request, $request->order ) && $request->order == 2) selected @endif onclick="search()">評価が低い順</option>
         </select>
       </div>
     </div>
@@ -26,7 +26,8 @@
           <option value="" style='display:none;' disabled @if(!isset($request, $request->area_id)) selected @endif>地域</option>
           <option value="0" @if(isset( $request, $request->area_id ) && $request->area_id == 0) selected @endif>全て</option>
           @foreach (Area::All() as $area)
-          <option value="{{$area->id}}" @if(isset( $request, $request->area_id ) && $request->area_id == $area->id) selected @endif>{{$area->name}}</option>
+            @continue($area->id == 1)     {{-- id=1はその他 --}}
+            <option value="{{$area->id}}" @if(isset( $request, $request->area_id ) && $request->area_id == $area->id) selected @endif>{{$area->name}}</option>
           @endforeach
         </select>
       </div>
@@ -35,7 +36,8 @@
           <option value="" style='display:none;' disabled @if(!isset($request, $request->genre_id)) selected @endif>ジャンル</option>
           <option value="0" @if(isset( $request, $request->genre_id ) && $request->genre_id == 0) selected @endif>全て</option>
           @foreach (Genre::All() as $genre)
-          <option value="{{$genre->id}}" @if(isset( $request, $request->genre_id ) && $request->genre_id == $genre->id) selected @endif>{{$genre->name}}</option>
+            @continue($genre->id == 1)    {{-- id=1はその他 --}}
+            <option value="{{$genre->id}}" @if(isset( $request, $request->genre_id ) && $request->genre_id == $genre->id) selected @endif>{{$genre->name}}</option>
           @endforeach
         </select>
       </div>
