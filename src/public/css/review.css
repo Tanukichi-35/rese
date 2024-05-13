@@ -25,13 +25,13 @@
   }
 
   .div__back{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     align-self: start;
   }
 
   .h2__title{
     font-size: 2.0rem;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
   }
 
   .div__store-info {
@@ -214,15 +214,6 @@
   }
 
 }
-
-/* .div__review::before{
-  content: "";
-  position: absolute;
-  transform: translate(-50px, 100px);
-  width: 2px;
-  height: 400px;
-  background-color: #E2E2E2;
-} */
 
 .div__review-submit {
   grid-row: 3 / 4;

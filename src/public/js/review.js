@@ -18,7 +18,8 @@ function clickStar($rate) {
 $textArea = $('#textarea__comment');
 $textCount = $('#small__text-count');
 
-$textArea.on('input', function (e) {
+function textCount() {
+// $textArea.on('input', function (e) {
   $cnt = $textArea.val().length;
   $textCount.text($cnt);
 
@@ -27,7 +28,7 @@ $textArea.on('input', function (e) {
     $textCount.css("color", "#c02600");
   else
     $textCount.css("color", "#000");
-});
+};
 
 
 // ドラッグアンドドロップ処理
@@ -48,7 +49,12 @@ $dropArea.on('dragleave', function(e) {
 // 入力された画像を表示
 $dropArea.on('change', function(e) {
   $(this).css('border', 'none');
-  console.log(this.files[0]);
+
+  // 画像のクリア
+  let element = document.getElementById('div__image');
+  while(element.firstChild){
+    element.removeChild( element.firstChild);
+  }
 
   let err = false;
   if (this.files) { // ファイル存在チェック
@@ -88,9 +94,10 @@ function editReview(review_id) {
   $('#form__review').submit();
 };
 
-// rate値入力
+// 初期値入力
 (function () {
   this.clickStar($(".input__rate").val());
+  this.textCount();
 })();
 
 // 画像のクリア

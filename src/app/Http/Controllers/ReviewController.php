@@ -121,7 +121,7 @@ class ReviewController extends Controller
     $review->delete();
 
     // 画面を更新
-    if(Auth::check('admin'))
+    if (Auth::check('admin'))
       return back()->with('error', '口コミを削除しました');
     else
       return redirect('/')->with('message', '口コミを削除しました');

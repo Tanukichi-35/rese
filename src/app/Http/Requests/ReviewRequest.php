@@ -25,7 +25,7 @@ class ReviewRequest extends FormRequest
     {
         return [
             'rate' => 'required|integer|between:1,5',
-            'comment' => 'string|max:400',
+            'comment' => 'required|string|max:400',
         ];
     }
 
@@ -36,8 +36,9 @@ class ReviewRequest extends FormRequest
             'rate.required' => '評価レートを入力してください',
             'rate.integer' => '評価レートは数字の1～5で入力してください',
             'rate.between' => '評価レートは数字の1～5で入力してください',
+            'comment.required' => '口コミを入力してください',
             'comment.string' => '口コミは文字列で入力してください',
-            'comment.max' => '人数を入力してください',
+            'comment.max' => '口コミは400文字以内で入力してください',
         ];
     }
 }
