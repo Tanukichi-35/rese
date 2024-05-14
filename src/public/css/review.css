@@ -179,6 +179,7 @@
           color: transparent;
           background-color: transparent;
           z-index: 2;
+          cursor: pointer;
         }
   
         input::file-selector-button {

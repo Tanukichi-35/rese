@@ -51,20 +51,22 @@ class ReviewController extends Controller
 
         // 画像のアップロードと登録
         if (!is_null($request->file('images'))) {
-          foreach ($request->file('images') as $image) {
-            $imagePath = FileIO::uploadImageFile('reviewImages', $image);
+          $this->uploadImages($request->file('images'), $review);
+          // foreach ($request->file('images') as $image) {
+          //   $imagePath = FileIO::uploadImageFile('reviewImages', $image);
 
-            // 画像を登録
-            ReviewImage::create([
-              'review_id' => $review->id,
-              'imageURL' => $imagePath
-            ]);
-          }
+          //   // 画像を登録
+          //   ReviewImage::create([
+          //     'review_id' => $review->id,
+          //     'imageURL' => $imagePath
+          //   ]);
+          // }
         }
       }
 
       // 画面を更新
-      return redirect('/')->with('message', '口コミを投稿いただきありがとうございます。');
+      // return redirect('/')->with('message', '口コミを投稿いただきありがとうございます。');
+      return redirect()->route('detail', ['store_id' => $store_id])->with('message', '口コミを投稿いただきありがとうございます。');
     }
   }
 
@@ -93,19 +95,24 @@ class ReviewController extends Controller
     // 画像のアップロードと登録
     // dd($request->file('images'));
     if (!is_null($request->file('images'))) {
-      foreach ($request->file('images') as $image) {
-        $imagePath = FileIO::uploadImageFile(self::dirName, $image);
+      $this->removeImages($review);
+      $this->uploadImages($request->file('images'), $review);
+      // foreach ($request->file('images') as $image) {
+      //   $imagePath = FileIO::uploadImageFile(self::dirName, $image);
 
-        // 画像を登録
-        ReviewImage::create([
-          'review_id' => $review->id,
-          'imageURL' => $imagePath
-        ]);
-      }
+      //   // 画像を登録
+      //   ReviewImage::create([
+      //     'review_id' => $review->id,
+      //     'imageURL' => $imagePath
+      //   ]);
+      // }
+    } else if (!is_null($request->clear)) {
+      $this->removeImages($review);
     }
 
     // 画面を更新
-    return redirect('/')->with('message', '口コミを更新しました');
+    // return redirect('/')->with('message', '口コミを更新しました');
+    return redirect()->route('detail', ['store_id' => $review->store_id])->with('message', '口コミを更新しました');
   }
 
   // 口コミの削除
@@ -114,16 +121,42 @@ class ReviewController extends Controller
     $review = Review::find($request->id);
 
     // 紐づくデータを同時に削除
+    $this->removeImages($review);
+    // foreach ($review->reviewImages as $reviewImage) {
+    //   FileIO::deleteImageFile(self::dirName, $reviewImage->imageURL);
+    //   $reviewImage->delete();
+    // }
+    $review->delete();
+
+    // 画面を更新
+    return back()->with('message', '口コミを更新しました');
+    // if (Auth::check('admin'))
+    //   return back()->with('error', '口コミを削除しました');
+    // else
+    //   return redirect('/')->with('message', '口コミを削除しました');
+
+  }
+
+  // 画像のアップロードとReviewImageアイテムの作成
+  private function uploadImages($images, $review)
+  {
+    foreach ($images as $image) {
+      $imagePath = FileIO::uploadImageFile(self::dirName, $image);
+
+      // 画像を登録
+      ReviewImage::create([
+        'review_id' => $review->id,
+        'imageURL' => $imagePath
+      ]);
+    }
+  }
+
+  // 画像の削除とReviewImageアイテムの削除
+  private function removeImages($review)
+  {
     foreach ($review->reviewImages as $reviewImage) {
       FileIO::deleteImageFile(self::dirName, $reviewImage->imageURL);
       $reviewImage->delete();
     }
-    $review->delete();
-
-    // 画面を更新
-    if (Auth::check('admin'))
-      return back()->with('error', '口コミを削除しました');
-    else
-      return redirect('/')->with('message', '口コミを削除しました');
   }
 }

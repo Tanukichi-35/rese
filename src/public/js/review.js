@@ -97,4 +97,7 @@ function imageClear() {
   while(element.firstChild){
     element.removeChild( element.firstChild);
   }
+  
+  // クリアしたことを記録
+  $('#input__clear').prop('checked', true);;
 }

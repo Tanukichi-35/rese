@@ -8,7 +8,7 @@
   {{-- 店詳細 --}}
   <div class="div__store">
     <div class="div__store-name">
-        <button class="button__back" onclick="goBackPage()">&lt;</button>
+        <a href="/" class="a__back">&lt;</a>
         <h2 class="h2__store-name">{{$store->name}}</h2>
         {{-- <button href="/" class="button__review" id="button__review">口コミ</button> --}}
     </div>

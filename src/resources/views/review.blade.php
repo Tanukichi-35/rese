@@ -45,11 +45,7 @@
       <div class="div__review-inner">
         <div class="div__rate">
           <h3 class="h3__rate">体験を評価してください</h3>
-          @if(isset($review))
-          <input type="number" class="input__rate" name="rate" value="{{old('rate', $review->rate)}}" hidden>
-          @else
-          <input type="number" class="input__rate" name="rate" value="{{old('rate', 1)}}" hidden>
-          @endisset
+          <input type="number" class="input__rate" name="rate" @if(isset($review)) value="{{old('rate', $review->rate)}}"@else value="{{old('rate', 1)}}" @endif hidden>
           <p id="p__url" hidden>{{asset('img')}}</p>
           <img class="img__star" src="{{asset('img/star_on.svg')}}" alt="" onclick="clickStar(1)">
           @for ($i = 2; $i <= 5; $i++)
@@ -83,10 +79,21 @@
           </ul>
         </div>
         <div class="div__image">
+          @if(isset($review))
+          <h3 class="h3__image">イメージ画像</h3>
+          @else
           <h3 class="h3__image">画像の追加</h3>
+          @endif
           <div class="div__file">
-            <div id="div__image"></div>
-            <input type="file" name="images[]" accept=".jpg,.jpeg,.svg" id="input__file" multiple value="{{old('images[]')}}"/>
+            <div id="div__image">
+              @if(isset($review))
+              @foreach ($review->reviewImages as $reviewImage)
+              <img src="{{asset($reviewImage->imageURL)}}" alt="">
+              @endforeach
+              @endif
+            </div>
+            <input type="file" name="images[]" accept=".jpg,.jpeg,.svg" id="input__file" multiple />
+            <input type="checkbox" name="clear" id="input__clear" hidden/>
             <div class="div__image-message">
               <span>クリックして写真を追加</span>
               <span>またはドラッグアンドドロップ</span>

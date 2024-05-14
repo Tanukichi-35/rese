@@ -35,7 +35,7 @@ Route::get('/search', [
 // 飲食店の詳細ページを表示
 Route::get('/detail/{store_id}', [
     StoreController::class, 'showDetail'
-]);
+])->name('detail');
 
 // お気に入り追加
 Route::post('/favoriteOn', [
