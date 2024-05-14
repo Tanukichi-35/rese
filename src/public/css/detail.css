@@ -90,6 +90,21 @@
       }
     }
 
+    .div__image {
+      margin-bottom: 10px;
+      max-height: 100px;
+      display: flex;
+      flex-direction: row;
+      overflow: auto;
+
+      .img_review {
+        /* width: 100px; */
+        height: 100px;
+        padding: 10px;
+        cursor: pointer;
+      }
+    }
+
     .div__show-rate {
       margin: 20px 0;
 

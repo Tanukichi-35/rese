@@ -39,6 +39,11 @@
             <button class="button__delete-review">口コミを削除</button>
           </form>
         </div>
+        <div class="div__image">
+          @foreach ($review->reviewImages as $reviewImage)
+            <img class="img_review" src="{{asset($reviewImage->imageURL)}}" alt="">
+          @endforeach
+        </div>
         <div class="div__show-rate">
           @for ($i = 1; $i <= 5; $i++)
             @if ($i <= $review->rate)

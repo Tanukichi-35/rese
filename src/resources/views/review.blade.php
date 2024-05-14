@@ -67,7 +67,7 @@
         </div>
         <div class="div__comment">
           <h3 class="h3__comment">口コミを投稿</h3>
-          <textarea name="comment" class="textarea__comment" id="textarea__comment" cols="30" rows="8" placeholder="カジュアルな夜のお出かけにお勧めのスポット" oninput="textCount()">@if(isset($review)) {{old('comment', $review->comment)}} @else {{old('comment')}} @endif</textarea>
+          <textarea name="comment" class="textarea__comment" id="textarea__comment" cols="30" rows="8" placeholder="カジュアルな夜のお出かけにお勧めのスポット" oninput="textCount()">@if(isset($review)){{old('comment', $review->comment)}}@else{{old('comment')}}@endif</textarea>
           <div class="div__comment-upper">
             <small id="small__text-count">0</small>
             <small>/ 400 (最高文字数)</small>
@@ -93,6 +93,20 @@
             </div>
           </div>
           <button type="button" class="button__clear" onclick="imageClear()">クリア</button>
+        </div>
+        <div class="div__error">
+          <ul>
+            @error('images')
+            <li class="li__error">
+              {{$message}}
+            </li>
+            @enderror
+            @error('images.*')
+            <li class="li__error">
+              {{$message}}
+            </li>
+            @enderror
+          </ul>
         </div>
       </div>
     </form>
