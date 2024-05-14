@@ -26,6 +26,8 @@ class ReviewRequest extends FormRequest
         return [
             'rate' => 'required|integer|between:1,5',
             'comment' => 'required|string|max:400',
+            'images' => 'max:5',
+            'images.*' => 'max:1024|mimes:jpg,jpeg,png'
         ];
     }
 
@@ -39,6 +41,9 @@ class ReviewRequest extends FormRequest
             'comment.required' => '口コミを入力してください',
             'comment.string' => '口コミは文字列で入力してください',
             'comment.max' => '口コミは400文字以内で入力してください',
+            'images.max' => 'アップロード可能な画像は最大5枚です',
+            'images.*.max' => 'アップロード可能な画像のサイズは最大1MBです',
+            'images.*.mimes' => 'アップロード可能なファイルの拡張子は"jpg,jpeg,png"です',
         ];
     }
 }

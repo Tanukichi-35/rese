@@ -56,20 +56,6 @@ $dropArea.on('change', function(e) {
     element.removeChild( element.firstChild);
   }
 
-  let err = false;
-  if (this.files) { // ファイル存在チェック
-    Array.from(this.files).forEach(file => {
-      if (!file.name.match('.(jpg|jpeg|png)')) { // 許可する拡張子以外の場合
-        alert('拡張子が jpg, jpeg, png以外のファイルはアップロードできません。');
-        err = true;
-        return // 処理を中断
-      }
-    });
-  }
-
-  if (err)
-    return false;
-
   // ファイル読込
   Array.from(this.files).forEach(file => {
     fileReader = new FileReader();
