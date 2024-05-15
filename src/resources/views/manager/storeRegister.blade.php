@@ -71,7 +71,7 @@
           </td>
         </tr>
         <tr>
-          <th><label for="input__description">詳細</label></th>
+          <th><label for="input__description">店舗詳細</label></th>
           <td>
             <textarea name="description" class="textarea__description" cols="30" rows="5" placeholder="お店の特徴を入力してください。">{{old('description')}}</textarea>
             <div class="div__error">
@@ -95,7 +95,7 @@
             </div>
             <div class="div__error">
               <ul>
-                @error('imageURL')
+                @error('image')
                 <li class="li__error">
                   {{$message}}
                 </li>

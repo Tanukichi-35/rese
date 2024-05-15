@@ -28,7 +28,7 @@ class StoresRequest extends FormRequest
             'area_ids.*' => 'required | integer | min:2',
             'genre_ids.*' => 'required | integer | min:2',
             'descriptions.*' => 'required | string | max:400',
-            'imageURLs.*' => 'required',
+            'imageURLs.*' => 'required | mimes:jpg,jpeg,png',
         ];
     }
 
@@ -48,6 +48,7 @@ class StoresRequest extends FormRequest
             'descriptions.*.string' => '店舗詳細は文字列で入力してください。',
             'descriptions.*.max' => '店舗詳細の最大文字数は400文字です。',
             'imageURLs.*.required' => '画像が設定されていないデータが存在します。',
+            'imageURLs.*.mimes' => 'アップロード可能なファイルの拡張子は"jpg,jpeg,png"です',
         ];
     }
 
