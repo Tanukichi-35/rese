@@ -48,20 +48,3 @@ services:
         published: ${MAILHOG_PUBLISHED_PORT:-8025}
         protocol: tcp
         mode: host
-
-#   https-portal:
-#     image: steveltn/https-portal:1
-#     ports:
-#       - '80:80'
-#       - '443:443'
-#     restart: always
-#     environment:
-#       DOMAINS: 'rese-test.tanuko.xyz -> http://nginx:80'
-#       # STAGE: 'local'
-#       # STAGE: 'production'
-#       # FORCE_RENEW: 'true'
-#     volumes:
-#       - https-portal-data:/var/lib/https-portal
-
-# volumes:
-#     https-portal-data:

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\StoresRequest;
-// use Illuminate\Pagination\Paginator;
-// use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Store;
 use App\Models\Area;
 use App\Models\Genre;
@@ -116,7 +114,6 @@ class StoreController extends Controller
         ]);
 
         // 画面を更新
-        // return redirect()->route('manager.stores');
         $message = '新しく店舗を登録しました';
         return redirect()->route('manager.stores')->with(compact('message'));
     }
@@ -172,7 +169,6 @@ class StoreController extends Controller
         $store->delete();
 
         // 画面を更新
-        // return redirect()->route('manager.stores');
         $error = '登録情報を削除しました';
         return redirect()->route('manager.stores')->with(compact('error'));
     }
@@ -199,9 +195,9 @@ class StoreController extends Controller
     // 店舗情報のインポートページの表示
     public function import()
     {
+        // sessionクリア
         if (session()->exists('importStores')) {
             session()->forget('importStores');
-            session()->forget('importStores_url');
         }
 
         return view('manager.storeImporter');
@@ -210,16 +206,7 @@ class StoreController extends Controller
     // インポートデータの表示
     public function showImportData(Request $request)
     {
-        // dd($request);
         $stores = session()->get('importStores');
-        // $perPage = 10;
-        // $stores = new LengthAwarePaginator(
-        //     $stores->forPage($request->page, $perPage),
-        //     count($stores),
-        //     $perPage,
-        //     $request->page,
-        //     array('path' => session()->get('importStores_url'))
-        // );
 
         return view('manager.storeImporter', compact('stores'));
     }
@@ -241,12 +228,9 @@ class StoreController extends Controller
                 while (($csvData = fgetcsv($fp)) !== FALSE) {
                     // 店舗情報を作成
                     $store = new Store([
-                        // 'name' => mb_substr($csvData[1], 0, 50),
                         'name' => $csvData[1],
-                        // 'manager_id' => Auth::guard('managers')->user()->id,
                         'area_id' => Area::getID($csvData[2]),
                         'genre_id' => Genre::getID($csvData[3]),
-                        // 'description' => mb_substr($csvData[4], 0, 400),
                         'description' => $csvData[4],
                         'imageURL' => $csvData[5]
                     ]);
@@ -262,11 +246,8 @@ class StoreController extends Controller
             return back()->with('error', 'csvファイルの読み込みに失敗しました。');
         }
 
-        // $stores = collect($storesArray);
-        // return view('manager.storeImporter', compact('stores'));
-
+        // sessionに保持
         $request->session()->put('importStores', collect($storesArray));
-        $request->session()->put('importStores_url', $request->url());
 
         return redirect()->route('load')->with('message', 'csvファイルを読み込みました。');
     }
@@ -274,7 +255,6 @@ class StoreController extends Controller
     // 店舗情報のインポート
     public function importData(StoresRequest $request)
     {
-        // dd($request);
         for ($i=0; $i < $request->dataCount; $i++) {
             if(isset($request->valid[$i]) && $request->valid[$i]){
                 // 画像をアップロード

@@ -52,21 +52,11 @@ class ReviewController extends Controller
         // 画像のアップロードと登録
         if (!is_null($request->file('images'))) {
           $this->uploadImages($request->file('images'), $review);
-          // foreach ($request->file('images') as $image) {
-          //   $imagePath = FileIO::uploadImageFile('reviewImages', $image);
-
-          //   // 画像を登録
-          //   ReviewImage::create([
-          //     'review_id' => $review->id,
-          //     'imageURL' => $imagePath
-          //   ]);
-          // }
         }
       }
 
       // 画面を更新
-      // return redirect('/')->with('message', '口コミを投稿いただきありがとうございます。');
-      return redirect()->route('detail', ['store_id' => $store_id])->with('message', '口コミを投稿いただきありがとうございます。');
+      return redirect()->route('detail', ['store_id' => $store_id])->with('message', '口コミを投稿しました。');
     }
   }
 
@@ -93,25 +83,14 @@ class ReviewController extends Controller
     ]);
 
     // 画像のアップロードと登録
-    // dd($request->file('images'));
     if (!is_null($request->file('images'))) {
       $this->removeImages($review);
       $this->uploadImages($request->file('images'), $review);
-      // foreach ($request->file('images') as $image) {
-      //   $imagePath = FileIO::uploadImageFile(self::dirName, $image);
-
-      //   // 画像を登録
-      //   ReviewImage::create([
-      //     'review_id' => $review->id,
-      //     'imageURL' => $imagePath
-      //   ]);
-      // }
     } else if (!is_null($request->clear)) {
       $this->removeImages($review);
     }
 
     // 画面を更新
-    // return redirect('/')->with('message', '口コミを更新しました');
     return redirect()->route('detail', ['store_id' => $review->store_id])->with('message', '口コミを更新しました');
   }
 
@@ -122,10 +101,6 @@ class ReviewController extends Controller
 
     // 紐づくデータを同時に削除
     $this->removeImages($review);
-    // foreach ($review->reviewImages as $reviewImage) {
-    //   FileIO::deleteImageFile(self::dirName, $reviewImage->imageURL);
-    //   $reviewImage->delete();
-    // }
     $review->delete();
 
     // 画面を更新

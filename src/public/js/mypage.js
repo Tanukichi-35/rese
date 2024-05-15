@@ -64,6 +64,7 @@ $(".button__modal-close").on('click', function () {
   $('.div__modal-QR').fadeOut();
 });
 
+// ページバック時に更新
 window.addEventListener('pageshow',()=>{
   const entries = window.performance.getEntriesByType('navigation')
   for (const entry of entries) {

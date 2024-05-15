@@ -79,7 +79,6 @@ class ManagerController extends Controller
         ]);
 
         // 画面を更新
-        // return redirect()->route('admin.managers');
         $message = '新しく店舗代表者を登録しました';
         return redirect()->route('admin.managers')->with(compact('message'));
     }
@@ -98,7 +97,6 @@ class ManagerController extends Controller
     }
 
     // 店舗代表者情報の更新
-    // public function restore(Request $request){
     public function restore(ManagerRequest $request)
     {
         if (Auth::guard('admins')->check()) {         // 管理者権限
@@ -127,7 +125,6 @@ class ManagerController extends Controller
     {
         // ログインユーザーの取得
         $manager = Auth::guard('managers')->user();
-        // dd($manager);
 
         return view('manager.password', compact('manager'));
     }

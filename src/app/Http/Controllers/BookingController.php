@@ -24,7 +24,6 @@ class BookingController extends Controller
             'payment' => $request->number * $request->fee,
             'status' => 0,
         ]);
-        // dd($booking);
 
         $payment = $request->number * $request->fee;
 

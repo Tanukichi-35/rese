@@ -51,17 +51,4 @@ class StoresRequest extends FormRequest
             'imageURLs.*.mimes' => 'アップロード可能なファイルの拡張子は"jpg,jpeg,png"です',
         ];
     }
-
-    public function prepareForValidation()
-    {
-        // dd($this);
-        // $request = $this->request;
-        // for ($i=0; $i < $request->get('dataCount'); $i++) {
-        //     if (!isset($request->get('valid')[$i])) {
-        //         $this->replace([
-        //             "names[$i]" => 'dummy'
-        //         ]);
-        //     }
-        // }
-    }
 }

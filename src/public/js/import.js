@@ -57,15 +57,3 @@ function clickCheck(inputElement) {
     $(`#label__file-${index}`).css('color', 'black')
   }
 }
-
-// // URLの有効性の確認
-// function checkURL(inputElement, imageURL) {
-//   $url = 'チェックしたいリンク先のURL';
-//   $response = @file_get_contents($url, NULL, NULL, 0, 1);
-//   if ($response !== false) {
-//   // リンク先が存在するときの処理
-
-//   } else {
-//     // リンク先が存在しない時の処理
-//   }
-// }

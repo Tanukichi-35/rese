@@ -20,7 +20,6 @@
   }
 
   .h2__store-name {
-    /* height: 30px; */
     line-height: 30px;
     margin-left: 15px;
   }
@@ -65,7 +64,9 @@
   }
 
   .a__review{
+    display: block;
     color: #000;
+    margin: 10px 0;
   }
 
   .button__review {
@@ -110,7 +111,6 @@
       overflow: auto;
 
       .img_review {
-        /* width: 100px; */
         height: 100px;
         padding: 10px;
         cursor: pointer;
@@ -334,7 +334,6 @@
         overflow: auto;
 
         .img_review {
-          /* width: 100px; */
           height: 100px;
           padding: 10px;
           cursor: pointer;

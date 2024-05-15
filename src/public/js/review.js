@@ -1,6 +1,5 @@
 // 評価レートの切り替え
 function clickStar($rate) {
-  console.log($("#p__url").text());
   let i = 0;
   Array.from($(".img__star")).forEach(star => {
     if (i < $rate) {
@@ -74,9 +73,7 @@ function submitReview (store_id) {
 };
 
 function editReview(review_id) {
-  console.log(review_id);
   $('#form__review').attr('action', '/detail/' + review_id + '/edit');
-  console.log($('#form__review'));
   $('#form__review').submit();
 };
 

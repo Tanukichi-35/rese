@@ -17,13 +17,3 @@ $(".button__modal-detail").on('click', function () {
 $(".button__modal-close").on('click', function () {
   $('.div__modal-detail').fadeOut();
 });
-
-// // CSVインポートボタンでcsvファイルインポートページを開く
-// $(".button__import").on('click', function () {
-//   $(this).next().fadeIn();
-// });
-
-// // xボタンでcsvファイルインポートページを閉じる
-// $(".button__import").on('click', function () {
-//   $('.div__modal-detail').fadeOut();
-// });
