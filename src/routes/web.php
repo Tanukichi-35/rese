@@ -96,12 +96,12 @@ Route::middleware('verified')->group(function () {
     ]);
 
     // 口コミ投稿編集ページの表示
-    Route::get('/detail/{review_id}/edit-review', [
+    Route::get('/detail/{review_id}/edit', [
         ReviewController::class, 'edit'
     ]);
 
     // 口コミを更新
-    Route::post('/detail/{review_id}/edit-review', [
+    Route::post('/detail/{review_id}/edit', [
         ReviewController::class, 'restore'
     ]);
 

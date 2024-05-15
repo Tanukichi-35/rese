@@ -75,7 +75,7 @@ function submitReview (store_id) {
 
 function editReview(review_id) {
   console.log(review_id);
-  $('#form__review').attr('action', '/detail/' + review_id + '/edit-review');
+  $('#form__review').attr('action', '/detail/' + review_id + '/edit');
   console.log($('#form__review'));
   $('#form__review').submit();
 };

@@ -31,7 +31,7 @@
       <button class="button__review" id="button__review">全ての口コミ情報</button>
       <div class="div__self-review">
         <div class="div__edit-review">
-          <a href="/detail/{{$review->id}}/edit-review" class="a__edit-review">口コミを編集</a>
+          <a href="/detail/{{$review->id}}/edit" class="a__edit-review">口コミを編集</a>
           <form action="/detail/delete-review" method="POST" class="form__delete-review" onsubmit="return confirmDeleteReview()">
           @csrf
           @method('DELETE')
