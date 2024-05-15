@@ -8,8 +8,8 @@
 .button__delete,
 .a__register,
 .a__edit,
+.a__import,
 .label__file{
-/* .button__import{ */
   background-color: #214BE0;
   color: #fff;
   padding: 5px;
@@ -22,15 +22,11 @@
   background-color: rgb(185, 75, 75);
 }
 
+.a__import,
 .label__file {
   display: inline-block;
   cursor: pointer;
 }
-
-/* .button__import{
-  display: inline-block;
-  cursor: pointer;
-} */
 
 /* modal-detail-page */
 .div__modal-page-contents {

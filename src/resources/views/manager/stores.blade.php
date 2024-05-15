@@ -16,12 +16,12 @@
         @method('DELETE')
         <button class="button__delete">一括削除</button>
       </form>
-      <form id="form__import" action="/manager/store/import" method="POST" enctype="multipart/form-data">
+      {{-- <form id="form__import" action="/manager/store/import" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="file" name="csv" accept=".csv" id="input__file" onchange="OnFileSelect(this)" hidden/>
         <label class="label__file" for="input__file">CSVインポート</label>
-      </form>
-      {{-- <button type="button" class="button__import">CSVインポート</button> --}}
+      </form> --}}
+      <a class="a__import" href="/manager/store/import">CSVインポート</a>
     </div>
     {{ $stores->links() }}
     <table class="table__list">

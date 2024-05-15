@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
+use App\Http\Requests\StoresRequest;
+// use Illuminate\Pagination\Paginator;
+// use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Store;
 use App\Models\Area;
 use App\Models\Genre;
@@ -193,8 +196,36 @@ class StoreController extends Controller
         return redirect()->route('manager.stores')->with(compact('error'));
     }
 
-    // 店舗データのインポート
-    public function import(Request $request)
+    // 店舗情報のインポートページの表示
+    public function import()
+    {
+        if (session()->exists('importStores')) {
+            session()->forget('importStores');
+            session()->forget('importStores_url');
+        }
+
+        return view('manager.storeImporter');
+    }
+
+    // インポートデータの表示
+    public function showImportData(Request $request)
+    {
+        // dd($request);
+        $stores = session()->get('importStores');
+        // $perPage = 10;
+        // $stores = new LengthAwarePaginator(
+        //     $stores->forPage($request->page, $perPage),
+        //     count($stores),
+        //     $perPage,
+        //     $request->page,
+        //     array('path' => session()->get('importStores_url'))
+        // );
+
+        return view('manager.storeImporter', compact('stores'));
+    }
+
+    // 店舗情報のインポートページの表示
+    public function load(Request $request)
     {
         if ($request->hasFile('csv')) {
             // リクエストからファイルを取得
@@ -206,16 +237,20 @@ class StoreController extends Controller
             fgetcsv($fp);
             // 1行ずつ読み込む
             try {
+                $storesArray = [];
                 while (($csvData = fgetcsv($fp)) !== FALSE) {
                     // 店舗情報を作成
-                    Store::create([
-                        'name' => mb_substr($csvData[1], 0, 50),
-                        'manager_id' => Auth::guard('managers')->user()->id,
+                    $store = new Store([
+                        // 'name' => mb_substr($csvData[1], 0, 50),
+                        'name' => $csvData[1],
+                        // 'manager_id' => Auth::guard('managers')->user()->id,
                         'area_id' => Area::getID($csvData[2]),
                         'genre_id' => Genre::getID($csvData[3]),
-                        'description' => mb_substr($csvData[4], 0, 400),
+                        // 'description' => mb_substr($csvData[4], 0, 400),
+                        'description' => $csvData[4],
                         'imageURL' => $csvData[5]
                     ]);
+                    $storesArray[] = $store;
                 }
             } catch (Exception $e) {
                 return back()->with('error', 'csvファイルの読み込みに失敗しました。');
@@ -226,6 +261,39 @@ class StoreController extends Controller
         } else {
             return back()->with('error', 'csvファイルの読み込みに失敗しました。');
         }
-        return back()->with('message', 'csvデータをインポートしました');
+
+        // $stores = collect($storesArray);
+        // return view('manager.storeImporter', compact('stores'));
+
+        $request->session()->put('importStores', collect($storesArray));
+        $request->session()->put('importStores_url', $request->url());
+
+        return redirect()->route('load')->with('message', 'csvファイルを読み込みました。');
+    }
+
+    // 店舗情報のインポート
+    public function importData(StoresRequest $request)
+    {
+        // dd($request);
+        for ($i=0; $i < $request->dataCount; $i++) {
+            if(isset($request->valid[$i]) && $request->valid[$i]){
+                // 画像をアップロード
+                $imagePath = null;
+                if (isset($request->file('images')[$i])) {
+                    $imagePath = FileIO::uploadImageFile(self::dirName, $request->file('images')[$i]);
+                }
+
+                Store::create([
+                    'name' => mb_substr($request->names[$i], 0, 50),
+                    'manager_id' => Auth::guard('managers')->user()->id,
+                    'area_id' => $request->area_ids[$i],
+                    'genre_id' => $request->genre_ids[$i],
+                    'description' => mb_substr($request->descriptions[$i], 0, 400),
+                    'imageURL' => $imagePath ?? $request->imageURLs[$i],
+                ]);
+            }
+        }
+        
+        return redirect()->route('manager.stores')->with('message', 'データをインポートしました');
     }
 }

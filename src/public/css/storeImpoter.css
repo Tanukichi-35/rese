@@ -1,0 +1,75 @@
+.div__header{
+  .button__back{
+    align-self: center;
+  }
+
+  .h3__title {
+    margin: 0;
+    align-self: center;
+  }
+}
+
+
+/* インプットテーブル */
+.table__list {
+  .input__name,
+  .select__area,
+  .select__genre,
+  .textarea__description{
+    background-color: transparent;
+    width: 100%;
+  }
+
+  .th__name,
+  .th__area,
+  .th__genre{
+    min-width: 150px;
+  }
+
+  .th__description{
+    min-width: 300px;
+  }
+
+  .textarea__description{
+    font-size: 0.8rem;
+    resize: none;
+  }
+
+  .div__file {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    img {
+      height: 100px;
+      line-height: 100px;
+    }
+
+    input {
+      display: none;
+    }
+
+    label {
+      width: 70px;
+      background: #E9E9ED;
+      color: #000;
+      font-size: 0.8rem;
+      padding: 5px 20px;
+      border: solid 1px #8F8F9D;
+      border-radius: 4px;
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      margin-right: 1%;
+    }
+  }
+}
+
+.label__file,
+.button__import{
+  padding: 5px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}

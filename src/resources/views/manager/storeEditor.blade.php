@@ -35,6 +35,7 @@
           <td>
             <select name="area_id" class="select__area" id="select__area">
               @foreach (Area::All() as $area)
+              @continue($area->id == 1)     {{-- id=1はその他 --}}
               <option value="{{$area->id}}" @if($store->area->id == $area->id) selected @endif>{{$area->name}}</option>
               @endforeach
             </select>
@@ -54,6 +55,7 @@
           <td>
             <select name="genre_id" class="select__genre" id="select__genre">
               @foreach (Genre::All() as $genre)
+              @continue($genre->id == 1)     {{-- id=1はその他 --}}
               <option value="{{$genre->id}}" @if($store->genre->id == $genre->id) selected @endif>{{$genre->name}}</option>
               @endforeach
             </select>

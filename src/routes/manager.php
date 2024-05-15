@@ -65,9 +65,24 @@ Route::prefix('manager')->middleware('auth.managers:managers')->group(function (
         StoreController::class, 'create'
     ]);
 
+    // 店舗データのインポートページの表示
+    Route::get('store/import', [
+        StoreController::class, 'import'
+    ])->name('import');
+
     // 店舗データのインポート
     Route::post('store/import', [
-        StoreController::class, 'import'
+        StoreController::class, 'importData'
+    ]);
+
+    // インポートデータの表示
+    Route::get('store/load', [
+        StoreController::class, 'showImportData'
+    ])->name('load');
+
+    // 店舗データをファイルから読込
+    Route::post('store/load', [
+        StoreController::class, 'load'
     ]);
 
     // 店舗の一括削除
