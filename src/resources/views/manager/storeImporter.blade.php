@@ -98,6 +98,11 @@
             {{$message}}
           </li>
           @enderror
+          @error('images.*')
+          <li class="li__error">
+            {{$message}}
+          </li>
+          @enderror
         </ul>
       </div>
       <input type="number" name="dataCount" id="" value="{{$stores->count()}}" hidden>
