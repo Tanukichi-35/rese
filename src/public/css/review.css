@@ -114,7 +114,7 @@
   
     .div__rate {
       width: 100%;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
   
       .img__star {
         width: 50px;
@@ -145,7 +145,7 @@
   
     .div__image {
       width: 100%;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
   
       .div__file {
         width: 100%;
@@ -219,7 +219,7 @@
   grid-column: 1 / 3;
   color: #000;
   background-color: #fff;
-  margin: 50px auto;
+  margin: 20px auto;
   width: 40%;
   min-width: 200px;
   padding: 15px 30px;
