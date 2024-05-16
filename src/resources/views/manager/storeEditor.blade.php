@@ -89,8 +89,9 @@
           <th><label for="input__image">店舗画像</label></th>
           <td>
             <div class="div__file">
+              <input type="checkbox" name="existImage" id="input__existImage" @if(isset($store->imageURL))checked @endif hidden/>
               <img src="{{asset($store->imageURL)}}" alt="画像が選択されていません">
-              <input type="file" name="image"  accept=".jpg,.jpeg,.png" id="input__file" onchange="OnFileSelect(this)"/>
+              <input type="file" name="image" accept=".jpg,.jpeg,.png" id="input__file" onchange="OnFileSelect(this)"/>
               <label for="input__file">読込</label>
             </div>
             <div class="div__error">

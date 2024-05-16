@@ -23,13 +23,23 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required | string | max:50',
-            'area_id' => 'required',
-            'genre_id' => 'required',
-            'description' => 'required | string | max:400',
-            'image' => 'required | mimes:jpg,jpeg,png',
-        ];
+        if (null == $this->request->get('existImage')) {
+            return [
+                'name' => 'required | string | max:50',
+                'area_id' => 'required',
+                'genre_id' => 'required',
+                'description' => 'required | string | max:400',
+                'image' => 'required | mimes:jpg,jpeg,png',
+            ];
+        } else {
+            return [
+                'name' => 'required | string | max:50',
+                'area_id' => 'required',
+                'genre_id' => 'required',
+                'description' => 'required | string | max:400',
+                'image' => 'mimes:jpg,jpeg,png',
+            ];
+        }
     }
 
     public function messages()
@@ -46,5 +56,10 @@ class StoreRequest extends FormRequest
             'image.required' => '画像を設定してください。',
             'image.mimes' => 'アップロード可能なファイルの拡張子は"jpg,jpeg,png"です',
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        // dd($this);
     }
 }
